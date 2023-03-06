@@ -1,7 +1,7 @@
 CREATE TABLE "user" (
 	"id" SERIAL PRIMARY KEY,
-	"username" VARCHAR(500) NOT NULL,
-	"password" VARCHAR(500) NOT NULL
+	"username" VARCHAR (80) UNIQUE NOT NULL,
+	"password" VARCHAR(1000) NOT NULL
 );
 CREATE TABLE "events" (
 	"id" SERIAL PRIMARY KEY,
