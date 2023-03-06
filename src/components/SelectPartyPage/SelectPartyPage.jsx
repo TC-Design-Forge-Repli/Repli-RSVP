@@ -9,23 +9,23 @@ import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 
-function SelectPartyPage(props) {
+function SelectPartyPage() {
  
-  // const store = useSelector((store) => store);
+  const params = useParams();
   const dispatch= useDispatch();
   const history = useHistory();
-  // const params = useParams();
 
-  // useEffect(() => {
+  const partyNames = useSelector((store) => store.partyNames);
+
+  
+
+  useEffect(() => {
     const eventCode=params.id
-  //   dispatch({
-  //         type: 'SAGA/FETCH_PARTY_NAMES',
-  //         payload: eventCode
-  //   })
-  // }, [params.id])
-
-
-
+    dispatch({
+          type: 'SAGA/FETCH_PARTY_NAMES',
+          payload: eventCode
+    })
+  }, [params.id])
 
 
   return (
@@ -33,20 +33,19 @@ function SelectPartyPage(props) {
       <h4>Welcome, please select your party:</h4>
 
 
-
-{/* Create a UL/LI with buttons to list party names */}
-
-
-
-
-    {/* Party Name Buttons */}
-    <Button 
-      className="PartyNameButton"
-      type="name"
-      variant="contained" 
-      size="small">Mire
-      </Button>
-
+    {/* Party Names Listed */}
+      <div>
+        {partyNames.map(partyName => (
+          <Button 
+            key={partyName.id}
+            className="PartyNameButton"
+            type="name"
+            variant="contained" 
+            size="small">
+            {partyName.name}
+          </Button>
+        ))}
+      </div>
 
 
 
