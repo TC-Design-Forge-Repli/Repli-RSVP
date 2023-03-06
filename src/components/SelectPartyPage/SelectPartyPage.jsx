@@ -11,17 +11,16 @@ import Button from '@mui/material/Button';
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 
-
-
+// const PartyNameButton = styled.button
+// `
+//   .button-text {
+//     text-transform: none;
+//   }
+//   `;
 
 function SelectPartyPage() {
 
-  // const Button = styled.button
-  // `
-  //   .button-text {
-  //     text-transform: none;
-  //   }
-  //   `;
+
  
   const params = useParams();
   const dispatch= useDispatch();
@@ -42,7 +41,7 @@ function SelectPartyPage() {
 
   return (
     <>
-      <h4>Welcome, please select your party:</h4>
+      <h4 style={{marginLeft:"15px"}}>Welcome, please select your party:</h4>
 
 
     {/* Party Names Listed */}
@@ -55,6 +54,12 @@ function SelectPartyPage() {
             type="name"
             variant="contained" 
             size="small"
+            style={{backgroundColor:"#4330DA", 
+                    textTransform:"none", 
+                    marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"
+                  }}
             onClick={() => history.push('/rsvp')}>
             {partyName.name}
           </Button>
@@ -70,6 +75,10 @@ function SelectPartyPage() {
       className="backToEventCodePage"
       type="back"
       variant="outlined" 
+      style={{color:"#4330DA", 
+              border:"2px solid #4330DA", 
+              marginTop:"25px",
+              marginLeft:"20px"}}
       onClick={() => history.push('/eventCode')}>Back
     </Button>
 
