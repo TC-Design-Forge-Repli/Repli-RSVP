@@ -1,18 +1,61 @@
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name SelectPartyPage with the name for the new component.
+
+// MUI Imports
+import Button from '@mui/material/Button';
+
+
 function SelectPartyPage(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Functional Component');
+ 
+  // const store = useSelector((store) => store);
+
+  const history = useHistory();
+  // const params = useParams();
+
+  // useEffect(() => {
+  //   dispatchEvent({
+  //         type: 'FETCH_PARTY_NAMES',
+  //         payload: params.id
+  //   })
+  // }, [params.id])
+
+
+
+
 
   return (
     <div>
-      <h2>{heading}</h2>
+      <h4>Welcome, please select your party:</h4>
+
+
+
+{/* Create a UL/LI with buttons to list party names */}
+
+
+
+
+    {/* Party Name Buttons */}
+    <Button 
+      className="PartyNameButton"
+      type="name"
+      variant="contained" 
+      size="small">Mire
+      </Button>
+
+
+
+
+    {/* Back Button */}
+    <Button 
+      className="backToEventCodePage"
+      type="back"
+      variant="outlined" 
+      onClick={() => history.push('/eventCode')}>Back
+    </Button>
     </div>
   );
 }
