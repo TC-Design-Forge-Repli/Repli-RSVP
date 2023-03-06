@@ -1,19 +1,44 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name EventCodePage with the name for the new component.
-function EventCodePage(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Functional Component');
+//mui imports
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+function EventCodePage() {
+ 
+  const [eventCode, setEventCode] = useState('');
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const enterEventCode = (event) => {
+    event.preventDefault();
+    console.log('event code:', eventCode);
+    history.push('/selectParty/${eventCode}');
+    //if the code is correct, navigate guest to SelectParty Page
+    // history.push('/selectParty')
+  }
 
   return (
-    <div>
-      <h2>{heading}</h2>
-    </div>
+    <form onSubmit={enterEventCode}>
+      <TextField
+        className="eventCodeInput"
+        required
+        value={eventCode}
+        label="Event Code"
+        varient="standard"
+        onChange={(event) => setEventCode(event.target.value)}
+      />
+      <Button
+        className="eventCodeSubmitButton"
+        variant="contained"
+        type="submit"
+      >
+        Enter
+      </Button>
+    </form>
   );
 }
 

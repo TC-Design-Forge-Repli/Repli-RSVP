@@ -10,7 +10,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@material-ui/icons": "^4.11.3",
-    "@mui/material": "^5.11.7",
+    "@mui/material": "^5.11.12",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0",
