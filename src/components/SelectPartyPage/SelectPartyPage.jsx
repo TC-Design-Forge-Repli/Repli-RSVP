@@ -12,14 +12,15 @@ import Button from '@mui/material/Button';
 function SelectPartyPage(props) {
  
   // const store = useSelector((store) => store);
-
+  const dispatch= useDispatch();
   const history = useHistory();
   // const params = useParams();
 
   // useEffect(() => {
-  //   dispatchEvent({
-  //         type: 'FETCH_PARTY_NAMES',
-  //         payload: params.id
+    const eventCode=params.id
+  //   dispatch({
+  //         type: 'SAGA/FETCH_PARTY_NAMES',
+  //         payload: eventCode
   //   })
   // }, [params.id])
 
