@@ -14,11 +14,21 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+import Dashboard from '../Dashboard/Dashboard';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import CreateEventPage from '../CreateEventPage/CreateEventPage';
+import AddGuestsPage from '../AddGuestsPage/AddGuestsPage';
+import AddMealsPage from '../AddMealsPage/AddMealsPage';
+import ManageEventPage from '../ManageEventPage/ManageEventPage';
+import ManageGuestsPage from '../ManageGuestsPage/ManageGuestsPage';
+import EventCodePage from '../EventCodePage/EventCodePage';
+import SelectPartyPage from '../SelectPartyPage/SelectPartyPage';
+import RsvpPage from '../RsvpPage/RsvpPage';
+import RemindersPage from '../RemindersPage/RemindersPage';
+import SuccessPage from '../SuccessPage/SuccessPage';
 
 import './App.css';
 
@@ -37,7 +47,7 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/landingPage" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -49,15 +59,15 @@ function App() {
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
+            Visiting localhost:3000/user will show the Dashboard if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows Dashboard else shows LoginPage
             exact
-            path="/user"
+            path="/dashboard"
           >
-            <UserPage />
+            <Dashboard />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -67,6 +77,48 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
+          {/* Host Routes */}
+          <ProtectedRoute exact path="/createEvent">
+            <CreateEventPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/addGuests">
+            <AddGuestsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/addMeals">
+            <AddMealsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/manageEvent">
+            <ManageEventPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/manageGuests">
+            <ManageGuestsPage />
+          </ProtectedRoute>
+
+          {/* Guest Routes */}
+          <Route exact path="/eventCode">
+            <EventCodePage />
+          </Route>
+
+          <Route exact path="/selectParty">
+            <SelectPartyPage />
+          </Route>
+
+          <Route exact path="/rsvp">
+            <RsvpPage />
+          </Route>
+
+          <Route exact path="/reminders">
+            <RemindersPage />
+          </Route>
+
+          <Route exact path="/success">
+            <SuccessPage />
+          </Route>
 
           <Route
             exact
@@ -98,12 +150,12 @@ function App() {
 
           <Route
             exact
-            path="/home"
+            path="/landingPage"
           >
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/dashboard" />
               :
               // Otherwise, show the Landing page
               <LandingPage />
