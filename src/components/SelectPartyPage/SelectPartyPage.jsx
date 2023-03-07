@@ -32,6 +32,10 @@ function SelectPartyPage() {
 
   const partyNames = useSelector((store) => store.partyNames);
 
+  const handlePartyButtonClick = (event, id) => {
+    history.push(`/rsvp/${id}`);
+  }
+
   useEffect(() => {
     const eventCode=params.id
     dispatch({
@@ -62,7 +66,7 @@ function SelectPartyPage() {
                     marginLeft:"20px",
                     marginRight:"20px"
                   }}
-              onClick={() => history.push('/rsvp')}>
+              onClick={(event) => handlePartyButtonClick(event, partyName.id)}>
               {partyName.name}
             </Button>
            ))}

@@ -7,11 +7,11 @@ function* selectPartySaga() {
 
 
 // Will get Party Names to be listed on the Party Names page
-function* fetchPartyNames() {
+function* fetchPartyNames(action) {
     try {
         const response = yield axios({
             method: 'GET',
-            url:`/api/partyNames`
+            url:`/api/partyNames/${action.payload}`
         })
         yield put({
             type:'SET_PARTY_NAMES',
