@@ -10,7 +10,7 @@ CREATE TABLE "events" (
 	"event_name" VARCHAR(500) NOT NULL,
 	"deadline" DATE NOT NULL,
 	"location" VARCHAR(500) NOT NULL,
-	"event_password" INTEGER NOT NULL,
+	"event_code" VARCHAR(500) UNIQUE NOT NULL,
 	"event_date" DATE NOT NULL
 );
 
