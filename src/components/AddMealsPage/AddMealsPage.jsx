@@ -1,54 +1,110 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import './AddMealsPage.css';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name AddMealsPage with the name for the new component.
+
 function AddMealsPage() {
-  const [textFields, setTextFields] = useState([textFields]);
+  const history = useHistory();
+  const [inputFields, setInputFields] = useState([{ name: '', description: '' }]);
 
-  const addInput = () => {
-    console.log('add input:');
+  const handleFormChange = (index, event) => {
+    // store inputFields state into a variable called data with spread operator
+    let data = [...inputFields];
+    // target the index of the data variable using index parameter, and name of the property using event.target.name
+    // inside the data index, we are storing the values from the input fields using event.target.value
+    data[index][event.target.name] = event.target.value;
+    // store this data back inside the inputFields array using the setInputFields method
+    setInputFields(data);
+  }
 
-    setTextFields(textFields.concat(''))
+  const addInputs = () => {
+    let newInput = { name: '', description: '' }
+    // set newInput inside the inputFields state
+    setInputFields([...inputFields, newInput])
+  }
+
+  const submit = (event) => {
+    event.preventDefault();
+    console.log(inputFields)
+  }
+
+  const removeInputs = (index) => {
+    let data = [...inputFields];
+    data.splice(index, 1)
+    setInputFields(data)
   }
 
   return (
-    <div>
+    <section>
       <h2>Add Meals</h2>
       <p>How many meals?</p>
+
       <Button 
-        variant="contained"
-        onClick={addInput}
-      >Add Meal+
+        variant="contained" 
+        onClick={addInputs}
+        style={{
+          backgroundColor: "#4330DA",
+          fontFamily: "Montserrat"
+        }}
+      >
+        Add Meal+
       </Button>
-      {/* <TextField 
-        required
-        id="outlined-required"
-        label="Required"
-        defaultValue="Meal 1"
-      /> */}
-      {textFields.map((field, index) => (
-        <div>
-          <TextField 
-            required 
-            id="outlined-required" 
-            key={index} 
-            label={`Meal Option ${index + 1}`}
-            placeholder={`Meal Option ${index + 1}`}
-          />
-          <TextField 
-            required 
-            id="outlined-required" 
-            key={index} 
-            label={`Meal Description ${index + 1}`}
-            placeholder={`Meal Description ${index + 1}`}
-          />
-        </div>
-      ))}
-    </div>
+
+      <form onSubmit={submit}>
+        {inputFields.map((input, index) => {
+          return (
+            <div key={index}>
+              <TextField 
+                required
+                id="outlined-required"
+                name="name"
+                label={`Meal Option ${index + 1}`}
+                placeholder={`Meal Option ${index + 1}`}
+                value={input.name}
+                onChange={(event) => handleFormChange(index, event)}
+              />
+              {/* Delete button will only render for every option after the first */}
+              {index !== 0 && <button onClick={() => removeInputs(index)}><DeleteForeverIcon /></button>}
+              <TextField
+                required
+                id="outlined-required"
+                name="description"
+                label={`Meal Description ${index + 1}`}
+                placeholder={`Meal Description ${index + 1}`}
+                value={input.description}
+                onChange={(event) => handleFormChange(index, event)}
+              />
+            </div>
+          )
+        })}
+      </form>
+
+      <Button 
+        variant="outlined"
+        style={{
+          color: "#4330DA",
+          fontFamily: "Montserrat",
+          outline: "1px solid #4330DA"
+        }}
+      >
+        Back
+      </Button>
+      <Button 
+        variant="contained" 
+        onClick={submit}
+        style={{
+          backgroundColor: "#4330DA",
+          fontFamily: "Montserrat"
+        }}
+      >
+        Submit
+      </Button>
+    </section>
   );
 }
+
 
 export default AddMealsPage;
