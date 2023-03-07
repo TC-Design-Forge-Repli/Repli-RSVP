@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import RsvpPageItem from './RsvpPageItem';
 //mui imports
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,7 +14,7 @@ import Button from '@mui/material/Button';
 
 function RsvpPage() {
 
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = useState(true);
   const [mealChoice, setMealChoice] = useState('');
   const partyGuests = useSelector(store => store.partyGuests);
   console.log('party guests in party', partyGuests);
@@ -49,40 +50,15 @@ function RsvpPage() {
               - ✅ drop down menu for response or switch or toggle
               - drop down menu for meal options (need to map through meals reducer for options to show up)*/}
 
-      <h2>{partyGuests[0].party_name}</h2>
       {partyGuests.map(partyGuest => {
         return (
-          <section key={partyGuest.guest_id}>
-          <h4>{partyGuest.guest_name}</h4>
-
-          <FormGroup>
-            <FormControlLabel 
-              control={
-              <Switch
-                checked={checked}
-                onChange={(event) => setChecked(event.target.checked)}
-              />} 
-              label={`${checked ? 'Politely Accept' : 'Regretfully Decline'}`}
+            <RsvpPageItem  
+              key={partyGuest.guest_id}
+              partyGuest={partyGuest}
             />
-            </FormGroup>
-
-            <FormControl sx={{ m: 1, minWidth: 85 }}>
-              <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
-                <Select
-                  labelId="demo-simple-select-standard-label"
-                  id="demo-simple-select-standard"
-                  value={mealChoice}
-                  onChange={(event) => setMealChoice(event.target.value)}
-                >
-                  <MenuItem value={1}>Option 1</MenuItem>
-                  <MenuItem value={2}>Option 2</MenuItem>
-                </Select>
-              </FormControl>
-
-        </section>
         )
       })}
-      
+
       <div>
       <Button
         className="backToSelectPartyButton"
