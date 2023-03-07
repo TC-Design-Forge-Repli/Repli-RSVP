@@ -5,18 +5,19 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
+    console.log(req.params.id)
     console.log('in partyNames.router GET route for Party Names', req.body.id)
     const sqlQuery = 
     `
     SELECT "party"."id", "party"."name", "party"."event_id", "events"."event_name"
     FROM "party"
     JOIN "events" ON "party"."event_id" = "events"."id"
-    WHERE "events"."event_code" = 'noice'
+    WHERE "events"."event_code" = $1
     ORDER BY "name" ASC;
     `;
-
-    pool.query(sqlQuery)
+   const sqlValue = [req.params.id]
+    pool.query(sqlQuery, sqlValue)
      .then(dbRes => {
         res.send(dbRes.rows)
      })
