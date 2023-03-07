@@ -30,10 +30,14 @@ function AddMealsPage() {
 
   const submit = (event) => {
     event.preventDefault();
-    console.log(inputFields)
+    console.log('inputFields:', inputFields)
 
     dispatch({
       type: 'SET_MEALS',
+      payload: inputFields
+    })
+    dispatch({
+      type: 'SAGA/CREATE_MEALS',
       payload: inputFields
     })
   }
@@ -43,7 +47,8 @@ function AddMealsPage() {
     data.splice(index, 1)
     setInputFields(data)
   }
-  const backButton = () =>{
+
+  const goToAddGuests = () =>{
     history.push('/addGuests')
   }
 
@@ -94,7 +99,7 @@ function AddMealsPage() {
 
       <Button 
         variant="outlined"
-        onClick={backButton}
+        onClick={goToAddGuests}
         style={{
           color: "#4330DA",
           fontFamily: "Montserrat",
