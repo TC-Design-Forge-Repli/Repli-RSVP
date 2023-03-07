@@ -104,7 +104,7 @@ function App() {
             <EventCodePage />
           </Route>
 
-          <Route exact path="/selectParty">
+          <Route exact path="/selectParty/:id">
             <SelectPartyPage />
           </Route>
 
