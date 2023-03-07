@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 //mui imports
@@ -13,19 +13,29 @@ import Button from '@mui/material/Button';
 
 function RsvpPage() {
 
-  const [response, setResponse] = useState('');
+  const [checked, setChecked] = React.useState(true);
+
   const [mealChoice, setMealChoice] = useState('');
+  const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // const partyGuests = useSelector(store => store.)
+
+  useEffect(() => {
+    dispatch({
+      type: 'SAGA/FETCH_PARTY_GUESTS'.
+      payload: params.id;
+    })
+  }, [params.id])
 
   const addResponse = (event) => {
     event.preventDefault();
-    console.log('here are your  responses:', response, mealChoice)
+    console.log('here are your responses:', checked, mealChoice)
     dispatch({
       type: 'SAGA/SET_RESPONSE',
       payload: {
-        response: response,
+        response: checked,
         meal_id: mealChoice
       }
     })
@@ -35,11 +45,21 @@ function RsvpPage() {
     <form onSubmit={addResponse}>
       {/* <h2>{party.name}</h2> */}
       {/* need to map through a party and have the following things:
-              - guest name
-              - drop down menu for response
+              - guest name (map through guest reducer for specific party)
+              - ✅ drop down menu for response or switch or toggle
               - drop down menu for meal options (need to map through meals reducer for options to show up)*/}
+            
+      
+      
       <FormGroup>
-        <FormControlLabel control={<Switch defaultChecked />} label="Politely Accept" />
+      <FormControlLabel 
+        control={
+        <Switch
+          checked={checked}
+          onChange={(event) => setChecked(event.target.checked)}
+        />} 
+        label={`${checked ? 'Politely Accept' : 'Regretfully Decline'}`}
+      />
       </FormGroup>
 
       <FormControl sx={{ m: 1, minWidth: 85 }}>
