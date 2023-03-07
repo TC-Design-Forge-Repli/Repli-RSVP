@@ -5,6 +5,7 @@ import partyReducer from './manageGuestPage.reducer';
 import partyNames from './selectParty.reducer';
 import eventDetails from './createEvent.reducer';
 import isEventCodeUnique from './isEventCodeUnique.reducer'
+import matchEventCode from './matchEventCode.reducer';
 
 
 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   partyNames, 
   eventDetails,
   isEventCodeUnique,
+  matchEventCode,
 });
 
 export default rootReducer;

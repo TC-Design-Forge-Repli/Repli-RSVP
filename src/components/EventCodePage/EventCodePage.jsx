@@ -1,19 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name EventCodePage with the name for the new component.
-function EventCodePage(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Functional Component');
+//mui imports
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+function EventCodePage() {
+ 
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [eventCode, setEventCode] = useState('');
+  const doesEventCodeMatch = useSelector((store) => store.matchEventCode);
+
+
+  useEffect(() => {
+    matchEventCode();
+  }, [doesEventCodeMatch])
+
+  const matchEventCode = () => {
+    if (doesEventCodeMatch === true) {
+      history.push('/selectParty/${eventCode}');
+      console.log('event code matches to an event');
+      dispatch({
+        type: 'DOES_EVENT_CODE_MATCH',
+        payload:''
+      })
+    }
+    else if (doesEventCodeMatch === false) {
+      alert('this event code does not exist');
+      console.log('event code does not match to an event');
+      dispatch({
+        type: 'DOES_EVENT_CODE_MATCH',
+        payload:'' 
+      })
+    }
+  }
+
+  const enterEventCode = (event) => {
+    event.preventDefault();
+    console.log('event code entered:', eventCode);
+    dispatch({
+      type: 'SAGA/MATCH_EVENT_CODE',
+      payload: eventCode
+    })
+    matchEventCode();
+  }
 
   return (
-    <div>
-      <h2>{heading}</h2>
-    </div>
+    <form onSubmit={enterEventCode}>
+      <TextField
+        className="eventCodeInput"
+        required
+        value={eventCode}
+        label="Event Code"
+        varient="standard"
+        onChange={(event) => setEventCode(event.target.value)}
+      />
+      <Button
+        className="eventCodeSubmitButton"
+        variant="contained"
+        type="submit"
+      >
+        Enter
+      </Button>
+    </form>
   );
 }
 
