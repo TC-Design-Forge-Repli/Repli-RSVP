@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -8,6 +9,7 @@ import './AddMealsPage.css';
 
 function AddMealsPage() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [inputFields, setInputFields] = useState([{ name: '', description: '' }]);
 
   const handleFormChange = (index, event) => {
@@ -29,6 +31,11 @@ function AddMealsPage() {
   const submit = (event) => {
     event.preventDefault();
     console.log(inputFields)
+
+    dispatch({
+      type: 'SET_MEALS',
+      payload: inputFields
+    })
   }
 
   const removeInputs = (index) => {
