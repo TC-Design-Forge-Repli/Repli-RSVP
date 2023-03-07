@@ -36,6 +36,10 @@ function Nav() {
               Dashboard
             </Link>
 
+            <Link className="navLink" to="/addMeals">
+              Add Meals Page
+            </Link>
+
             <Link className="navLink" to="/eventCode">
               Event Code
             </Link>

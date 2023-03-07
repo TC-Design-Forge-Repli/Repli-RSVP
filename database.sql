@@ -26,13 +26,13 @@ CREATE TABLE "guests" (
 	"name" VARCHAR(500) NOT NULL,
 	"response" BOOLEAN DEFAULT FALSE,
 	"meal_id" INTEGER NOT NULL,
-	"phone_number" INTEGER NOT NULL,
-	"email_address" VARCHAR(500) NOT NULL
+	"phone_number" INTEGER,
+	"email_address" VARCHAR(500)
 );
 
 CREATE TABLE "meal_options" (
 	"id" SERIAL PRIMARY KEY,
 	"event_id" INT REFERENCES "events",
 	"meal_name" VARCHAR(500) NOT NULL,
-	"description" VARCHAR(500)
+	"description" VARCHAR(500) NOT NULL
 );
