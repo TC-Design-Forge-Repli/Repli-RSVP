@@ -3,12 +3,18 @@ import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './AddMealsPage.css';
 
 
 function AddMealsPage() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  let eventDetails = useSelector((store) => store.eventDetails)
+  let guests = useSelector((store) => store.partyReducer)
   const [inputFields, setInputFields] = useState([{ name: '', description: '' }]);
+  
 
   const handleFormChange = (index, event) => {
     // store inputFields state into a variable called data with spread operator
@@ -28,7 +34,16 @@ function AddMealsPage() {
 
   const submit = (event) => {
     event.preventDefault();
-    console.log(inputFields)
+    let eventObjectToSendToDb = {
+      meals: inputFields,
+      eventDetails: eventDetails,
+      parties: guests.party
+    }
+    dispatch({
+      type: 'SAGA/CREATE_EVENT', 
+      payload: eventObjectToSendToDb
+    })
+    console.log(eventObjectToSendToDb)
   }
 
   const removeInputs = (index) => {

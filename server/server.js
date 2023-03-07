@@ -11,7 +11,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const partyNamesRouter = require('./routes/partyNames.router');
 const checkEventCodeRouter = require('./routes/checkEventCode.router')
-
+const createEventRouter = require('./routes/createEvent.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -27,6 +27,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/checkEventCode', checkEventCodeRouter);
+app.use('/api/createEvent', createEventRouter)
 
 // Party Names Router
 app.use('/api/partyNames', partyNamesRouter);
