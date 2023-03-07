@@ -93,7 +93,12 @@ function addGuestsPage() {
     console.log("This is the delete guest function", partyIndex);
     console.log("This is the this guest variable", thisParty);
   };
-
+  const backButton = () =>{
+    history.push('/createEvent')
+  }
+  // required
+  // id="outlined-required"
+  // label="Required"
   return (
     <>
       <h2>Add Guests</h2>
@@ -103,11 +108,12 @@ function addGuestsPage() {
         {newPartyInput.map((partyInput, partyIndex) => (
           <div key={partyIndex}>
             <TextField
+              required
               className="partyInput"
               id="outlined-required"
               value={partyInput.name}
               label={`Party ${partyIndex + 1}`}
-              variant="standard"
+              // variant="standard"
               sx={{ color: "#4330DA", display: "block", marginBottom: "20px" }}
               onChange={(evt) => handlePartyInputChange(evt, partyIndex)}
             />
@@ -116,12 +122,13 @@ function addGuestsPage() {
             {partyInput.guestList.map((guestInput, guestIndex) => (
               <>
                 <TextField
+                  required
                   key={guestIndex}
                   className="guestsInput"
                   id="outlined-required"
                   value={guestInput}
                   label={`Guest ${guestIndex + 1}`}
-                  variant="standard"
+                  // variant="standard"
                   sx={{ color: "#4330DA" }}
                   onChange={(evt) =>
                     handleGuestInputChange(evt, partyIndex, guestIndex)
@@ -167,6 +174,7 @@ function addGuestsPage() {
           variant="outlined"
           color="secondary"
           size="large"
+          onClick={backButton}
           sx={{ color: "#4330DA", margin: "15px", marginRight: "50px" }}
         >
           Back
