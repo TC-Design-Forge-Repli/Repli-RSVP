@@ -9,9 +9,7 @@ router.get('/', (req, res) => {
   // GET route code here
 });
 
-/**
- * POST route template
- */
+//POST route for Guest's: email, phone and receive reminders choice
 router.post('/', (req, res) => {
     const reminders = req.body;
     console.log(reminders)

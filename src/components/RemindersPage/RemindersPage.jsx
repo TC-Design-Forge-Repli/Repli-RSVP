@@ -15,9 +15,6 @@ import { useHistory } from 'react-router-dom';
 
 function RemindersPage() {
  
-  // const store = useSelector((store) => store);
-
-
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
@@ -33,7 +30,7 @@ function RemindersPage() {
       phoneNumber:phoneNumber,
       receiveReminders:receiveReminders
     }
-    console.log('These are the communication options', reminders)
+    console.log('These are the guests communication options', reminders)
 
     dispatch({
       type:'SAGA/CREATE_REMINDERS',
@@ -44,12 +41,14 @@ function RemindersPage() {
 
   return (
     <div>
-      <h4>What's the best way for us to communicate with you?</h4>
+      <h4>What is the best way for us to communicate with you?</h4>
 
         <TextField
           // required
           id="outlined-required"
           label="Email"
+          // color="#4330DA"
+       
           // defaultValue="Email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -68,7 +67,7 @@ function RemindersPage() {
 
 
         <FormControlLabel 
-          control={< Checkbox/>} 
+          control={< Checkbox style={{color:"#4330DA"}}/>} 
           label="I would like to receive event updates and reminders."
           checked={receiveReminders}
           onChange={()=> setReceiveReminders(!receiveReminders)}
