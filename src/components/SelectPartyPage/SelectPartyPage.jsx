@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import './SelectPartyPage.css'
+
 
 // MUI Imports
 import Button from '@mui/material/Button';
