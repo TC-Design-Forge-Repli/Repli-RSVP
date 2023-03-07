@@ -5,9 +5,8 @@ import userSaga from './user.saga';
 import selectPartySaga from './selectPartySaga';
 import checkEventCodeSaga from './checkEventCode.saga'
 import remindersSaga from './reminders.saga';
-import checkEventCodeSaga from './checkEventCode.saga';
 import MatchEventCodeSaga from './matchEventCode.saga';
-import selectPartySaga from './selectPartySaga';
+import fetchPartyGuestsSaga from './partyGuests.saga';
 
 
 // rootSaga is the primary saga.
@@ -28,7 +27,8 @@ export default function* rootSaga() {
     checkEventCodeSaga(),
     MatchEventCodeSaga(),
     selectPartySaga(), //fetch all party names to be rendered onto SelectPartyPage
-    checkEventCodeSaga()
+    checkEventCodeSaga(), 
+    fetchPartyGuestsSaga(),
 
   ]);
 }

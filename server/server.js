@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const partyNamesRouter = require('./routes/partyNames.router');
 const checkEventCodeRouter = require('./routes/checkEventCode.router');
 const remindersRouter = require('./routes/reminders.router');
+const partyGustRouter = require('./routes/partyGuests.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,6 +29,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/checkEventCode', checkEventCodeRouter);
 app.use('/api/reminders', remindersRouter);
+app.use('/api/partyGuests', partyGustRouter);
 
 // Party Names Router
 app.use('/api/partyNames', partyNamesRouter);
