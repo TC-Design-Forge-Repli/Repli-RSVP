@@ -11,7 +11,7 @@ function* createReminders(action) {
 
         const response = yield axios({
             method:'POST',
-            url:'/reminders',
+            url:'/api/reminders',
             data: reminders
         });
     } catch (error) {

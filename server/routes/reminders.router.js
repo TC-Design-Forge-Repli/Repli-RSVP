@@ -19,15 +19,15 @@ router.post('/', (req, res) => {
     const sqlQuery = 
     `
     INSERT INTO "guests"
-    ("email_address, "phone_number", "receive_reminders")
+    ("email_address", "phone_number", "receive_reminders")
     VALUES
     ($1, $2, $3)
     `;
 
     const sqlValues = [
-        reminders.email_address, 
-        reminders.phone_number,
-        reminders.receive_reminders
+        reminders.email, 
+        reminders.phoneNumber,
+        reminders.receiveReminders
     ]
     pool.query(sqlQuery, sqlValues)
         .then(() => res.sendStatus(201))
