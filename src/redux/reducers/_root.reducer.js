@@ -18,7 +18,7 @@ import matchEventCode from './matchEventCode.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  partyReducer
+  partyReducer,
   partyNames, 
   eventDetails,
   isEventCodeUnique,
