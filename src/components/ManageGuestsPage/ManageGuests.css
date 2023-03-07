@@ -1,0 +1,4 @@
+.partyForm {
+    display: flex;
+    flex-direction: column;
+  }
