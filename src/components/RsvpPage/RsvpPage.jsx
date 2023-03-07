@@ -14,18 +14,18 @@ import Button from '@mui/material/Button';
 function RsvpPage() {
 
   const [checked, setChecked] = React.useState(true);
-
   const [mealChoice, setMealChoice] = useState('');
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const partyGuests = useSelector(store => store.)
+  const partyNames = useSelector(store => store.partyNames);
+  console.log('party_id', partyNames)
 
   useEffect(() => {
     dispatch({
-      type: 'SAGA/FETCH_PARTY_GUESTS'.
-      payload: params.id;
+      type: 'SAGA/FETCH_PARTY_GUESTS',
+      payload: params.id
     })
   }, [params.id])
 
