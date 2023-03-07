@@ -78,6 +78,25 @@ function ManageGuestsPage() {
     // clearEventForm();
   };
 
+  const deleteParty = (partyIndex) => {
+      let thisParty = [...newPartyInput];
+      thisParty.splice(partyIndex, 1)
+      setNewPartyInput(thisParty)
+      console.log('This is the delete party function', partyIndex)
+      console.log('This is the this party variable', thisParty)
+
+  }
+
+  const deleteGuests = (partyIndex, guestIndex) => {
+    let thisParty = [...newPartyInput];
+    thisParty[partyIndex].guestList.splice(guestIndex, 1)
+    setNewPartyInput(thisParty)
+    console.log('This is the delete guest function', partyIndex)
+    console.log('This is the this guest variable', thisParty)
+
+}
+
+
   return (
     <>
       <h2>Add Guests</h2>
@@ -94,7 +113,9 @@ function ManageGuestsPage() {
               sx={{ color: '#4330DA', display: "block", marginBottom: "20px" }}
               onChange={(evt) => handlePartyInputChange(evt, partyIndex)}
             />
+            <Button onClick={() => deleteParty(partyIndex)}> Delete </Button>
             {partyInput.guestList.map((guestInput, guestIndex) => (
+              <> 
               <TextField
                 key={guestIndex}
                 className="guestsInput"
@@ -104,6 +125,8 @@ function ManageGuestsPage() {
                 sx={{ color: '#4330DA' }}
                 onChange={(evt) => handleGuestInputChange(evt, partyIndex, guestIndex)}
               />
+               <Button onClick={() => deleteGuests(partyIndex, guestIndex)}> Delete </Button>
+            </>
             ))}
             <Button
               className="addGuestButton"
