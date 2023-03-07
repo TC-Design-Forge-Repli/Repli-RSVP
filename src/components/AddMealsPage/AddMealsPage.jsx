@@ -36,6 +36,9 @@ function AddMealsPage() {
     data.splice(index, 1)
     setInputFields(data)
   }
+  const backButton = () =>{
+    history.push('/addGuests')
+  }
 
   return (
     <section>
@@ -84,6 +87,7 @@ function AddMealsPage() {
 
       <Button 
         variant="outlined"
+        onClick={backButton}
         style={{
           color: "#4330DA",
           fontFamily: "Montserrat",
