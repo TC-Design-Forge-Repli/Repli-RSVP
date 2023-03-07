@@ -108,7 +108,7 @@ function App() {
             <SelectPartyPage />
           </Route>
 
-          <Route exact path="/rsvp">
+          <Route exact path="/rsvp/:id">
             <RsvpPage />
           </Route>
 

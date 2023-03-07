@@ -2,11 +2,9 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-
 import selectPartySaga from './selectPartySaga';
-
 import checkEventCodeSaga from './checkEventCode.saga'
-
+import remindersSaga from './reminders.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,10 +18,9 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-
     selectPartySaga(), //fetch all party names to be rendered onto SelectPartyPage
-
-    checkEventCodeSaga()
+    checkEventCodeSaga(),
+    remindersSaga(),// POSTS guests communication options (email, phone, receive updates/reminders) 
 
   ]);
 }
