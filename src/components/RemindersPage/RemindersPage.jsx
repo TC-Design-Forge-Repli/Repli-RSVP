@@ -15,7 +15,7 @@ import { useHistory } from 'react-router-dom';
 
 function RemindersPage() {
  
-  const store = useSelector((store) => store);
+  // const store = useSelector((store) => store);
 
 
   const [email, setEmail] = useState('');
@@ -25,19 +25,19 @@ function RemindersPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleCommunicationSubmission = (event) => {
+  const handleRemindersSubmission = (event) => {
     event.preventDefault();
 
-    let communicationOptions = {
+    let reminders = {
       email:email,
       phoneNumber:phoneNumber,
       receiveReminders:receiveReminders
     }
-    console.log('These are the communication options', communicationOptions)
+    console.log('These are the communication options', reminders)
 
     dispatch({
-      type:'SAGA/CREATE_COMMUNICATION_OPTIONS',
-      payload: communicationOptions
+      type:'SAGA/CREATE_REMINDERS',
+      payload: reminders
     })
     history.push('/success')//sends guest to the Success Page
   }//end handleCommunicationSubmission
@@ -96,7 +96,7 @@ function RemindersPage() {
           border:"2px solid #4330DA", 
           marginTop:"25px",
           marginLeft:"20px"}}
-          onClick={handleCommunicationSubmission}>Submit
+          onClick={handleRemindersSubmission}>Submit
         </Button>
    </div>
   );
