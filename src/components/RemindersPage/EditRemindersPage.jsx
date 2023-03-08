@@ -12,38 +12,37 @@ import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
 
 function EditRemindersPage() {
 
-    const dispatch = useDispatch();
-    const useHistory = useHistory();
+    // const dispatch = useDispatch();
+    // // const useHistory = useHistory();
 
-    const remindersPageToEdit = useSelector((store) => store.remindersPageToEdit)
+    // const remindersPageToEdit = useSelector((store) => store.remindersPageToEdit)
     
-    useEffect(() => {
-        dispatch({
-            type:'SAGA/FETCH_REMINDERS_PAGE_TO_EDIT',
-        })
-    },[])
+    // useEffect(() => {
+    //     dispatch({
+    //         type:'SAGA/FETCH_REMINDERS_PAGE_TO_EDIT',
+    //     })
+    // },[])
 
-    console.log(remindersPageToEdit)
+    // console.log(remindersPageToEdit)
 
-    const handleUpdateToRemindersPage = (event) => {
-        event.preventDefault();
-            dispatch({
-                type:'UPDATE_REMINDERS_PAGE',
-                payload: remindersPageToEdit
-            })
-            history.push('/success')
-    }
+    // const handleUpdateToRemindersPage = (event) => {
+    //     event.preventDefault();
+    //         dispatch({
+    //             type:'UPDATE_REMINDERS_PAGE',
+    //             payload: remindersPageToEdit
+    //         })
+    //         history.push('/success')
+    // }
 
     return (
         <>
-         
+{/*          
             <TextField
                 // required
                 id="outlined-required"
@@ -67,7 +66,7 @@ function EditRemindersPage() {
                 label="I would like to receive event updates and reminders."
                 checked={remindersPageToEdit.receiveReminders}
                 onChange={(event) => dispatch({type: 'EDIT_RECEIVE_REMINDERS', payload: event.target.checked})}
-            />
+            /> */}
 
 {/* NEED AMAN'S PAGE NAME FOR ONCLICK */}
             {/* Back Button */}
@@ -90,7 +89,8 @@ function EditRemindersPage() {
                         border:"2px solid #4330DA", 
                         marginTop:"25px",
                         marginLeft:"20px"}}
-                onClick={handleUpdateToRemindersPage}>Submit
+                // onClick={handleUpdateToRemindersPage}
+                >Submit
             </Button>
         </>
     )

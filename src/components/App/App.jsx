@@ -29,6 +29,8 @@ import SelectPartyPage from '../SelectPartyPage/SelectPartyPage';
 import RsvpPage from '../RsvpPage/RsvpPage';
 import RemindersPage from '../RemindersPage/RemindersPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
+import EditRemindersPage from '../RemindersPage/EditRemindersPage';
+
 
 import './App.css';
 
@@ -114,6 +116,10 @@ function App() {
 
           <Route exact path="/reminders">
             <RemindersPage />
+          </Route>
+
+          <Route exact path="/editReminders">
+            <EditRemindersPage />
           </Route>
 
           <Route exact path="/success">
