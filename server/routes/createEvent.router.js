@@ -45,16 +45,20 @@ router.post('/', (req, res) => {
     let count = 1; 
     let count2 = 2;
     let query = ``
-    for(let i = 0; i < guestArray.length; i++){
-        if(i === guestArray.length-1){
+    let newArray = [];
+    for(let party of guestArray){
+        newArray.push(...party.guestList)
+    }
+    for(let i = 0; i < newArray.length; i++){
+        if(i === newArray.length-1){
             query = query + `($${count}, $${count2})`
         } else{
             query = query + `($${count}, $${count2}),`
             count = count + 2;
             count2 = count2 + 2;
         }
-        return query
     }
+    return query
   }
   const dynamicPartySqlValues = (party, eventId) =>{
     let arrayToHold = [];
@@ -75,8 +79,36 @@ router.post('/', (req, res) => {
   }
   const dynamicGuestSqlsValues = (partyIdArray, guestArray) =>{
     let arrayToHold = [];
-    for(let )
+    for (let i = 0; i < partyIdArray.length; i++) {
+      const partyId = partyIdArray[i].id;
+      const guests = guestArray[i].guestList;
+      for (let guest of guests) {
+        arrayToHold.push(partyId);
+        arrayToHold.push(guest);
+      }
+    }
+    return arrayToHold;
   }
+  
+  // party id then name of guest
+//   parties: [
+//     { name: 'asf', guestList: [Array] },
+//     { name: 'fsdf', guestList: [Array] }
+//   ]
+
+// [ { id: 13 }, { id: 14 } ],
+
+// combined
+// [
+//     {
+//         id: 13,
+//         guestList: [Array]
+//     },
+//     {
+//         id: 14,
+//         guestList: [Array]
+//     }
+// ]
   const userId = req.user.id
   const eventDetails = req.body.eventDetails
   let sqlQuery1 = `
@@ -89,7 +121,6 @@ router.post('/', (req, res) => {
   let sqlValues1 = [userId, eventDetails.eventTitle, eventDetails.rsvpCloseDate, eventDetails.location, eventDetails.eventCode, eventDetails.date]
   pool.query(sqlQuery1, sqlValues1)
     .then((dbRes1) =>{
-        res.sendStatus(200)
         console.log('WHAT I GOT BACK FROM THE DATABASE',dbRes1);
         const eventIdThatWeJustCreated = dbRes1.rows[0].id
         const partyName = req.body.parties
@@ -116,8 +147,6 @@ router.post('/', (req, res) => {
                 let sqlValues3 = dynamicMealsSqlValues(eventIdThatWeJustCreated, meals)
                 pool.query(sqlQuery3, sqlValues3)
                     .then((dbRes3) =>{
-                        const mealsArrayThatWasJustCreated = dbRes3.rows
-                        //     VVVVV this is an array of objects DONT USE GUEST ARRAY LIKE THE REST
                         const guestArray = req.body.parties
                         let sqlQuery4 = `
                         INSERT INTO "guests"
@@ -126,6 +155,13 @@ router.post('/', (req, res) => {
                         ${determineAmountOfGuests(guestArray)};
                         `
                         let sqlValues4 = dynamicGuestSqlsValues(partyIdArrayOfJustCreatedParties, guestArray);
+                        pool.query(sqlQuery4, sqlValues4)
+                            .then((dbRes5) =>{
+                                res.sendStatus(200)
+                            })
+                            .catch((dbErr) =>{
+                                res.sendStatus(500)
+                            })
                     })
                     .catch((dbErr3) =>{
                         console.log(dbErr3)
@@ -136,7 +172,7 @@ router.post('/', (req, res) => {
             })
     })
     .catch((dbErr1) =>{
-        res.sendStatus(500)
+        console.log(dbErr1)
     })
 });
 

@@ -25,7 +25,7 @@ CREATE TABLE "guests" (
 	"party_id" INT REFERENCES "party",
 	"name" VARCHAR(500),
 	"response" BOOLEAN DEFAULT FALSE,
-	"meal_id" INTEGER NOT NULL,
+	"meal_id" INTEGER,
 	"phone_number" VARCHAR(500),
 	"email_address" VARCHAR(500)
 );
