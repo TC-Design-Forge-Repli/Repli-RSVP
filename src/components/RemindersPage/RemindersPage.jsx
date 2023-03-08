@@ -45,10 +45,18 @@ function RemindersPage() {
 
         <TextField
           // required
-          id="outlined-required"
+          id="outlined"
           label="Email"
+          sx={{
+           
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": { borderColor: "#4330DA"},
+              "&:focus-within":{borderColor: "#4330DA",}
+            }
+            ,
+          }}
+        //  sx={{borderColor:"#4330DA"}}
           // color="#4330DA"
-       
           // defaultValue="Email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -58,8 +66,14 @@ function RemindersPage() {
 
         <TextField
           // required
-          id="outlined-required"
+          id="outlined"
           label="Phone Number"
+          sx={{
+            
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": { borderColor: "#4330DA" },
+            },
+          }}
           // defaultValue="Phone Number"
           value={phoneNumber}
           onChange={(event) => setPhoneNumber(event.target.value)}
@@ -100,5 +114,13 @@ function RemindersPage() {
    </div>
   );
 }
+
+
+
+
+
+
+
+
 
 export default RemindersPage;

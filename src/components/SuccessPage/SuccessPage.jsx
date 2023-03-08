@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name SuccessPage with the name for the new component.
-function SuccessPage(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Functional Component');
+
+//MUI Imports
+import Button from '@mui/material/Button';
+import { useEffect } from 'react';
+
+
+
+function SuccessPage() {
+ 
+
+
 
   return (
     <div>
-      <h2>{heading}</h2>
+       <h4>Perfect!!<br></br> You are all set.<br></br> We can't wait to see you on our BIG day!!</h4>
+
+      {/* Edit Button */}
+      <Button 
+          className="backToEventCodePage"
+          type="back"
+          variant="outlined" 
+          style={{color:"#4330DA", 
+          border:"2px solid #4330DA", 
+          marginTop:"25px",
+          marginLeft:"20px"}}
+          onClick={() => history.push('/rsvp')}>Edit My RSVP
+      </Button>
+
+
+
+
     </div>
   );
 }
