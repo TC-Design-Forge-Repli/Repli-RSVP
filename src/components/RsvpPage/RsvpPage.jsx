@@ -8,6 +8,8 @@ import Button from '@mui/material/Button';
 function RsvpPage() {
 
   const partyGuests = useSelector(store => store.partyGuests);
+  const storedEventCode = useSelector(store => store.storeNavigation.storeEventCode);
+  const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,7 +20,11 @@ function RsvpPage() {
       type: 'SAGA/FETCH_PARTY_GUESTS',
       payload: party_id
     })
+    dispatch({
+      type: 'STORE_PARTY_ID'
+    })
   }, [params.id])
+
 
 
   return (
@@ -42,7 +48,7 @@ function RsvpPage() {
       <Button
         className="backToSelectPartyButton"
         variant="outlined"
-        onClick={() => history.push(`/selectParty/${eventCode}`)}
+        onClick={() => history.push(`/selectParty/${storedEventCode}`)}
       >
         Back
       </Button>
@@ -50,7 +56,7 @@ function RsvpPage() {
         className="rsvpSubmitButton"
         variant="contained"
         type="submit"
-        onClick={() => history.push(`/success/${party_id}`)}
+        onClick={() => history.push(`/reminders/${storedPartyId}`)}
       >
         Next
       </Button>

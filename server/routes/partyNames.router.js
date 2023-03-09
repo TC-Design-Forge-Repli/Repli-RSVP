@@ -10,7 +10,7 @@ router.get('/:id', (req, res) => {
     console.log('in partyNames.router GET route for Party Names', req.body.id)
     const sqlQuery = 
     `
-    SELECT "party"."id", "party"."name", "party"."event_id", "events"."event_name"
+    SELECT "party"."id", "party"."name", "party"."event_id", "events"."event_name", "events"."event_code"
     FROM "party"
     JOIN "events" ON "party"."event_id" = "events"."id"
     WHERE "events"."event_code" = $1

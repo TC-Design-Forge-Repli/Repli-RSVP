@@ -3,9 +3,46 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-// router.get('/', (req, res) => {
-//   // GET route code here
-// });
+router.get('/', (req, res) => {
+  // GET route code here
+  console.log('in dashboard GET route ', req.body.id)
+  const userId = req.user.id
+
+  const sqlQuery = 
+  `
+  SELECT
+  events.event_name,
+  events.deadline,
+  events.location,
+  events.event_code,
+  events.event_date,
+  party.name AS party_name,
+  guests.name AS guest_name,
+  guests.response,
+  guests.phone_number,
+  guests.email_address,
+  meal_options.meal_name,
+  meal_options.description
+ FROM
+  "user"
+  JOIN events ON events.event_host_id = "user".id
+  JOIN party ON events.id = party.event_id
+  JOIN guests ON party.id = guests.party_id
+  JOIN meal_options ON events.id = meal_options.event_id
+  WHERE "user"."id" = $1;
+
+  `
+  const sqlValues = [userId]
+  pool.query(sqlQuery, sqlValues)
+  .then((dbRes) => {
+    res.send(dbRes.rows)
+  })
+  .catch((dbErr) => {
+    console.log("GET Dashboard route not working ", dbErr);
+    res.sendStatus(500)
+  })
+
+});
 
 router.post('/', (req, res) => {
   console.log(req.body)

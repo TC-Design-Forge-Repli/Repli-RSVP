@@ -10,6 +10,8 @@ import rsvpSaga from './rsvp.saga';
 import selectPartySaga from './selectPartySaga';
 import createEventSaga from './createEvent.saga'
 import mealsSaga from './meals.saga';
+import dashboardSaga from './dashboard.saga';
+
 
 
 // rootSaga is the primary saga.
@@ -32,5 +34,6 @@ export default function* rootSaga() {
     rsvpSaga(), // handles guest rsvps(attendance and meal choice)
     createEventSaga(),
     mealsSaga(),
+    dashboardSaga(),
   ]);
 }
