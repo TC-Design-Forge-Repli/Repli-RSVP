@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 //POST route for Guest's: email, phone and receive reminders choice
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
     const reminders = req.body;
     console.log(reminders)
 

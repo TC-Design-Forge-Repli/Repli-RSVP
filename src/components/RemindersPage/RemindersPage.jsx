@@ -38,7 +38,8 @@ function RemindersPage() {
     let reminders = {
       email:email,
       phoneNumber:phoneNumber,
-      receiveReminders:receiveReminders
+      receiveReminders:receiveReminders,
+      party_id:params.id
     }
     console.log('These are the guests communication options', reminders)
 
