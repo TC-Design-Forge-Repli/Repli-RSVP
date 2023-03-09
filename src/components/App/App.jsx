@@ -114,7 +114,7 @@ function App() {
             <RsvpPage />
           </Route>
 
-          <Route exact path="/reminders">
+          <Route exact path="/reminders/:id">
             <RemindersPage />
           </Route>
 

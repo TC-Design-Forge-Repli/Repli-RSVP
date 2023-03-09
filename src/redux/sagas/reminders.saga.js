@@ -11,7 +11,7 @@ function* createReminders(action) {
         //reminders= email, phone# and reminders repsonse
 
         const response = yield axios({
-            method:'POST',
+            method:'PUT',
             url:'/api/reminders',
             data: reminders
         });

@@ -11,7 +11,8 @@ import Checkbox from '@mui/material/Checkbox';
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function RemindersPage() {
  
@@ -19,8 +20,17 @@ function RemindersPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
 
+  const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    const party_id=params.id
+    dispatch({
+      type: 'SAGA/FETCH_PARTY_ID',
+      payload: party_id
+    })
+  }, [params.id])
 
   const handleRemindersSubmission = (event) => {
     event.preventDefault();
