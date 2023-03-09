@@ -31,7 +31,12 @@ function SelectPartyPage() {
   const history = useHistory();
 
   const partyNames = useSelector((store) => store.partyNames);
-  const handlePartyButtonClick = (event, id) => {
+
+  const sendToRSVP = (event, id) => {
+    dispatch({
+      type: 'STORE_PARTY_ID',
+      payload: id
+    })
     history.push(`/rsvp/${id}`);
   }
 
@@ -65,7 +70,7 @@ function SelectPartyPage() {
                     marginLeft:"20px",
                     marginRight:"20px"
                   }}
-              onClick={(event) => handlePartyButtonClick(event, partyName.id)}>
+              onClick={(event) => sendToRSVP(event, partyName.id)}>
               {partyName.name}
             </Button>
            ))}
