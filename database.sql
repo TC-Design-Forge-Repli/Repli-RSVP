@@ -3,7 +3,6 @@ CREATE TABLE "user" (
   "username" VARCHAR (80) UNIQUE NOT NULL,
   "password" VARCHAR (1000) NOT NULL
 );
-
 CREATE TABLE "events" (
 	"id" SERIAL PRIMARY KEY,
 	"event_host_id" INT REFERENCES "user",
@@ -19,10 +18,10 @@ CREATE TABLE "party" (
 	"event_id" INT REFERENCES "events",
 	"name" VARCHAR(500) NOT NULL
 );
-
 CREATE TABLE "meal_options" (
 	"id" SERIAL PRIMARY KEY,
 	"event_id" INT REFERENCES "events",
+	"meal_name" VARCHAR(500) NOT NULL,
 	"meal_name" VARCHAR(500) NOT NULL,
 	"description" VARCHAR(500)
 );
