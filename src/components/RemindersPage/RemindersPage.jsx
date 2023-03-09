@@ -38,7 +38,7 @@ function RemindersPage() {
       type:'SAGA/CREATE_REMINDERS',
       payload: reminders
     })
-    history.push('/success')//sends guest to the Success Page
+    history.push(`/success/${storedPartyId}`)//sends guest to the Success Page
   }//end handleCommunicationSubmission
 
   return (
