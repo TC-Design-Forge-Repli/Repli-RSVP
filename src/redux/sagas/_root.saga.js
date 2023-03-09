@@ -8,7 +8,7 @@ import matchEventCodeSaga from './matchEventCode.saga';
 import fetchPartyGuestsSaga from './partyGuests.saga';
 import rsvpSaga from './rsvp.saga';
 import selectPartySaga from './selectPartySaga';
-import createEventSaga from './createEvent.saga'
+import eventsSaga from './events.saga'
 import mealsSaga from './meals.saga';
 import dashboardSaga from './dashboard.saga';
 
@@ -32,7 +32,7 @@ export default function* rootSaga() {
     matchEventCodeSaga(), // checks to see if event code exists before moving guest to select party page
     fetchPartyGuestsSaga(), //fetches party guests to display them on rsvp page
     rsvpSaga(), // handles guest rsvps(attendance and meal choice)
-    createEventSaga(),
+    eventsSaga(),
     mealsSaga(),
     dashboardSaga(),
   ]);

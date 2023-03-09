@@ -1,4 +1,4 @@
-const eventDetailsReducer = (state = {}, action) => {
+const eventDetails = (state = {}, action) => {
     switch (action.type) {
       case 'SET_EVENT_DETAILS':
         return action.payload;
@@ -9,4 +9,4 @@ const eventDetailsReducer = (state = {}, action) => {
     }
   };
   
-export default eventDetailsReducer;
+export default eventDetails;

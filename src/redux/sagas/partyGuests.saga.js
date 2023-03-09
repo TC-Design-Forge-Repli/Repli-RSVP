@@ -17,7 +17,7 @@ function* fetchPartyGuests(action) {
             payload: response.data,
         })
     } catch(error) {
-        console.log('fetchPartyGuests SAGA function failled', error)
+        console.error('fetchPartyGuests SAGA function failed', error)
     }
 }
 
