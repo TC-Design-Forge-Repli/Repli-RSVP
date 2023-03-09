@@ -31,7 +31,6 @@ function SelectPartyPage() {
   const history = useHistory();
 
   const partyNames = useSelector((store) => store.partyNames);
-
   const handlePartyButtonClick = (event, id) => {
     history.push(`/rsvp/${id}`);
   }
@@ -73,8 +72,6 @@ function SelectPartyPage() {
         </Grid>
       </div>
 
-
-
     {/* Back Button - will send user back to the Event Code page */}
       <Button 
         className="backToEventCodePage"
@@ -84,7 +81,9 @@ function SelectPartyPage() {
               border:"2px solid #4330DA", 
               marginTop:"25px",
               marginLeft:"20px"}}
-        onClick={() => history.push('/eventCode')}>Back
+        onClick={() => history.push('/eventCode')}
+        >
+          Back
       </Button>
     </>
   );
