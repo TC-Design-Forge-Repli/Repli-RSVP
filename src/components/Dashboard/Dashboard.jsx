@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
-import { useEffect, useSelector } from 'react';
 import { useDispatch } from 'react-redux';
 
 function Dashboard() {
