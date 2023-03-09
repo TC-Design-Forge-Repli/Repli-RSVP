@@ -12,7 +12,6 @@ router.get('/', (req, res) => {
 //POST route for Guest's: email, phone and receive reminders choice
 router.put('/:id', (req, res) => {
     const reminders = req.body;
-    const party_id = req.params.id;
     console.log(reminders)
     console.log(req.params, "in put route")
 
@@ -30,7 +29,7 @@ router.put('/:id', (req, res) => {
         reminders.email, 
         reminders.phoneNumber,
         reminders.receiveReminders,
-        party_id
+        reminders.party_id
     ]
     pool.query(sqlQuery, sqlValues)
         .then(() => res.sendStatus(201))

@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   partyReducer,
-  partyNames, 
+  partyNames, //party names that get mapped through on SelectPartyPage (for the guests)
   eventDetails,
   isEventCodeUnique,
   matchEventCode,

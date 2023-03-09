@@ -26,9 +26,9 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-    selectPartySaga(), //fetch all party names to be rendered onto SelectPartyPage
+    selectPartySaga(), //fetch all party names to be rendered onto SelectPartyPage (for guests)
     checkEventCodeSaga(),
-    remindersSaga(),// POSTS guests communication options (email, phone, receive updates/reminders) 
+    remindersSaga(),// PUTS email, phone, receive updates/reminders to db/guests table
     matchEventCodeSaga(), // checks to see if event code exists before moving guest to select party page
     fetchPartyGuestsSaga(), //fetches party guests to display them on rsvp page
     rsvpSaga(), // handles guest rsvps(attendance and meal choice)

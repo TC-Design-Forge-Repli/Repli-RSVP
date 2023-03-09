@@ -24,6 +24,8 @@ function RemindersPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+console.log(storePartyId[0])
+
   useEffect(() => {
     const party_id=params.id
     dispatch({
@@ -75,17 +77,6 @@ function RemindersPage() {
             "& label.Mui-focused":{color:"#4330DA"},
             margin:"5px"
           }}
-
-          // sx={{
-           
-          //   "& .MuiOutlinedInput-root": {
-          //     "& > fieldset": { borderColor: "#4330DA"},
-          //     "&:focus-within":{borderColor: "#4330DA",}
-          //   }
-          //   ,
-          // }}
-        //  sx={{borderColor:"#4330DA"}}
-          // color="#4330DA"
           // defaultValue="Email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -128,32 +119,26 @@ function RemindersPage() {
           type="back"
           variant="outlined" 
           style={{color:"#4330DA", 
-          border:"2px solid #4330DA", 
-          marginTop:"25px",
-          marginLeft:"20px"}}
-          onClick={() => history.push(`/rsvp/${storedPartyId}`)}>Back
+                  border:"2px solid #4330DA", 
+                  marginTop:"25px",
+                  marginLeft:"20px"}}
+          onClick={() => history.push(`/rsvp/${storePartyId}`)}>Back
         </Button>
 
+      {/* Submit Button */}
         <Button 
           className="backToEventCodePage"
           type="back"
           variant="outlined" 
           style={{color:"#4330DA", 
-          border:"2px solid #4330DA", 
-          marginTop:"25px",
-          marginLeft:"20px"}}
+                  border:"2px solid #4330DA", 
+                  marginTop:"25px",
+                  marginLeft:"20px"}}
           onClick={handleRemindersSubmission}>Submit
         </Button>
    </div>
   );
 }
-
-
-
-
-
-
-
 
 
 export default RemindersPage;
