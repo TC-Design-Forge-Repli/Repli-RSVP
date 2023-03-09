@@ -1,20 +1,59 @@
-import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
+import './ManageEventPage.css';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name ManageEventPage with the name for the new component.
-function ManageEventPage(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Functional Component');
+
+function ManageEventPage() {
+  const dispatch = useDispatch();
+  const eventDetails = useSelector((store) => store.eventDetails);
+  const meals = useSelector((store) => store.meals);
+
+  useEffect(() => {
+    dispatch({
+      type: 'SAGA/FETCH_EVENT'
+    })
+    dispatch({
+      type: 'SAGA/FETCH_MEALS'
+    })
+  }, [])
+
+  console.log('eventDetails:', eventDetails);
+  console.log('meals:', meals);
 
   return (
-    <div>
-      <h2>{heading}</h2>
-    </div>
+    <section>
+      <div className="manageEventDetailsDiv">
+        <h2>Manage {eventDetails[0] && eventDetails[0].event_name}</h2>
+        <p>Event Code: {eventDetails[0] && eventDetails[0].event_code}</p>
+        <p>Date: {eventDetails[0] && eventDetails[0].event_date}</p>
+        <p>Location: {eventDetails[0] && eventDetails[0].event_location}</p>
+        <p>RSVP Deadline: {eventDetails[0] && eventDetails[0].event_deadline}</p>
+      </div>
+      <div className="manageMealOptionsDiv">
+        <h3>Manage Meal Options</h3>
+        {meals && meals.map(meal => {
+          return (
+            <div key={meal.id}>
+              <p>Name: {meal.meal_name}</p>
+              <p>Description: {meal.description}</p>
+            </div>
+          )
+        })}
+      </div>
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: "#4330DA",
+          fontFamily: "Montserrat",
+          margin: "10px"
+        }}
+      >
+        Manage Guest List
+      </Button>
+    </section>
   );
 }
+
 
 export default ManageEventPage;

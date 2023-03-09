@@ -3,47 +3,24 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+// GET /api/events
 router.get('/', (req, res) => {
-  // GET route code here
-  console.log('in dashboard GET route ', req.body.id)
-  const userId = req.user.id
+    const sqlQuery = `
+        SELECT * FROM "events";
+    `;
 
-  const sqlQuery = 
-  `
-  SELECT
-  events.event_name,
-  events.deadline,
-  events.location,
-  events.event_code,
-  events.event_date,
-  party.name AS party_name,
-  guests.name AS guest_name,
-  guests.response,
-  guests.phone_number,
-  guests.email_address,
-  meal_options.meal_name,
-  meal_options.description
- FROM
-  "user"
-  JOIN events ON events.event_host_id = "user".id
-  JOIN party ON events.id = party.event_id
-  JOIN guests ON party.id = guests.party_id
-  JOIN meal_options ON events.id = meal_options.event_id
-  WHERE "user"."id" = $1;
-
-  `
-  const sqlValues = [userId]
-  pool.query(sqlQuery, sqlValues)
-  .then((dbRes) => {
-    res.send(dbRes.rows)
-  })
-  .catch((dbErr) => {
-    console.log("GET Dashboard route not working ", dbErr);
-    res.sendStatus(500)
-  })
-
+    pool.query(sqlQuery)
+        .then((dbRes) => {
+            const events = dbRes.rows;
+            res.send(events);
+        })
+        .catch((dbErr) => {
+            console.error('Error /api/events GET:', dbErr);
+            res.sendStatus(500);
+        })
 });
 
+// POST /api/events
 router.post('/', (req, res) => {
   console.log(req.body)
   const determinePartySize = (party) =>{
@@ -150,7 +127,7 @@ router.post('/', (req, res) => {
   const eventDetails = req.body.eventDetails
   let sqlQuery1 = `
   INSERT INTO "events"
-  ("event_host_id", "event_name", "deadline", "location", "event_code", "event_date")
+  ("event_host_id", "event_name", "event_deadline", "event_location", "event_code", "event_date")
   VALUES
   ($1, $2, $3, $4, $5, $6)
   RETURNING id; 
