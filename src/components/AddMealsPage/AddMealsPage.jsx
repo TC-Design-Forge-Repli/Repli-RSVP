@@ -4,13 +4,18 @@ import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './AddMealsPage.css';
 
 
 function AddMealsPage() {
   const history = useHistory();
   const dispatch = useDispatch();
+  let eventDetails = useSelector((store) => store.eventDetails)
+  let guests = useSelector((store) => store.partyReducer)
   const [inputFields, setInputFields] = useState([{ name: '', description: '' }]);
+  
 
   const handleFormChange = (index, event) => {
     // store inputFields state into a variable called data with spread operator
@@ -30,16 +35,16 @@ function AddMealsPage() {
 
   const submit = (event) => {
     event.preventDefault();
-    console.log('inputFields:', inputFields)
-
+    let eventObjectToSendToDb = {
+      meals: inputFields,
+      eventDetails: eventDetails,
+      parties: guests.party
+    }
     dispatch({
-      type: 'SET_MEALS',
-      payload: inputFields
+      type: 'SAGA/CREATE_EVENT', 
+      payload: eventObjectToSendToDb
     })
-    dispatch({
-      type: 'SAGA/CREATE_MEALS',
-      payload: inputFields
-    })
+    console.log(eventObjectToSendToDb)
   }
 
   const removeInputs = (index) => {
