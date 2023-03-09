@@ -11,18 +11,30 @@ import Checkbox from '@mui/material/Checkbox';
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function RemindersPage() {
  
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
-
-  const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
-
+  const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
+  const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    const party_id=params.id
+    dispatch({
+      type: 'SAGA/FETCH_PARTY_ID',
+      payload: party_id
+    })
+ 
+    console.log(params.id)
+  }, [params.id])
+
+
 
   const handleRemindersSubmission = (event) => {
     event.preventDefault();
@@ -30,16 +42,26 @@ function RemindersPage() {
     let reminders = {
       email:email,
       phoneNumber:phoneNumber,
-      receiveReminders:receiveReminders
+      receiveReminders:receiveReminders,
+      party_id:storePartyId[0]
     }
     console.log('These are the guests communication options', reminders)
 
     dispatch({
       type:'SAGA/CREATE_REMINDERS',
       payload: reminders
+    }) 
+    dispatch({
+      type: 'STORE_PARTY_ID',
+      payload: storePartyId
     })
-    history.push(`/success/${storedPartyId}`)//sends guest to the Success Page
+    history.push(`/success/${storePartyId[0]}`)
+    // history.push(`/success/${storePartyId}`)
+    //sends guest to the Success Page
   }//end handleCommunicationSubmission
+
+
+  
 
   return (
     <div>
@@ -47,10 +69,18 @@ function RemindersPage() {
 
         <TextField
           // required
-          id="outlined-required"
+          id="outlined"
           label="Email"
+          sx={{
+           
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": { borderColor: "#4330DA"},
+              "&:focus-within":{borderColor: "#4330DA",}
+            }
+            ,
+          }}
+        //  sx={{borderColor:"#4330DA"}}
           // color="#4330DA"
-       
           // defaultValue="Email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -60,8 +90,14 @@ function RemindersPage() {
 
         <TextField
           // required
-          id="outlined-required"
+          id="outlined"
           label="Phone Number"
+          sx={{
+            
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": { borderColor: "#4330DA" },
+            },
+          }}
           // defaultValue="Phone Number"
           value={phoneNumber}
           onChange={(event) => setPhoneNumber(event.target.value)}
@@ -102,5 +138,13 @@ function RemindersPage() {
    </div>
   );
 }
+
+
+
+
+
+
+
+
 
 export default RemindersPage;

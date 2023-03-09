@@ -39,5 +39,22 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// GET
+router.get('/', (req, res) => {
+  const sqlQuery = `
+    SELECT * FROM "meal_options";
+  `;
+
+  pool.query(sqlQuery)
+    .then((dbRes) => {
+      const meals = dbRes.rows;
+      res.send(meals);
+    })
+    .catch((dbErr) => {
+      console.error('Error /api/meals GET:', dbErr);
+      res.sendStatus(500);
+    })
+})
+
 
 module.exports = router;
