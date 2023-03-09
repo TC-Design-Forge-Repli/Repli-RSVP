@@ -32,7 +32,11 @@ function SelectPartyPage() {
 
   const partyNames = useSelector((store) => store.partyNames);
 
-  const handlePartyButtonClick = (event, id) => {
+  const sendToRSVP = (event, id) => {
+    dispatch({
+      type: 'STORE_PARTY_ID',
+      payload: id
+    })
     history.push(`/rsvp/${id}`);
   }
 
@@ -66,14 +70,12 @@ function SelectPartyPage() {
                     marginLeft:"20px",
                     marginRight:"20px"
                   }}
-              onClick={(event) => handlePartyButtonClick(event, partyName.id)}>
+              onClick={(event) => sendToRSVP(event, partyName.id)}>
               {partyName.name}
             </Button>
            ))}
         </Grid>
       </div>
-
-
 
     {/* Back Button - will send user back to the Event Code page */}
       <Button 
@@ -84,7 +86,9 @@ function SelectPartyPage() {
               border:"2px solid #4330DA", 
               marginTop:"25px",
               marginLeft:"20px"}}
-        onClick={() => history.push('/eventCode')}>Back
+        onClick={() => history.push('/eventCode')}
+        >
+          Back
       </Button>
     </>
   );
