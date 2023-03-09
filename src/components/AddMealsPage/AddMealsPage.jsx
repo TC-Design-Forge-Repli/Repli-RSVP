@@ -85,6 +85,7 @@ function AddMealsPage() {
                 label={`Meal Option ${index + 1}`}
                 placeholder={`Meal Option ${index + 1}`}
                 value={input.name}
+                required
                 onChange={(event) => handleFormChange(index, event)}
                 sx={{
                   "& .MuiOutlinedInput-root.Mui-focused": {
@@ -104,6 +105,7 @@ function AddMealsPage() {
                 label={`Meal Description ${index + 1}`}
                 placeholder={`Meal Description ${index + 1}`}
                 value={input.description}
+                required
                 onChange={(event) => handleFormChange(index, event)}
                 sx={{
                   "& .MuiOutlinedInput-root.Mui-focused": {

@@ -3,10 +3,24 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-// router.get('/', (req, res) => {
-//   // GET route code here
-// });
+// GET /api/events
+router.get('/', (req, res) => {
+    const sqlQuery = `
+        SELECT * FROM "events";
+    `;
 
+    pool.query(sqlQuery)
+        .then((dbRes) => {
+            const events = dbRes.rows;
+            res.send(events);
+        })
+        .catch((dbErr) => {
+            console.error('Error /api/events GET:', dbErr);
+            res.sendStatus(500);
+        })
+});
+
+// POST /api/events
 router.post('/', (req, res) => {
   console.log(req.body)
   const determinePartySize = (party) =>{
@@ -113,7 +127,7 @@ router.post('/', (req, res) => {
   const eventDetails = req.body.eventDetails
   let sqlQuery1 = `
   INSERT INTO "events"
-  ("event_host_id", "event_name", "deadline", "location", "event_code", "event_date")
+  ("event_host_id", "event_name", "event_deadline", "event_location", "event_code", "event_date")
   VALUES
   ($1, $2, $3, $4, $5, $6)
   RETURNING id; 

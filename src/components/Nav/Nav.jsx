@@ -44,6 +44,10 @@ function Nav() {
               Event Code
             </Link>
 
+            <Link className="navLink" to="/manageEvent">
+              Manage Event
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}

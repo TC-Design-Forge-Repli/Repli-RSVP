@@ -3,7 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import partyReducer from './manageGuestPage.reducer';
 import partyNames from './selectParty.reducer';
-import eventDetails from './createEvent.reducer';
+import eventDetails from './events.reducer';
 import isEventCodeUnique from './isEventCodeUnique.reducer'
 import matchEventCode from './matchEventCode.reducer';
 import meals from './meals.reducer';

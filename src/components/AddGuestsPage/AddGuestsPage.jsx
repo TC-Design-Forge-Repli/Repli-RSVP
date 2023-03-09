@@ -62,7 +62,7 @@ function addGuestsPage() {
 
   const addNewParty = (event) => {
     event.preventDefault();
-    console.log("This is the state", newPartyInput);
+    console.log("This is the state, newPartyInput:", newPartyInput);
 
     let newParty = {
       party: newPartyInput,
@@ -70,7 +70,7 @@ function addGuestsPage() {
         .flatMap((party) => party.guestList)
         .filter((guest) => guest.trim() !== ""),
     };
-    console.log("This is the state", newParty);
+    console.log("This is the state, newParty:", newParty);
 
     dispatch({
       type: "ADD_PARTY_INPUT",
