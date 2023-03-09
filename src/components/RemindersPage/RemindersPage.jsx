@@ -30,10 +30,8 @@ function RemindersPage() {
       type: 'SAGA/FETCH_PARTY_ID',
       payload: party_id
     })
- 
     console.log(params.id)
   }, [params.id])
-
 
 
   const handleRemindersSubmission = (event) => {
@@ -55,13 +53,9 @@ function RemindersPage() {
       type: 'STORE_PARTY_ID',
       payload: storePartyId
     })
-    history.push(`/success/${storePartyId[0]}`)
-    // history.push(`/success/${storePartyId}`)
-    //sends guest to the Success Page
+    history.push(`/success/${storePartyId[0]}`) //sends guest to the Success Page
   }//end handleCommunicationSubmission
 
-
-  
 
   return (
     <div>
@@ -72,13 +66,24 @@ function RemindersPage() {
           id="outlined"
           label="Email"
           sx={{
-           
             "& .MuiOutlinedInput-root": {
-              "& > fieldset": { borderColor: "#4330DA"},
-              "&:focus-within":{borderColor: "#4330DA",}
-            }
-            ,
+              "& > fieldset": { borderColor: "#4330DA" },
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset":{borderColor:"#4330DA"}
+            },
+            "& label.Mui-focused":{color:"#4330DA"},
+            margin:"5px"
           }}
+
+          // sx={{
+           
+          //   "& .MuiOutlinedInput-root": {
+          //     "& > fieldset": { borderColor: "#4330DA"},
+          //     "&:focus-within":{borderColor: "#4330DA",}
+          //   }
+          //   ,
+          // }}
         //  sx={{borderColor:"#4330DA"}}
           // color="#4330DA"
           // defaultValue="Email"
@@ -93,10 +98,14 @@ function RemindersPage() {
           id="outlined"
           label="Phone Number"
           sx={{
-            
             "& .MuiOutlinedInput-root": {
               "& > fieldset": { borderColor: "#4330DA" },
             },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset":{borderColor:"#4330DA"}
+            },
+            "& label.Mui-focused":{color:"#4330DA"},
+            margin:"5px"
           }}
           // defaultValue="Phone Number"
           value={phoneNumber}

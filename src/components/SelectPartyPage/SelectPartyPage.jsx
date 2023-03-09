@@ -77,6 +77,7 @@ function SelectPartyPage() {
         </Grid>
       </div>
 
+
     {/* Back Button - will send user back to the Event Code page */}
       <Button 
         className="backToEventCodePage"
