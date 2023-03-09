@@ -5,8 +5,9 @@ import userSaga from './user.saga';
 import selectPartySaga from './selectPartySaga';
 import checkEventCodeSaga from './checkEventCode.saga'
 import remindersSaga from './reminders.saga';
-import MatchEventCodeSaga from './matchEventCode.saga';
+import matchEventCodeSaga from './matchEventCode.saga';
 import fetchPartyGuestsSaga from './partyGuests.saga';
+import rsvpSaga from './rsvp.saga';
 
 
 // rootSaga is the primary saga.
@@ -24,11 +25,10 @@ export default function* rootSaga() {
     selectPartySaga(), //fetch all party names to be rendered onto SelectPartyPage
     checkEventCodeSaga(),
     remindersSaga(),// POSTS guests communication options (email, phone, receive updates/reminders) 
-    checkEventCodeSaga(),
-    MatchEventCodeSaga(),
+    matchEventCodeSaga(), // checks to see if event code exists before moving guest to select party page
     selectPartySaga(), //fetch all party names to be rendered onto SelectPartyPage
-    checkEventCodeSaga(), 
-    fetchPartyGuestsSaga(),
+    fetchPartyGuestsSaga(), //fetches party guests to display them on rsvp page
+    rsvpSaga(), // handles guest rsvps(attendance and meal choice)
 
   ]);
 }
