@@ -47,7 +47,9 @@ function EventCodePage() {
       payload: eventCode
     })
     matchEventCode();
+    history.push(`/selectParty/${eventCode}`)
   }
+
 
   return (
     <form onSubmit={enterEventCode}>
