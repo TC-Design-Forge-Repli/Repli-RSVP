@@ -20,6 +20,9 @@ function RsvpPage() {
       type: 'SAGA/FETCH_PARTY_GUESTS',
       payload: party_id
     })
+    dispatch({
+      type: 'STORE_PARTY_ID'
+    })
   }, [params.id])
 
 

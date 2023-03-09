@@ -19,6 +19,8 @@ function RemindersPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
 
+  const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -84,7 +86,7 @@ function RemindersPage() {
           border:"2px solid #4330DA", 
           marginTop:"25px",
           marginLeft:"20px"}}
-          onClick={() => history.push('/rsvp')}>Back
+          onClick={() => history.push(`/rsvp/${storedPartyId}`)}>Back
         </Button>
 
         <Button 
