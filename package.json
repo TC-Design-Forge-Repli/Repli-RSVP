@@ -7,8 +7,8 @@
     "node": "16.x"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
     "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.11.11",

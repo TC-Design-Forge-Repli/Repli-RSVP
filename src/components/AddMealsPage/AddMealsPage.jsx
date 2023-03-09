@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useSelector } from 'react-redux';
 import './AddMealsPage.css';
 
 
 function AddMealsPage() {
   const history = useHistory();
   const dispatch = useDispatch();
+  let eventDetails = useSelector((store) => store.eventDetails)
+  let guests = useSelector((store) => store.partyReducer)
   const [inputFields, setInputFields] = useState([{ name: '', description: '' }]);
+  
 
   const handleFormChange = (index, event) => {
     // store inputFields state into a variable called data with spread operator
@@ -30,16 +35,16 @@ function AddMealsPage() {
 
   const submit = (event) => {
     event.preventDefault();
-    console.log('inputFields:', inputFields)
-
+    let eventObjectToSendToDb = {
+      meals: inputFields,
+      eventDetails: eventDetails,
+      parties: guests.party
+    }
     dispatch({
-      type: 'SET_MEALS',
-      payload: inputFields
+      type: 'SAGA/CREATE_EVENT', 
+      payload: eventObjectToSendToDb
     })
-    dispatch({
-      type: 'SAGA/CREATE_MEALS',
-      payload: inputFields
-    })
+    console.log(eventObjectToSendToDb)
   }
 
   const removeInputs = (index) => {
@@ -62,7 +67,9 @@ function AddMealsPage() {
         onClick={addInputs}
         style={{
           backgroundColor: "#4330DA",
-          fontFamily: "Montserrat"
+          fontFamily: "Montserrat",
+          marginLeft: "35%",
+          marginBottom: "20px"
         }}
       >
         Add Meal+
@@ -71,53 +78,71 @@ function AddMealsPage() {
       <form onSubmit={submit}>
         {inputFields.map((input, index) => {
           return (
-            <div key={index}>
-              <TextField 
-                required
+            <div key={index} className="inputsDiv">
+              <TextField
                 id="outlined-required"
                 name="name"
                 label={`Meal Option ${index + 1}`}
                 placeholder={`Meal Option ${index + 1}`}
                 value={input.name}
                 onChange={(event) => handleFormChange(index, event)}
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {borderColor: "#4330DA"}
+                  },
+                  "& label.Mui-focused": {color: "#4330DA"},
+                  margin: "5px"
+                }}
               />
               {/* Delete button will only render for every option after the first */}
-              {index !== 0 && <button onClick={() => removeInputs(index)}><DeleteForeverIcon /></button>}
+              {index !== 0 && <IconButton onClick={() => removeInputs(index)}>
+                <DeleteForeverIcon />
+              </IconButton>}
               <TextField
-                required
                 id="outlined-required"
                 name="description"
                 label={`Meal Description ${index + 1}`}
                 placeholder={`Meal Description ${index + 1}`}
                 value={input.description}
                 onChange={(event) => handleFormChange(index, event)}
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused": {
+                    "& > fieldset": {borderColor: "#4330DA"}
+                  },
+                  "& label.Mui-focused": {color: "#4330DA"},
+                  margin: "5px"
+                }}
               />
             </div>
           )
         })}
       </form>
 
-      <Button 
-        variant="outlined"
-        onClick={goToAddGuests}
-        style={{
-          color: "#4330DA",
-          fontFamily: "Montserrat",
-          outline: "1px solid #4330DA"
-        }}
-      >
-        Back
-      </Button>
-      <Button 
-        variant="contained" 
-        onClick={submit}
-        style={{
-          backgroundColor: "#4330DA",
-          fontFamily: "Montserrat"
-        }}
-      >
-        Submit
-      </Button>
+      <div className="backAndSubmitButtons">
+        <Button 
+          variant="outlined"
+          onClick={goToAddGuests}
+          sx={{
+            color: "#4330DA",
+            fontFamily: "Montserrat",
+            margin: "10px",
+            borderColor: "#4330DA"
+          }}
+        >
+          Back
+        </Button>
+        <Button
+          variant="contained" 
+          onClick={submit}
+          sx={{
+            backgroundColor: "#4330DA",
+            fontFamily: "Montserrat",
+            margin: "10px"
+          }}
+        >
+          Submit
+        </Button>
+      </div>
     </section>
   );
 }

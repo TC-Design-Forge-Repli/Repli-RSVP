@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 
+
 function CreateEventPage() {
   
   const history = useHistory();
