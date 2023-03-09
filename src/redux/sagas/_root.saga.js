@@ -11,7 +11,7 @@ import selectPartySaga from './selectPartySaga';
 import eventsSaga from './events.saga'
 import mealsSaga from './meals.saga';
 import dashboardSaga from './dashboard.saga';
-
+import editRemindersPageSaga from './editReminders.saga';
 
 
 // rootSaga is the primary saga.
