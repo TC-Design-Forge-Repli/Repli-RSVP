@@ -7,6 +7,7 @@ import remindersSaga from './reminders.saga';
 import MatchEventCodeSaga from './matchEventCode.saga';
 import selectPartySaga from './selectPartySaga';
 import mealsSaga from './meals.saga';
+import editRemindersPageSaga from './editReminders.saga';
 
 
 // rootSaga is the primary saga.
@@ -25,6 +26,7 @@ export default function* rootSaga() {
     checkEventCodeSaga(),
     remindersSaga(),// POSTS guests communication options (email, phone, receive updates/reminders) 
     MatchEventCodeSaga(),
-    mealsSaga()
+    mealsSaga(),
+    editRemindersPageSaga()
   ]);
 }

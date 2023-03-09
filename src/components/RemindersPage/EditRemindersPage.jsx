@@ -18,32 +18,32 @@ import { useEffect } from 'react';
 
 function EditRemindersPage() {
 
-    // const dispatch = useDispatch();
-    // // const useHistory = useHistory();
+    const dispatch = useDispatch();
+    // const useHistory = useHistory();
 
-    // const remindersPageToEdit = useSelector((store) => store.remindersPageToEdit)
+    const remindersPageToEdit = useSelector((store) => store.remindersPageToEdit)
     
-    // useEffect(() => {
-    //     dispatch({
-    //         type:'SAGA/FETCH_REMINDERS_PAGE_TO_EDIT',
-    //     })
-    // },[])
+    useEffect(() => {
+        dispatch({
+            type:'SAGA/FETCH_REMINDERS_PAGE_TO_EDIT',
+        })
+    },[])
 
-    // console.log(remindersPageToEdit)
+    console.log(remindersPageToEdit)
 
-    // const handleUpdateToRemindersPage = (event) => {
-    //     event.preventDefault();
-    //         dispatch({
-    //             type:'UPDATE_REMINDERS_PAGE',
-    //             payload: remindersPageToEdit
-    //         })
-    //         history.push('/success')
-    // }
+    const handleUpdateToRemindersPage = (event) => {
+        event.preventDefault();
+            dispatch({
+                type:'SAGA/UPDATE_REMINDERS_PAGE',
+                payload: remindersPageToEdit
+            })
+            history.push('/success')
+    }
 
     return (
         <>
-{/*          
-            <TextField
+         
+            {/* <TextField
                 // required
                 id="outlined-required"
                 label="email"
