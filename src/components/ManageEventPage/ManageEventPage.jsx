@@ -43,7 +43,7 @@ function ManageEventPage() {
       </div>
       <Button
         variant="contained"
-        sx={{
+        style={{
           backgroundColor: "#4330DA",
           fontFamily: "Montserrat",
           margin: "10px"
