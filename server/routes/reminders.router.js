@@ -12,20 +12,25 @@ router.get('/', (req, res) => {
 //POST route for Guest's: email, phone and receive reminders choice
 router.put('/:id', (req, res) => {
     const reminders = req.body;
+    const party_id = req.params.id;
     console.log(reminders)
+    console.log(req.params, "in put route")
 
     const sqlQuery = 
     `
-    INSERT INTO "guests"
-    ("email_address", "phone_number", "receive_reminders")
-    VALUES
-    ($1, $2, $3)
+    UPDATE "guests"
+    SET 
+    "email_address" =$1, 
+    "phone_number" = $2, 
+    "receive_reminders" = $3
+    WHERE "party_id" = $4
     `;
 
     const sqlValues = [
         reminders.email, 
         reminders.phoneNumber,
-        reminders.receiveReminders
+        reminders.receiveReminders,
+        party_id
     ]
     pool.query(sqlQuery, sqlValues)
         .then(() => res.sendStatus(201))

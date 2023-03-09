@@ -19,7 +19,7 @@ function RemindersPage() {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
-  const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
+  const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,7 +30,11 @@ function RemindersPage() {
       type: 'SAGA/FETCH_PARTY_ID',
       payload: party_id
     })
+ 
+    console.log(params.id)
   }, [params.id])
+
+
 
   const handleRemindersSubmission = (event) => {
     event.preventDefault();
@@ -39,16 +43,25 @@ function RemindersPage() {
       email:email,
       phoneNumber:phoneNumber,
       receiveReminders:receiveReminders,
-      party_id:params.id
+      party_id:storePartyId[0]
     }
     console.log('These are the guests communication options', reminders)
 
     dispatch({
       type:'SAGA/CREATE_REMINDERS',
       payload: reminders
+    }) 
+    dispatch({
+      type: 'STORE_PARTY_ID',
+      payload: storePartyId
     })
-    history.push(`/success/${storedPartyId}`)//sends guest to the Success Page
+    history.push(`/success/${storePartyId[0]}`)
+    // history.push(`/success/${storePartyId}`)
+    //sends guest to the Success Page
   }//end handleCommunicationSubmission
+
+
+  
 
   return (
     <div>
