@@ -18,8 +18,8 @@ function* matchEventCode(action) {
   }
 }
 
-function* MatchEventCodeSaga() {
+function* matchEventCodeSaga() {
   yield takeLatest('SAGA/MATCH_EVENT_CODE', matchEventCode);
 }
 
-export default MatchEventCodeSaga;
+export default matchEventCodeSaga;

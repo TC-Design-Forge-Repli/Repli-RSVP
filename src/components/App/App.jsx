@@ -97,9 +97,9 @@ function App() {
             <ManageEventPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/manageGuests">
+          {/* <ProtectedRoute exact path="/manageGuests">
             <ManageGuestsPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           {/* Guest Routes */}
           <Route exact path="/eventCode">
