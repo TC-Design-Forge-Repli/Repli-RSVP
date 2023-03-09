@@ -2,12 +2,14 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import selectPartySaga from './selectPartySaga';
 import checkEventCodeSaga from './checkEventCode.saga'
 import remindersSaga from './reminders.saga';
 import matchEventCodeSaga from './matchEventCode.saga';
 import fetchPartyGuestsSaga from './partyGuests.saga';
 import rsvpSaga from './rsvp.saga';
+import selectPartySaga from './selectPartySaga';
+import createEventSaga from './createEvent.saga'
+import mealsSaga from './meals.saga';
 
 
 // rootSaga is the primary saga.
@@ -26,9 +28,9 @@ export default function* rootSaga() {
     checkEventCodeSaga(),
     remindersSaga(),// POSTS guests communication options (email, phone, receive updates/reminders) 
     matchEventCodeSaga(), // checks to see if event code exists before moving guest to select party page
-    selectPartySaga(), //fetch all party names to be rendered onto SelectPartyPage
     fetchPartyGuestsSaga(), //fetches party guests to display them on rsvp page
     rsvpSaga(), // handles guest rsvps(attendance and meal choice)
-
+    createEventSaga(),
+    mealsSaga(),
   ]);
 }

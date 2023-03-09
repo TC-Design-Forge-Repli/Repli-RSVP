@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useHistory } from "react-router-dom";
 
 function addGuestsPage() {
@@ -107,38 +109,49 @@ function addGuestsPage() {
       <form className="partyForm" onSubmit={addNewParty}>
         {newPartyInput.map((partyInput, partyIndex) => (
           <div key={partyIndex}>
-            <TextField
-              required
-              className="partyInput"
-              id="outlined-required"
-              value={partyInput.name}
-              label={`Party ${partyIndex + 1}`}
-              // variant="standard"
-              sx={{ color: "#4330DA", display: "block", marginBottom: "20px" }}
-              onChange={(evt) => handlePartyInputChange(evt, partyIndex)}
-            />
-            <Button onClick={() => deleteParty(partyIndex)}> Delete </Button>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <TextField
+                required
+                className="partyInput"
+                id="outlined-required"
+                value={partyInput.name}
+                label={`Party ${partyIndex + 1}`}
+                sx={{
+                  color: "#4330DA",
+                  display: "block",
+                  marginBottom: "20px",
+                  flexGrow: 1,
+                }}
+                onChange={(evt) => handlePartyInputChange(evt, partyIndex)}
+              />
+              <IconButton color="error" onClick={() => deleteParty(partyIndex)}>
+                <DeleteForeverIcon />
+              </IconButton>
+            </div>
 
             {partyInput.guestList.map((guestInput, guestIndex) => (
-              <>
+              <div
+                key={guestIndex}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <TextField
                   required
-                  key={guestIndex}
                   className="guestsInput"
                   id="outlined-required"
                   value={guestInput}
                   label={`Guest ${guestIndex + 1}`}
-                  // variant="standard"
-                  sx={{ color: "#4330DA" }}
+                  sx={{ color: "#4330DA", flexGrow: 1 }}
                   onChange={(evt) =>
                     handleGuestInputChange(evt, partyIndex, guestIndex)
                   }
                 />
-                <Button onClick={() => deleteGuests(partyIndex, guestIndex)}>
-                  {" "}
-                  Delete{" "}
-                </Button>
-              </>
+                <IconButton
+                  color="error"
+                  onClick={() => deleteGuests(partyIndex, guestIndex)}
+                >
+                  <DeleteForeverIcon />
+                </IconButton>
+              </div>
             ))}
             <Button
               className="addGuestButton"
@@ -195,4 +208,3 @@ function addGuestsPage() {
 }
 
 export default addGuestsPage;
-
