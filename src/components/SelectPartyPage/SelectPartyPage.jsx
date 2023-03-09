@@ -4,11 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import './SelectPartyPage.css'
+
 
 // MUI Imports
 import Button from '@mui/material/Button';
-import styled from "styled-components";
+// import styled from "styled-components";
 import { Grid } from "@mui/material";
 
 // Alternate way to style...
@@ -31,6 +31,10 @@ function SelectPartyPage() {
   const history = useHistory();
 
   const partyNames = useSelector((store) => store.partyNames);
+
+  const handlePartyButtonClick = (event, id) => {
+    history.push(`/rsvp/${id}`);
+  }
 
   useEffect(() => {
     const eventCode=params.id
@@ -62,7 +66,7 @@ function SelectPartyPage() {
                     marginLeft:"20px",
                     marginRight:"20px"
                   }}
-              onClick={() => history.push('/rsvp')}>
+              onClick={(event) => handlePartyButtonClick(event, partyName.id)}>
               {partyName.name}
             </Button>
            ))}

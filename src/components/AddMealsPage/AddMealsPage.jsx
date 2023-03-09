@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -51,7 +52,8 @@ function AddMealsPage() {
     data.splice(index, 1)
     setInputFields(data)
   }
-  const backButton = () =>{
+
+  const goToAddGuests = () =>{
     history.push('/addGuests')
   }
 
@@ -102,7 +104,7 @@ function AddMealsPage() {
 
       <Button 
         variant="outlined"
-        onClick={backButton}
+        onClick={goToAddGuests}
         style={{
           color: "#4330DA",
           fontFamily: "Montserrat",
