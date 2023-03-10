@@ -11,7 +11,7 @@ function* fetchDashboardData() {
     try {
         const response = yield axios({
             method: 'GET',
-            url:`/api/createEvent/`
+            url:`/api/events`
         })
         yield put({
             type:'SET_DASHBOARD',
