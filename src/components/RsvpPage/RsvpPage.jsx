@@ -34,12 +34,8 @@ function RsvpPage() {
 
   return (
     <>
+      <h2>{partyGuests[0].party_name}</h2>
       {/* <h2>{party.name}</h2> */}
-      {/* need to map through a party and have the following things:
-              - ✅ guest name (map through guest reducer for specific party)
-              - ✅ drop down menu for response or switch or toggle
-              - drop down menu for meal options (need to map through meals reducer for options to show up)*/}
-
       {partyGuests.map(partyGuest => {
         return (
             <RsvpPageItem  

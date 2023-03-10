@@ -21,7 +21,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
           type: 'SAGA/UPDATE_RESPONSE',
           payload: {
             guest_id: partyGuest.guest_id,
-            response: event.target.checked,
+            response: partyGuest.guest_response,
             meal_id: null
           }
         })
@@ -52,7 +52,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
                     control={
                     <Switch
                         checked={partyGuest.guest_response}
-                        onChange={(event) => setChecked(false)}
+                        onChange={() => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
                 />
@@ -66,7 +66,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
                     required
-                    value={''}
+                    value={partyGuest.meal_id}
                     onChange={updateMealChoice}
                     >
                     {mealOptions.map(mealOption => {
@@ -88,7 +88,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
                     control={
                     <Switch
                         checked={partyGuest.guest_response}
-                        onChange={(event) => setChecked(true)}
+                        onChange={() => setChecked(true)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
                 />

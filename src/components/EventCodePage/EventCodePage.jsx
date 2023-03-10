@@ -22,7 +22,7 @@ function EventCodePage() {
 
   const matchEventCode = () => {
     if (doesEventCodeMatch === true) {
-      history.push('/selectParty/${eventCode}');
+      history.push(`/selectParty/${eventCode}`);
       console.log('event code matches to an event');
       dispatch({
         type: 'DOES_EVENT_CODE_MATCH',
@@ -40,15 +40,12 @@ function EventCodePage() {
   }
 
   const enterEventCode = (event) => {
-    event.preventDefault();
     console.log('event code entered:', eventCode);
     dispatch({
       type: 'SAGA/MATCH_EVENT_CODE',
       payload: eventCode
     })
-    matchEventCode();
-    setEventCode('');
-    history.push(`/selectParty/${eventCode}`)
+    matchEventCode(eventCode);
     dispatch({
       type: 'STORE_EVENT_CODE',
       payload: eventCode

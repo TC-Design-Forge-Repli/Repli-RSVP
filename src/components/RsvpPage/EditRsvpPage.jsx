@@ -8,22 +8,26 @@ import Button from '@mui/material/Button';
 function EditRsvpPage() {
 
     const partyGuests = useSelector(store => store.partyGuests);
+    const mealOptions = useSelector(store => store.meals);
     const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
     const params = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
   
     useEffect(() => {
-      const party_id = params.id;
-      dispatch({
-        type: 'SAGA/FETCH_PARTY_GUEST_RESPONSES',
-        payload: party_id
-      })
-      dispatch({
-        type: 'STORE_PARTY_ID',
-        payload: {party_id: params.id}
-      })
-    }, [params.id])
+        const party_id = params.id;
+        dispatch({
+          type: 'SAGA/FETCH_PARTY_GUESTS',
+          payload: params.id
+        })
+        dispatch({
+          type: 'SAGA/FETCH_MEALS',  
+        })
+        dispatch({
+          type: 'STORE_PARTY_ID',
+          payload: {party_id: params.id}
+        })
+      }, [params.id])
 
 
     return (
@@ -31,10 +35,12 @@ function EditRsvpPage() {
             <h3>Previous Answers</h3>
             {partyGuests.map(partyGuest => {
                 return (
-                    <EditRsvpPageItem  
-                    key={partyGuest.guest_id}
-                    partyGuest={partyGuest}
+                    <EditRsvpPage
+                        key={partyGuest.guest_id}
+                        partyGuest={partyGuest}
+                        mealOptions={mealOptions}
                     />
+
                 )
             })}
 

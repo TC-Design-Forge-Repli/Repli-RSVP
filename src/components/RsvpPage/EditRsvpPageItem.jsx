@@ -9,11 +9,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-function EditRsvpPageItem({partyGuest}) {
+function EditRsvpPageItem({partyGuest, mealOptions}) {
     
     const [checked, setChecked] = useState(true);
 
     const dispatch = useDispatch();
+
+    console.log('partyGuests', partyGuest)
 
     const updateResponse = (event) => {
         dispatch({
