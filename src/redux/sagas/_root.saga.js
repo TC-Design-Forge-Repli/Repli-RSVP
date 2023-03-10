@@ -35,5 +35,6 @@ export default function* rootSaga() {
     eventsSaga(),
     mealsSaga(),
     dashboardSaga(),
+    editRemindersPageSaga(),//fetches email, phone and receive updates/reminders from db/guests table to edit
   ]);
 }

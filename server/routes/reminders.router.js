@@ -3,11 +3,39 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 /**
- * GET route template
+ * GET route to EDIT Guest's: email, phone and receive reminders choice
  */
-router.get('/', (req, res) => {
-  // GET route code here
+router.get('/:id', (req, res) => {
+    const remindersToEdit = req.params.id
+console.log(req.params.id)
+console.log('in editReminders router GET for: email/phone/reminders', req.params.id)
+
+
+    const sqlQuery = 
+    `
+    SELECT 
+        guests.phone_number,
+        guests.email_address,
+        guests.receive_reminders
+    FROM guests
+        WHERE party_id = $1;
+    `;
+    const sqlValues = [remindersToEdit];
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+            res.send(dbRes.rows[0])
+            console.log(dbRes.rows[0])
+        })
+        .catch((dbError) => {
+            console.log('Error in GET route for remindersToEdit', dbError)
+            res.sendStatus(500);
+        })
 });
+
+
+
+
+
 
 //POST route for Guest's: email, phone and receive reminders choice
 router.put('/:id', (req, res) => {

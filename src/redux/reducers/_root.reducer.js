@@ -9,8 +9,7 @@ import matchEventCode from './matchEventCode.reducer';
 import meals from './meals.reducer';
 import partyGuests from './partyGuests.reducer';
 import storeNavigation from './storeNavigation.reducer';
-
-
+import remindersToEdit from './editReminders.reducer'
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -28,6 +27,7 @@ const rootReducer = combineReducers({
   meals,
   partyGuests,
   storeNavigation,
+  remindersToEdit,//reducer to hold guest's: email, phone number and receive reminders choice
 });
 
 export default rootReducer;
