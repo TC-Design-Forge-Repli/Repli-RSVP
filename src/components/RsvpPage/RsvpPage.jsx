@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 function RsvpPage() {
 
   const partyGuests = useSelector(store => store.partyGuests);
+  const party_name = partyGuests.party_name;
   const mealOptions = useSelector(store => store.meals);
   const storedEventCode = useSelector(store => store.storeNavigation.storeEventCode);
   const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
@@ -34,8 +35,7 @@ function RsvpPage() {
 
   return (
     <>
-      <h2>{partyGuests[0].party_name}</h2>
-      {/* <h2>{party.name}</h2> */}
+      <h2>{party_name}</h2>
       {partyGuests.map(partyGuest => {
         return (
             <RsvpPageItem  

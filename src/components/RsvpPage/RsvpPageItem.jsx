@@ -15,13 +15,12 @@ function RsvpPageItem({partyGuest, mealOptions}) {
 
     const dispatch = useDispatch();
 
-
     const updateResponse = (event) => {
         dispatch({
           type: 'SAGA/UPDATE_RESPONSE',
           payload: {
             guest_id: partyGuest.guest_id,
-            response: partyGuest.guest_response,
+            response: event.target.checked,
             meal_id: null
           }
         })

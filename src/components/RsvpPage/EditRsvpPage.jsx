@@ -32,15 +32,14 @@ function EditRsvpPage() {
 
     return (
         <>
-            <h3>Previous Answers</h3>
+            <h2>Previous Answers</h2>
             {partyGuests.map(partyGuest => {
                 return (
-                    <EditRsvpPage
-                        key={partyGuest.guest_id}
-                        partyGuest={partyGuest}
-                        mealOptions={mealOptions}
+                    <EditRsvpPageItem  
+                    key={partyGuest.guest_id}
+                    partyGuest={partyGuest}
+                    mealOptions={mealOptions}
                     />
-
                 )
             })}
 

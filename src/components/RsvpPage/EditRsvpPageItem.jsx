@@ -15,8 +15,6 @@ function EditRsvpPageItem({partyGuest, mealOptions}) {
 
     const dispatch = useDispatch();
 
-    console.log('partyGuests', partyGuest)
-
     const updateResponse = (event) => {
         dispatch({
           type: 'SAGA/UPDATE_RESPONSE',
@@ -42,8 +40,8 @@ function EditRsvpPageItem({partyGuest, mealOptions}) {
 
     return (
         <>
+        <h4>{partyGuest.guest_name}</h4>
         {/* <h4>{partyGuest.guest_name}</h4> */}
-
         {checked ?
         <>
             {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
@@ -53,7 +51,7 @@ function EditRsvpPageItem({partyGuest, mealOptions}) {
                     control={
                     <Switch
                         checked={partyGuest.guest_response}
-                        onChange={(event) => setChecked(false)}
+                        onChange={() => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
                 />
@@ -67,11 +65,14 @@ function EditRsvpPageItem({partyGuest, mealOptions}) {
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
                     required
-                    value={''}
+                    value={partyGuest.meal_id}
                     onChange={updateMealChoice}
                     >
-                    <MenuItem value={1}>Option 1</MenuItem>
-                    <MenuItem value={2}>Option 2</MenuItem>
+                    {mealOptions.map(mealOption => {
+                        return (
+                            <MenuItem key={mealOption.id} value={mealOption.id}>{mealOption.meal_name}</MenuItem>
+                        )
+                    })}
                     </Select>
                 </FormControl>
             </form>
@@ -80,20 +81,21 @@ function EditRsvpPageItem({partyGuest, mealOptions}) {
         :
 
         // only show toggle(switch) if they are currently declining the invitation
-        
          <form onChange={updateResponse}>
                 <FormGroup>
                 <FormControlLabel 
                     control={
                     <Switch
                         checked={partyGuest.guest_response}
-                        onChange={(event) => setChecked(true)}
+                        onChange={() => setChecked(true)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
                 />
                 </FormGroup>
             </form>
+        
             }
+              
         </>
     )
 }

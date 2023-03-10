@@ -41,7 +41,7 @@ function SuccessPage() {
           border:"2px solid #4330DA", 
           marginTop:"25px",
           marginLeft:"20px"}}
-          onClick={() => history.push(`/rsvp/${storePartyId[0]}`)}>Edit My RSVP
+          onClick={() => history.push(`/editRsvp/${storePartyId}`)}>Edit My RSVP
       </Button>
 
 
