@@ -63,18 +63,20 @@ function AddMealsPage() {
       <h2>Add Meals</h2>
       <p id="mealsParagraph">How many meals?</p>
 
+      <div id="addMealsButton">
       <Button 
         variant="contained" 
         onClick={addInputs}
         style={{
           backgroundColor: "#4330DA",
           fontFamily: "Montserrat",
-          marginLeft: "35%",
+          // marginLeft: "35%",
           marginBottom: "20px"
         }}
       >
         Add Meal+
       </Button>
+      </div>
 
       <form onSubmit={submit}>
         {inputFields.map((input, index) => {
@@ -100,9 +102,11 @@ function AddMealsPage() {
                 }}
               />
               {/* Delete button will only render for every option after the first */}
-              {index !== 0 && <IconButton onClick={() => removeInputs(index)}>
-                <DeleteForeverIcon />
-              </IconButton>}
+              <div className="deleteIconButton">
+                {index !== 0 && <IconButton onClick={() => removeInputs(index)}>
+                  <DeleteForeverIcon />
+                </IconButton>}
+              </div>
               <TextField
                 id="outlined-required"
                 name="description"
@@ -127,7 +131,7 @@ function AddMealsPage() {
         })}
       </form>
 
-      <div className="backAndSubmitButtons">
+      <div className="buttonsDiv">
         <Button 
           variant="outlined"
           onClick={goToAddGuests}

@@ -10,6 +10,9 @@ function* createEvent(action) {
         url: '/api/events',
         data: action.payload
     })
+    yield put({
+      type: 'SAGA/FETCH_EVENT'
+    })
   } catch (error) {
     console.error('Event code check error', error);
   }
