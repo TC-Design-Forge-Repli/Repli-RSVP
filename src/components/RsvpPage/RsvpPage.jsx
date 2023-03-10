@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import RsvpPageItem from './RsvpPageItem';
@@ -48,7 +48,7 @@ function RsvpPage() {
       <Button
         className="backToSelectPartyButton"
         variant="outlined"
-        onClick={() => history.push(`/selectParty/${storedEventCode}`)}
+        onClick={() => history.push(`/reminders/${storedPartyId}`)}
       >
         Back
       </Button>

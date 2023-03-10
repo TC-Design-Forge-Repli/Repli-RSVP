@@ -30,6 +30,7 @@ import RsvpPage from '../RsvpPage/RsvpPage';
 import RemindersPage from '../RemindersPage/RemindersPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
 import EditRemindersPage from '../RemindersPage/EditRemindersPage';
+import EditRsvpPage from '../RsvpPage/EditRsvpPageItem.jsx';
 
 
 import './App.css';
@@ -112,6 +113,10 @@ function App() {
 
           <Route exact path="/rsvp/:id">
             <RsvpPage />
+          </Route>
+
+          <Route exact path="/editRsvp/:id">
+            <EditRsvpPage />
           </Route>
 
           <Route exact path="/reminders/:id">
