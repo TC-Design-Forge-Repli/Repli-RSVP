@@ -44,7 +44,9 @@ function AddMealsPage() {
       type: 'SAGA/CREATE_EVENT', 
       payload: eventObjectToSendToDb
     })
-    history.push("/dashboard")
+    setTimeout(() => {
+      history.push("/dashboard")
+    }, 2000);
     console.log(eventObjectToSendToDb)
   }
 
@@ -61,7 +63,7 @@ function AddMealsPage() {
   return (
     <section>
       <h2>Add Meals</h2>
-      <p>How many meals?</p>
+      <p id="mealsParagraph">How many meals?</p>
 
       <Button 
         variant="contained" 
@@ -89,6 +91,9 @@ function AddMealsPage() {
                 required
                 onChange={(event) => handleFormChange(index, event)}
                 sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": {borderColor: "#4330DA"}
+                  },
                   "& .MuiOutlinedInput-root.Mui-focused": {
                     "& > fieldset": {borderColor: "#4330DA"}
                   },
@@ -109,6 +114,9 @@ function AddMealsPage() {
                 required
                 onChange={(event) => handleFormChange(index, event)}
                 sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": {borderColor: "#4330DA"}
+                  },
                   "& .MuiOutlinedInput-root.Mui-focused": {
                     "& > fieldset": {borderColor: "#4330DA"}
                   },

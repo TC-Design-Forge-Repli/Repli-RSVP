@@ -9,6 +9,8 @@ import matchEventCode from './matchEventCode.reducer';
 import meals from './meals.reducer';
 import partyGuests from './partyGuests.reducer';
 import storeNavigation from './storeNavigation.reducer';
+import dashboard from './dashboard.reducer'
+import donePosting from './donePosting.reducer';
 import remindersToEdit from './editReminders.reducer'
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -26,6 +28,8 @@ const rootReducer = combineReducers({
   matchEventCode,
   meals,
   partyGuests,
+  dashboard,
+  donePosting,
   storeNavigation,
   remindersToEdit,//reducer to hold guest's: email, phone number and receive reminders choice
 });

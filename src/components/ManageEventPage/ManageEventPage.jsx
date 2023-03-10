@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import './ManageEventPage.css';
 
 
 function ManageEventPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const eventDetails = useSelector((store) => store.eventDetails);
   const meals = useSelector((store) => store.meals);
+  const partyGuests = useSelector((store) => store.partyGuests);
 
   useEffect(() => {
     dispatch({
@@ -16,10 +19,14 @@ function ManageEventPage() {
     dispatch({
       type: 'SAGA/FETCH_MEALS'
     })
+    dispatch({
+      type: 'SAGA/FETCH_ALL_GUESTS'
+    })
   }, [])
 
-  console.log('eventDetails:', eventDetails);
-  console.log('meals:', meals);
+  const goToManageGuestList = () => {
+    history.push('/manageGuests');
+  }
 
   return (
     <section>
@@ -33,9 +40,12 @@ function ManageEventPage() {
       <div className="manageMealOptionsDiv">
         <h3>Manage Meal Options</h3>
         {meals && meals.map(meal => {
+          // Create an array of guests with the same meal_id
+          const guestsWithSameMealId = partyGuests.filter(guest => guest.meal_id === meal.id);
           return (
             <div key={meal.id}>
               <p>Name: {meal.meal_name}</p>
+              <p>Number of Guests: {guestsWithSameMealId.length}</p>
               <p>Description: {meal.description}</p>
             </div>
           )
@@ -43,6 +53,7 @@ function ManageEventPage() {
       </div>
       <Button
         variant="contained"
+        onClick={goToManageGuestList}
         style={{
           backgroundColor: "#4330DA",
           fontFamily: "Montserrat",
