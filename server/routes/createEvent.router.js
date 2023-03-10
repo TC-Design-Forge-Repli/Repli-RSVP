@@ -5,24 +5,27 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   // GET route code here
-  console.log('in dashboard GET route ', req.body.id)
   const userId = req.user.id
 
   const sqlQuery = 
   `
   SELECT
+  events.id AS event_id,
   events.event_name,
   events.deadline,
   events.location,
   events.event_code,
   events.event_date,
+  party.id AS party_id,
   party.name AS party_name,
+  guests.id AS guest_id,
   guests.name AS guest_name,
-  guests.response,
-  guests.phone_number,
-  guests.email_address,
-  meal_options.meal_name,
-  meal_options.description
+  guests.response AS guest_response,
+  guests.phone_number AS guest_phone_number,
+  guests.email_address AS guest_email_address,
+  meal_options.id AS meal_id,
+  meal_options.meal_name AS meal_name,
+  meal_options.description AS meal_description
  FROM
   "user"
   JOIN events ON events.event_host_id = "user".id
@@ -35,17 +38,89 @@ router.get('/', (req, res) => {
   const sqlValues = [userId]
   pool.query(sqlQuery, sqlValues)
   .then((dbRes) => {
-    res.send(dbRes.rows)
-  })
-  .catch((dbErr) => {
-    console.log("GET Dashboard route not working ", dbErr);
-    res.sendStatus(500)
-  })
+    const events = [];
 
+      // group rows by event id
+      const rows = dbRes.rows;
+      const groupedRows = {};
+      rows.forEach((row) => {
+        const { event_id, event_name, deadline, location, event_code, event_date, party_id, party_name, guest_id, guest_name, guest_responses, guest_phone_number, guest_email_address, meal_id, meal_name, meal_description } = row;
+        if (!groupedRows[event_id]) {
+          groupedRows[event_id] = {
+            event_id,
+            event_name,
+            deadline,
+            location,
+            event_code,
+            event_date,
+            parties: [],
+            meals: []
+          };
+        }
+        const partyIndex = groupedRows[event_id].parties.findIndex((p) => p.party_id === party_id);
+        if (partyIndex === -1) {
+          groupedRows[event_id].parties.push({
+            party_id,
+            party_name,
+            guests: []
+          });
+        }
+        const mealIndex = groupedRows[event_id].meals.findIndex((m) => m.meal_id === meal_id)
+        if(mealIndex === -1){
+            groupedRows[event_id].meals.push({
+                meal_id,
+                meal_name,
+                meal_description
+              });
+        }
+        groupedRows[event_id].parties[groupedRows[event_id].parties.length - 1].guests.push({
+          guest_id,
+          guest_name,
+          guest_responses,
+          guest_phone_number,
+          guest_email_address
+        });
+      });
+
+      // push each event object into the events array
+      Object.values(groupedRows).forEach((event) => {
+        events.push(event);
+      });
+      res.send(events);
+    })
+    .catch((dbErr) => {
+      console.error('Error /api/events GET:', dbErr);
+      res.sendStatus(500);
+    });
 });
+// [
+//     {
+//         event_id: 
+//         event_name: 
+//         deadline: 
+//         location:
+//         event_code:
+//         event_date: 
+//         parties: [{
+//             party_id: 
+//             party_name: 
+//             guests: [{
+//                 guest_id: 
+//                 guest_name: 
+//                 guest_responses: 
+//                 guest_phone_number:
+//                 guest_email_address: 
+//             }]
+//         }],
+//         meals: [{
+//             meal_id:
+//             meal_name: 
+//             meal_description:
+//         }]
+//     }
+// ]
 
 router.post('/', (req, res) => {
-  console.log(req.body)
   const determinePartySize = (party) =>{
     let count = 1;
     let count2 = 2;
@@ -126,26 +201,6 @@ router.post('/', (req, res) => {
     }
     return arrayToHold;
   }
-  
-  // party id then name of guest
-//   parties: [
-//     { name: 'asf', guestList: [Array] },
-//     { name: 'fsdf', guestList: [Array] }
-//   ]
-
-// [ { id: 13 }, { id: 14 } ],
-
-// combined
-// [
-//     {
-//         id: 13,
-//         guestList: [Array]
-//     },
-//     {
-//         id: 14,
-//         guestList: [Array]
-//     }
-// ]
   const userId = req.user.id
   const eventDetails = req.body.eventDetails
   let sqlQuery1 = `
@@ -158,7 +213,6 @@ router.post('/', (req, res) => {
   let sqlValues1 = [userId, eventDetails.eventTitle, eventDetails.rsvpCloseDate, eventDetails.location, eventDetails.eventCode, eventDetails.date]
   pool.query(sqlQuery1, sqlValues1)
     .then((dbRes1) =>{
-        console.log('WHAT I GOT BACK FROM THE DATABASE',dbRes1);
         const eventIdThatWeJustCreated = dbRes1.rows[0].id
         const partyName = req.body.parties
         let sqlQuery2 = `
@@ -171,7 +225,6 @@ router.post('/', (req, res) => {
         let sqlValues2 = dynamicPartySqlValues(partyName, eventIdThatWeJustCreated)
         pool.query(sqlQuery2, sqlValues2)
             .then((dbRes2) =>{
-                console.log(dbRes2)
                 const partyIdArrayOfJustCreatedParties = dbRes2.rows
                 const meals = req.body.meals
                 let sqlQuery3 = `

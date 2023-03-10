@@ -8,7 +8,8 @@ import isEventCodeUnique from './isEventCodeUnique.reducer'
 import matchEventCode from './matchEventCode.reducer';
 import meals from './meals.reducer';
 import partyGuests from './partyGuests.reducer';
-
+import dashboard from './dashboard.reducer'
+import donePosting from './donePosting.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -26,6 +27,8 @@ const rootReducer = combineReducers({
   matchEventCode,
   meals,
   partyGuests,
+  dashboard,
+  donePosting
 });
 
 export default rootReducer;

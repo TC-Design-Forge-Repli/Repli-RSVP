@@ -8,6 +8,7 @@ function* createEvent(action) {
         url: '/api/createEvent',
         data: action.payload
     })
+    yield put({ type: 'DONE_POSTING', payload: response.data });
   } catch (error) {
     console.log('Event code check error', error);
   }
