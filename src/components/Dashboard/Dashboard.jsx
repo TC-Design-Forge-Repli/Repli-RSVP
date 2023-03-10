@@ -1,12 +1,15 @@
 import React, { useEffect, } from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+import Button from '@material-ui/core/Button';
+
 
 function Dashboard() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const events = useSelector(store => store.dashboardReducer);
   const donePosting = useSelector(store => store.donePosting)
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -17,12 +20,31 @@ function Dashboard() {
     })
   }, [donePosting])
 
+  const handleManageClick = () => {
+    history.push('/manageEvent');
+  }
+
   return (
     <div className="container">
-    
+      {events && events.map((event) => (
+        <div key={event.event_id}>
+          <h2>{event.event_name}</h2>
+          <p>{event.event_date}</p>
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#4330DA",
+              fontFamily: "Montserrat",
+              margin: "10px"
+            }}
+            onClick={handleManageClick}
+          >
+            Manage 
+          </Button>
+        </div>
+      ))}
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
 export default Dashboard;

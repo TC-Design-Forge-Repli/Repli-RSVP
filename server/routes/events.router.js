@@ -3,8 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-// GET /api/events
-router.get('/', (req, res) => {
+
   // GET route code here
   const userId = req.user.id
 
@@ -121,6 +120,7 @@ router.get('/', (req, res) => {
 //         }]
 //     }
 // ]
+
 
 // POST /api/events
 router.post('/', (req, res) => {
