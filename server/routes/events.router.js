@@ -6,19 +6,86 @@ const router = express.Router();
 // GET /api/events
 router.get('/', (req, res) => {
     const sqlQuery = `
-        SELECT * FROM "events";
+      SELECT 
+        e.event_id, 
+        e.event_name, 
+        e.deadline, 
+        e.location, 
+        e.event_code, 
+        e.event_date, 
+        p.party_id, 
+        p.party_name, 
+        g.guest_id, 
+        g.guest_name, 
+        g.guest_responses, 
+        g.guest_phone_number, 
+        g.guest_email_address, 
+        m.meal_id, 
+        m.meal_name, 
+        m.meal_description 
+      FROM events e
+      LEFT JOIN parties p ON p.event_id = e.event_id
+      LEFT JOIN guests g ON g.party_id = p.party_id
+      LEFT JOIN meals m ON m.event_id = e.event_id;
     `;
-
+  
     pool.query(sqlQuery)
-        .then((dbRes) => {
-            const events = dbRes.rows;
-            res.send(events);
-        })
-        .catch((dbErr) => {
-            console.error('Error /api/events GET:', dbErr);
-            res.sendStatus(500);
-        })
-});
+      .then((dbRes) => {
+        const events = [];
+        const rows = dbRes.rows;
+  
+        // group rows by event id
+        const groupedRows = rows.reduce((acc, row) => {
+          if (!acc[row.event_id]) {
+            acc[row.event_id] = {
+              event_id: row.event_id,
+              event_name: row.event_name,
+              deadline: row.deadline,
+              location: row.location,
+              event_code: row.event_code,
+              event_date: row.event_date,
+              parties: [],
+              meals: []
+            };
+          }
+          acc[row.event_id].parties.push({
+            party_id: row.party_id,
+            party_name: row.party_name,
+            guests: []
+          });
+          acc[row.event_id].meals.push({
+            meal_id: row.meal_id,
+            meal_name: row.meal_name,
+            meal_description: row.meal_description
+          });
+          return acc;
+        }, {});
+  
+        // add guests to parties
+        rows.forEach((row) => {
+          const event = groupedRows[row.event_id];
+          const party = event.parties.find((p) => p.party_id === row.party_id);
+          party.guests.push({
+            guest_id: row.guest_id,
+            guest_name: row.guest_name,
+            guest_responses: row.guest_responses,
+            guest_phone_number: row.guest_phone_number,
+            guest_email_address: row.guest_email_address
+          });
+        });
+  
+        // push each event object into the events array
+        Object.values(groupedRows).forEach((event) => {
+          events.push(event);
+        });
+  
+        res.send(events);
+      })
+      .catch((dbErr) => {
+        console.error('Error /api/events GET:', dbErr);
+        res.sendStatus(500);
+      });
+  });
 
 // POST /api/events
 router.post('/', (req, res) => {
