@@ -2,6 +2,23 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// get all guests
+router.get('/', (req, res) => {
+    const sqlQuery = `
+        SELECT * FROM "guests"
+        ORDER BY "id" ASC;
+    `;
+
+    pool.query(sqlQuery)
+        .then((dbRes) => {
+            res.send(dbRes.rows);
+        })
+        .catch((dbErr) => {
+            console.error('Error /api/partyGuests GET all:', dbErr);
+            res.sendStatus(500);
+        })
+})
+
 router.get('/:id', (req, res) => {
     const party_id = req.params.id;
     console.log('sending guests with party_id', party_id)

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 
+// POST
 function* createEvent(action) {
   try {
     const response = yield axios({
@@ -14,6 +15,7 @@ function* createEvent(action) {
   }
 }
 
+// GET
 function* fetchEvent() {
   try {
     const response = yield axios({
