@@ -22,7 +22,6 @@ CREATE TABLE "meal_options" (
 	"id" SERIAL PRIMARY KEY,
 	"event_id" INT REFERENCES "events",
 	"meal_name" VARCHAR(500) NOT NULL,
-	"meal_name" VARCHAR(500) NOT NULL,
 	"description" VARCHAR(500)
 );
 
