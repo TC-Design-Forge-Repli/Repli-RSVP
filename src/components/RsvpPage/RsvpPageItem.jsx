@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 //mui imports
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,6 +13,9 @@ function RsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(true);
     const dispatch = useDispatch();
+
+    const partyNames = useSelector((store) => store.partyNames);
+    
 
     const updateResponse = (event) => {
         dispatch({

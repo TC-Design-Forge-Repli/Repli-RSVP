@@ -61,7 +61,7 @@ function AddMealsPage() {
   return (
     <section>
       <h2>Add Meals</h2>
-      <p>How many meals?</p>
+      <p id="mealsParagraph">How many meals?</p>
 
       <Button 
         variant="contained" 
@@ -86,8 +86,12 @@ function AddMealsPage() {
                 label={`Meal Option ${index + 1}`}
                 placeholder={`Meal Option ${index + 1}`}
                 value={input.name}
+                required
                 onChange={(event) => handleFormChange(index, event)}
                 sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": {borderColor: "#4330DA"}
+                  },
                   "& .MuiOutlinedInput-root.Mui-focused": {
                     "& > fieldset": {borderColor: "#4330DA"}
                   },
@@ -105,8 +109,12 @@ function AddMealsPage() {
                 label={`Meal Description ${index + 1}`}
                 placeholder={`Meal Description ${index + 1}`}
                 value={input.description}
+                required
                 onChange={(event) => handleFormChange(index, event)}
                 sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": {borderColor: "#4330DA"}
+                  },
                   "& .MuiOutlinedInput-root.Mui-focused": {
                     "& > fieldset": {borderColor: "#4330DA"}
                   },
@@ -123,7 +131,7 @@ function AddMealsPage() {
         <Button 
           variant="outlined"
           onClick={goToAddGuests}
-          sx={{
+          style={{
             color: "#4330DA",
             fontFamily: "Montserrat",
             margin: "10px",
@@ -135,7 +143,7 @@ function AddMealsPage() {
         <Button
           variant="contained" 
           onClick={submit}
-          sx={{
+          style={{
             backgroundColor: "#4330DA",
             fontFamily: "Montserrat",
             margin: "10px"

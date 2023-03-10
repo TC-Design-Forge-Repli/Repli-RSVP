@@ -47,10 +47,17 @@ function EventCodePage() {
       payload: eventCode
     })
     matchEventCode();
+    setEventCode('');
+    history.push(`/selectParty/${eventCode}`)
+    dispatch({
+      type: 'STORE_EVENT_CODE',
+      payload: eventCode
+    })
   }
 
+
   return (
-    <form onSubmit={enterEventCode}>
+    <form>
       <TextField
         className="eventCodeInput"
         required
@@ -62,7 +69,7 @@ function EventCodePage() {
       <Button
         className="eventCodeSubmitButton"
         variant="contained"
-        type="submit"
+        onClick={enterEventCode}
       >
         Enter
       </Button>

@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 
-
 function CreateEventPage() {
   
   const history = useHistory();
@@ -82,8 +81,9 @@ function CreateEventPage() {
       <div>What is the date the event will take place?</div>
       <TextField 
       required
+      type="date"
       id="outlined-required"
-      label="Required"
+      // label="Required"
       value={date}
       onChange={(event) => setDate(event.target.value)}
       />
@@ -98,8 +98,9 @@ function CreateEventPage() {
       <div>When do you want this event to be closed?</div>
       <TextField 
       required
+      type="date"
       id="outlined-required"
-      label="Required"
+      // label="Required"
       value={rsvpCloseDate}
       onChange={(event) => setRsvpCloseDate(event.target.value)}
       />

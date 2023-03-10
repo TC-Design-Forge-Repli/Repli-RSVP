@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 

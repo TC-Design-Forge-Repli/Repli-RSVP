@@ -29,6 +29,8 @@ import SelectPartyPage from '../SelectPartyPage/SelectPartyPage';
 import RsvpPage from '../RsvpPage/RsvpPage';
 import RemindersPage from '../RemindersPage/RemindersPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
+import EditRemindersPage from '../RemindersPage/EditRemindersPage';
+
 
 import './App.css';
 
@@ -95,9 +97,9 @@ function App() {
             <ManageEventPage />
           </ProtectedRoute>
 
-          {/* <ProtectedRoute exact path="/manageGuests">
+          <ProtectedRoute exact path="/manageGuests">
             <ManageGuestsPage />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
           {/* Guest Routes */}
           <Route exact path="/eventCode">
@@ -112,11 +114,15 @@ function App() {
             <RsvpPage />
           </Route>
 
-          <Route exact path="/reminders">
+          <Route exact path="/reminders/:id">
             <RemindersPage />
           </Route>
 
-          <Route exact path="/success">
+          <Route exact path="/editReminders">
+            <EditRemindersPage />
+          </Route>
+
+          <Route exact path="/success/:id">
             <SuccessPage />
           </Route>
 

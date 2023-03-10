@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+// GET /api/events
 router.get('/', (req, res) => {
   // GET route code here
   const userId = req.user.id
@@ -120,6 +121,7 @@ router.get('/', (req, res) => {
 //     }
 // ]
 
+// POST /api/events
 router.post('/', (req, res) => {
   const determinePartySize = (party) =>{
     let count = 1;
@@ -205,7 +207,7 @@ router.post('/', (req, res) => {
   const eventDetails = req.body.eventDetails
   let sqlQuery1 = `
   INSERT INTO "events"
-  ("event_host_id", "event_name", "deadline", "location", "event_code", "event_date")
+  ("event_host_id", "event_name", "event_deadline", "event_location", "event_code", "event_date")
   VALUES
   ($1, $2, $3, $4, $5, $6)
   RETURNING id; 

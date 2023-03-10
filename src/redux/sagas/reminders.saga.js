@@ -7,12 +7,13 @@ function* remindersSaga() {
 
 function* createReminders(action) {
     try{
+
         const reminders = action.payload;
         //reminders= email, phone# and reminders repsonse
 
         const response = yield axios({
-            method:'POST',
-            url:'/api/reminders',
+            method:'PUT',
+            url:`/api/reminders/${reminders.party_id}`,
             data: reminders
         });
     } catch (error) {
