@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-function* selectPartySaga() {
-    yield takeEvery('SAGA/FETCH_PARTY_NAMES', fetchPartyNames)
-}
-
 
 // Will get Party Names to be listed on the Party Names page
 function* fetchPartyNames(action) {
@@ -18,10 +14,17 @@ function* fetchPartyNames(action) {
             payload: response.data,
             
         })
+
         console.log(response.data)
+        
     } catch(error) {
-        console.log('fetchPartyNames SAGA function failed', error)
+        console.error('fetchPartyNames SAGA function failed', error)
     }
 }
+
+function* selectPartySaga() {
+    yield takeEvery('SAGA/FETCH_PARTY_NAMES', fetchPartyNames);
+}
+
 
 export default selectPartySaga;
