@@ -3,6 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+router.get('/',(req, res) =>{
+
 
   // GET route code here
   const userId = req.user.id
@@ -12,8 +14,8 @@ const router = express.Router();
   SELECT
   events.id AS event_id,
   events.event_name,
-  events.deadline,
-  events.location,
+  events.event_deadline,
+  events.event_location,
   events.event_code,
   events.event_date,
   party.id AS party_id,
@@ -44,13 +46,13 @@ const router = express.Router();
       const rows = dbRes.rows;
       const groupedRows = {};
       rows.forEach((row) => {
-        const { event_id, event_name, deadline, location, event_code, event_date, party_id, party_name, guest_id, guest_name, guest_responses, guest_phone_number, guest_email_address, meal_id, meal_name, meal_description } = row;
+        const { event_id, event_name, event_deadline, event_location, event_code, event_date, party_id, party_name, guest_id, guest_name, guest_responses, guest_phone_number, guest_email_address, meal_id, meal_name, meal_description } = row;
         if (!groupedRows[event_id]) {
           groupedRows[event_id] = {
             event_id,
             event_name,
-            deadline,
-            location,
+            event_deadline,
+            event_location,
             event_code,
             event_date,
             parties: [],
@@ -123,7 +125,7 @@ const router = express.Router();
 
 
 // POST /api/events
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const determinePartySize = (party) =>{
     let count = 1;
     let count2 = 2;

@@ -1,42 +1,20 @@
 import React, { useEffect, } from 'react';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import DashboardItems from './DashboardItems';
+import { Button } from '@mui/material';
 
 
-function Dashboard() {
+function DashboardItems({event}) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const events = useSelector(store => store.dashboard);
-
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
-
-  useEffect(() => {
-    dispatch({
-      type: 'SAGA/FETCH_ALL_DATA'
-    })
-  }, [])
 
   const handleManageClick = () => {
     history.push('/manageEvent');
   }
-  const test = () =>{
-    console.log(events)
-  }
 
   return (
     <div className="container">
-      {
-      events && events.map(event => {
-        return <DashboardItems event={event}/>
-      })
-      }
-    </div>
-  );
-}
-
-{/* <div key={event.event_id}>
           <h2>{event.event_name}</h2>
           <p>{event.event_date}</p>
           <Button
@@ -50,5 +28,7 @@ function Dashboard() {
           >
             Manage 
           </Button>
-        </div> */}
-export default Dashboard;
+  </div>
+  );
+}
+export default DashboardItems;
