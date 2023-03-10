@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+import {useDispatch, useSelector} from 'react-redux';
 
 
 //MUI Imports
 import Button from '@mui/material/Button';
-import { useEffect } from 'react';
 
 
 
 function SuccessPage() {
  
+  const history = useHistory();
+  const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
 
 
 
@@ -27,7 +29,7 @@ function SuccessPage() {
           border:"2px solid #4330DA", 
           marginTop:"25px",
           marginLeft:"20px"}}
-          onClick={() => history.push('/rsvp')}>Edit My RSVP
+          onClick={() => history.push(`/editReminders/${storedPartyId}`)}>Edit My RSVP
       </Button>
 
 

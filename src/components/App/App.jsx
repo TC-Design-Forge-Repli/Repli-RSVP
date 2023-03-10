@@ -121,12 +121,12 @@ function App() {
             <RemindersPage />
           </Route>
 
-          <Route exact path="/editReminders">
+          <Route exact path="/editReminders/:id">
             <EditRemindersPage />
           </Route>
 
           <Route exact path="/success/:id">
-            <SuccessPage />
+            <SuccessPage />/
           </Route>
 
           <Route
