@@ -19,8 +19,8 @@ function SuccessPage() {
   useEffect(() => {
     const party_id=params.id
     dispatch({
-      type: 'SAGA/FETCH_PARTY_ID',
-      payload: party_id
+      type: 'STORE_PARTY_ID',
+      payload: {party_id: params.id}
     })
  
     console.log(params.id)
@@ -41,7 +41,7 @@ function SuccessPage() {
           border:"2px solid #4330DA", 
           marginTop:"25px",
           marginLeft:"20px"}}
-          onClick={() => history.push(`/editRsvp/${storePartyId[0]}`)}>Edit My RSVP
+          onClick={() => history.push(`/rsvp/${storePartyId[0]}`)}>Edit My RSVP
       </Button>
 
 

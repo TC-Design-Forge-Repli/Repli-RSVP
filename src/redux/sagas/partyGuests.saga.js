@@ -4,7 +4,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* fetchPartyGuestsSaga() {
     yield takeEvery('SAGA/FETCH_PARTY_GUESTS', fetchPartyGuests)
     yield takeEvery('SAGA/FETCH_ALL_GUESTS', fetchAllGuests)
-    yield takeEvery('SAGA/FETCH_PARTY_GUEST_RESPONSES', fetchPartyGuestResponses);
+    yield takeEvery('SAGA/FETCH_PARTY_GUEST_RESPONSES', fetchPartyGuests);
 }
 
 function* fetchPartyGuests(action) {

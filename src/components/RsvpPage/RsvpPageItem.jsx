@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 //mui imports
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -11,11 +11,9 @@ import Select from '@mui/material/Select';
 
 function RsvpPageItem({partyGuest}) {
     
-    const [checked, setChecked] = useState(true);
-    const dispatch = useDispatch();
+    const [checked, setChecked] = useState(partyGuest.guest_response);
 
-    const partyNames = useSelector((store) => store.partyNames);
-    
+    const dispatch = useDispatch();
 
     const updateResponse = (event) => {
         dispatch({
@@ -52,8 +50,8 @@ function RsvpPageItem({partyGuest}) {
                 <FormControlLabel 
                     control={
                     <Switch
-                        checked={checked}
-                        onChange={(event) => setChecked(event.target.checked)}
+                        checked={partyGuest.guest_response}
+                        onChange={(event) => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
                 />
@@ -66,6 +64,7 @@ function RsvpPageItem({partyGuest}) {
                     <Select
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
+                    required
                     value={''}
                     onChange={updateMealChoice}
                     >
@@ -84,8 +83,8 @@ function RsvpPageItem({partyGuest}) {
                 <FormControlLabel 
                     control={
                     <Switch
-                        checked={checked}
-                        onChange={(event) => setChecked(event.target.checked)}
+                        checked={partyGuest.guest_response}
+                        onChange={(event) => setChecked(true)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
                 />

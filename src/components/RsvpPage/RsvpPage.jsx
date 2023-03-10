@@ -21,7 +21,8 @@ function RsvpPage() {
       payload: party_id
     })
     dispatch({
-      type: 'STORE_PARTY_ID'
+      type: 'STORE_PARTY_ID',
+      payload: {party_id: params.id}
     })
   }, [params.id])
 
@@ -48,7 +49,7 @@ function RsvpPage() {
       <Button
         className="backToSelectPartyButton"
         variant="outlined"
-        onClick={() => history.push(`/reminders/${storedPartyId}`)}
+        onClick={() => history.push(`/selectParty/${storedEventCode}`)}
       >
         Back
       </Button>

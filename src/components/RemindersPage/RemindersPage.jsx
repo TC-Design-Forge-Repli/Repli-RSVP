@@ -28,7 +28,7 @@ function RemindersPage() {
     const party_id=params.id
     dispatch({
       type: 'SAGA/FETCH_PARTY_ID',
-      payload: party_id
+      payload: {party_id: params.id}
     })
  
     console.log(params.id)
