@@ -20,7 +20,8 @@ function EditRsvpPage() {
         payload: party_id
       })
       dispatch({
-        type: 'STORE_PARTY_ID'
+        type: 'STORE_PARTY_ID',
+        payload: {party_id: params.id}
       })
     }, [params.id])
 

@@ -10,8 +10,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function EditRsvpPageItem({partyGuest}) {
+    
+    const [checked, setChecked] = useState(true);
 
-    const [checked, setChecked] = useState(partyGuest.response);
     const dispatch = useDispatch();
 
     const updateResponse = (event) => {
@@ -39,7 +40,58 @@ function EditRsvpPageItem({partyGuest}) {
 
     return (
         <>
+        {/* <h4>{partyGuest.guest_name}</h4> */}
+
+        {checked ?
+        <>
+            {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
+            <form onChange={updateResponse}>
+                <FormGroup>
+                <FormControlLabel 
+                    control={
+                    <Switch
+                        checked={partyGuest.guest_response}
+                        onChange={(event) => setChecked(false)}
+                    />} 
+                    label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                />
+                </FormGroup>
+            </form>
+
+            <form>
+                <FormControl sx={{ m: 1, minWidth: 95 }}>
+                    <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    required
+                    value={''}
+                    onChange={updateMealChoice}
+                    >
+                    <MenuItem value={1}>Option 1</MenuItem>
+                    <MenuItem value={2}>Option 2</MenuItem>
+                    </Select>
+                </FormControl>
+            </form>
+        </>
+
+        :
+
+        // only show toggle(switch) if they are currently declining the invitation
         
+         <form onChange={updateResponse}>
+                <FormGroup>
+                <FormControlLabel 
+                    control={
+                    <Switch
+                        checked={partyGuest.guest_response}
+                        onChange={(event) => setChecked(true)}
+                    />} 
+                    label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                />
+                </FormGroup>
+            </form>
+            }
         </>
     )
 }

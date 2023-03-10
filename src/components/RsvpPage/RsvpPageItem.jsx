@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 //mui imports
 import FormGroup from '@mui/material/FormGroup';
@@ -9,11 +9,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-function RsvpPageItem({partyGuest}) {
+function RsvpPageItem({partyGuest, mealOptions}) {
     
     const [checked, setChecked] = useState(partyGuest.guest_response);
 
     const dispatch = useDispatch();
+
 
     const updateResponse = (event) => {
         dispatch({
@@ -68,8 +69,11 @@ function RsvpPageItem({partyGuest}) {
                     value={''}
                     onChange={updateMealChoice}
                     >
-                    <MenuItem value={1}>Option 1</MenuItem>
-                    <MenuItem value={2}>Option 2</MenuItem>
+                    {mealOptions.map(mealOption => {
+                        return (
+                            <MenuItem key={mealOption.id} value={mealOption.id}>{mealOption.meal_name}</MenuItem>
+                        )
+                    })}
                     </Select>
                 </FormControl>
             </form>
