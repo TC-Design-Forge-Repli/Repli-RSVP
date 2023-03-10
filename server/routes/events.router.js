@@ -87,6 +87,7 @@ router.get('/', (req, res) => {
       Object.values(groupedRows).forEach((event) => {
         events.push(event);
       });
+      console.log(events)
       res.send(events);
     })
     .catch((dbErr) => {
