@@ -13,6 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import styled from "styled-components";
 import { Grid } from "@mui/material";
+import { Switch } from '@material-ui/core';
 
 
 
@@ -22,10 +23,12 @@ function EditRemindersPage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
+
     
     const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
     const remindersToEdit = useSelector((store) => store.remindersToEdit)
     
+    const [checked, setChecked] = useState(remindersToEdit.receive_reminders)
 
     useEffect(() => {
         const party_id = params.id
@@ -51,6 +54,14 @@ function EditRemindersPage() {
             history.push('/success')
     }
 
+    const editReceiveReminders = (event) => {
+        dispatch({
+            type:'EDIT_RECEIVE_REMINDERS', 
+            payload: checked
+        })
+    }
+        
+
     return (
         <>
          
@@ -59,7 +70,7 @@ function EditRemindersPage() {
                 id="outlined-required"
                 label="email"
                 // defaultValue="Phone Number"
-                value={remindersToEdit.email_address || ""}
+                value={remindersToEdit.email_address || ''}
                 onChange={(event) => dispatch({type: 'EDIT_EMAIL', payload: event.target.value})}
             />  
 
@@ -68,16 +79,38 @@ function EditRemindersPage() {
                 id="outlined-required"
                 label="Phone Number"
                 // defaultValue="Phone Number"
-                value={remindersToEdit.phone_number || ""}
+                value={remindersToEdit.phone_number || ''}
                 onChange={(event) => dispatch({type: 'EDIT_PHONE_NUMBER', payload: event.target.value})}
             />  
 
-            <FormControlLabel 
-                control={< Checkbox style={{color:"#4330DA"}}/>} 
-                label="I would like to receive event updates and reminders."
-                checked={remindersToEdit.receive_reminders}
-                onChange={(event) => dispatch({type: 'EDIT_RECEIVE_REMINDERS', payload: event.target.checked})}
-            /> 
+
+            {checked ? 
+            <>
+            <form onChange={editReceiveReminders}>
+            <FormGroup>
+
+                <FormControlLabel 
+              control={<Switch checked={remindersToEdit.receive_reminders}  onChange={(event) => setChecked(true)}/>}
+              label="I would like to receive event updates and reminders."
+                />
+            </FormGroup>
+            </form>
+            </>
+            :
+            <>
+            <form onChange={editReceiveReminders}>
+            <FormGroup>
+
+                <FormControlLabel 
+              control={<Switch checked={remindersToEdit.receive_reminders}  onChange={() => setChecked(false)}/>}
+              label="I would like to receive event updates and reminders."
+                />
+            </FormGroup>
+            </form>
+            </>
+
+            } 
+
 {/* 
 {/* NEED AMAN'S PAGE NAME FOR ONCLICK */}
             {/* Back Button */}

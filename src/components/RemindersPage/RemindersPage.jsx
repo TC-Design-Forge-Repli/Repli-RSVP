@@ -14,6 +14,11 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
+import { Switch } from '@material-ui/core';
+
+
+// import { SwitchBase } from '@material-ui/core/SwitchBase';
+
 function RemindersPage() {
  
   const [email, setEmail] = useState('');
@@ -23,6 +28,7 @@ function RemindersPage() {
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+
 
 console.log(storePartyId[0])
 
@@ -103,15 +109,24 @@ console.log(storePartyId[0])
           onChange={(event) => setPhoneNumber(event.target.value)}
         />  
 
+        
+        <FormGroup>
+          <FormControlLabel 
+              control={<Switch checked={receiveReminders}  onChange={()=> setReceiveReminders(!receiveReminders)} />}
+              label="I would like to receive event updates and reminders."
+          />
+        </FormGroup>
 
-        <FormControlLabel 
-          control={< Checkbox style={{color:"#4330DA"}}/>} 
+   
+   
+   {/* Original checkbox code */}
+   {/* <FormControlLabel 
+          control={<Switch checked={receiveReminders}   onChange={()=> setReceiveReminders(!receiveReminders)}}
+          // control={< Checkbox style={{color:"#4330DA"}}/>} 
           label="I would like to receive event updates and reminders."
-          checked={receiveReminders}
-          onChange={()=> setReceiveReminders(!receiveReminders)}
-        />
-   
-   
+          // checked={receiveReminders}
+          // onChange={()=> setReceiveReminders(!receiveReminders)}
+        /> */}
 
       {/* Back Button */}
         <Button 
