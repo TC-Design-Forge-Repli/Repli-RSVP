@@ -1,7 +1,7 @@
 /* Import Roboto font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-h2, p {
+h2, #mealsParagraph {
   font-family: 'Roboto', sans-serif;
   margin: 15px;
   text-align: center;
