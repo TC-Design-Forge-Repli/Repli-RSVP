@@ -16,7 +16,7 @@ function EditRsvpPage() {
     useEffect(() => {
       const party_id = params.id;
       dispatch({
-        type: 'SAGA/FETCH_PARTY_GUESTS',
+        type: 'SAGA/FETCH_PARTY_GUEST_RESPONSES',
         payload: party_id
       })
       dispatch({
@@ -41,7 +41,7 @@ function EditRsvpPage() {
             <Button
                 className="backToSelectPartyButton"
                 variant="outlined"
-                onClick={() => history.push(`/`)}
+                onClick={() => history.push(`/success/${storedPartyId}`)}
             >
                 Back
             </Button>
@@ -49,7 +49,7 @@ function EditRsvpPage() {
                 className="rsvpSubmitButton"
                 variant="contained"
                 type="submit"
-                onClick={() => history.push(`/success/${storedPartyId}`)}
+                onClick={() => history.push(`/editReminders/${storedPartyId}`)}
             >
                 Next
             </Button>
