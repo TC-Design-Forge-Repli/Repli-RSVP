@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 
 function SuccessPage() {
  
-  const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
+  const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ function SuccessPage() {
       type: 'STORE_PARTY_ID',
       payload: {party_id: params.id}
     })
- 
     console.log(params.id)
   }, [params.id])
 
@@ -41,7 +40,7 @@ function SuccessPage() {
           border:"2px solid #4330DA", 
           marginTop:"25px",
           marginLeft:"20px"}}
-          onClick={() => history.push(`/editRsvp/${storePartyId}`)}>Edit My RSVP
+          onClick={() => history.push(`/rsvp/${storedPartyId}`)}>Edit My RSVP
       </Button>
 
 

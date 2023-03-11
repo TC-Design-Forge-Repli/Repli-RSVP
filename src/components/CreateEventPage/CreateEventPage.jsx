@@ -54,6 +54,7 @@ function CreateEventPage() {
         rsvpCloseDate
       }
     })
+    console.log('$$$$$$$$$$$$',date , rsvpCloseDate)
     dispatch({
       type: 'SAGA/CHECK_EVENT_CODE',
       payload: eventCode
@@ -83,7 +84,6 @@ function CreateEventPage() {
       required
       type="date"
       id="outlined-required"
-      // label="Required"
       value={date}
       onChange={(event) => setDate(event.target.value)}
       />

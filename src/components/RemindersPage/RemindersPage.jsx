@@ -14,6 +14,11 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
+import { Switch } from '@material-ui/core';
+
+
+// import { SwitchBase } from '@material-ui/core/SwitchBase';
+
 function RemindersPage() {
  
   const [email, setEmail] = useState('');
@@ -24,16 +29,17 @@ function RemindersPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+
+console.log(storePartyId[0])
+
   useEffect(() => {
     const party_id=params.id
     dispatch({
       type: 'SAGA/FETCH_PARTY_ID',
       payload: {party_id: params.id}
     })
- 
     console.log(params.id)
   }, [params.id])
-
 
 
   const handleRemindersSubmission = (event) => {
@@ -55,13 +61,9 @@ function RemindersPage() {
       type: 'STORE_PARTY_ID',
       payload: storePartyId
     })
-    history.push(`/success/${storePartyId[0]}`)
-    // history.push(`/success/${storePartyId}`)
-    //sends guest to the Success Page
+    history.push(`/success/${storePartyId[0]}`) //sends guest to the Success Page
   }//end handleCommunicationSubmission
 
-
-  
 
   return (
     <div>
@@ -72,15 +74,15 @@ function RemindersPage() {
           id="outlined"
           label="Email"
           sx={{
-           
             "& .MuiOutlinedInput-root": {
-              "& > fieldset": { borderColor: "#4330DA"},
-              "&:focus-within":{borderColor: "#4330DA",}
-            }
-            ,
+              "& > fieldset": { borderColor: "#4330DA" },
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset":{borderColor:"#4330DA"}
+            },
+            "& label.Mui-focused":{color:"#4330DA"},
+            margin:"5px"
           }}
-        //  sx={{borderColor:"#4330DA"}}
-          // color="#4330DA"
           // defaultValue="Email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -93,25 +95,38 @@ function RemindersPage() {
           id="outlined"
           label="Phone Number"
           sx={{
-            
             "& .MuiOutlinedInput-root": {
               "& > fieldset": { borderColor: "#4330DA" },
             },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset":{borderColor:"#4330DA"}
+            },
+            "& label.Mui-focused":{color:"#4330DA"},
+            margin:"5px"
           }}
           // defaultValue="Phone Number"
           value={phoneNumber}
           onChange={(event) => setPhoneNumber(event.target.value)}
         />  
 
+        
+        <FormGroup>
+          <FormControlLabel 
+              control={<Switch checked={receiveReminders}  onChange={()=> setReceiveReminders(!receiveReminders)} />}
+              label="I would like to receive event updates and reminders."
+          />
+        </FormGroup>
 
-        <FormControlLabel 
-          control={< Checkbox style={{color:"#4330DA"}}/>} 
+   
+   
+   {/* Original checkbox code */}
+   {/* <FormControlLabel 
+          control={<Switch checked={receiveReminders}   onChange={()=> setReceiveReminders(!receiveReminders)}}
+          // control={< Checkbox style={{color:"#4330DA"}}/>} 
           label="I would like to receive event updates and reminders."
-          checked={receiveReminders}
-          onChange={()=> setReceiveReminders(!receiveReminders)}
-        />
-   
-   
+          // checked={receiveReminders}
+          // onChange={()=> setReceiveReminders(!receiveReminders)}
+        /> */}
 
       {/* Back Button */}
         <Button 
@@ -119,32 +134,26 @@ function RemindersPage() {
           type="back"
           variant="outlined" 
           style={{color:"#4330DA", 
-          border:"2px solid #4330DA", 
-          marginTop:"25px",
-          marginLeft:"20px"}}
-          onClick={() => history.push(`/rsvp/${storedPartyId}`)}>Back
+                  border:"2px solid #4330DA", 
+                  marginTop:"25px",
+                  marginLeft:"20px"}}
+          onClick={() => history.push(`/rsvp/${storePartyId}`)}>Back
         </Button>
 
+      {/* Submit Button */}
         <Button 
           className="backToEventCodePage"
           type="back"
           variant="outlined" 
           style={{color:"#4330DA", 
-          border:"2px solid #4330DA", 
-          marginTop:"25px",
-          marginLeft:"20px"}}
+                  border:"2px solid #4330DA", 
+                  marginTop:"25px",
+                  marginLeft:"20px"}}
           onClick={handleRemindersSubmission}>Submit
         </Button>
    </div>
   );
 }
-
-
-
-
-
-
-
 
 
 export default RemindersPage;
