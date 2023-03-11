@@ -24,7 +24,14 @@ function RemindersPage() {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
+  
+  
+  const [checked, setChecked] = useState(false);
+  
+  
   const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
+  const partyNames = useSelector((store) => store.partyNames);
+
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -49,6 +56,7 @@ console.log(storePartyId[0])
       email:email,
       phoneNumber:phoneNumber,
       receiveReminders:receiveReminders,
+      // receiveReminders:event.target.checked,
       party_id:storePartyId[0]
     }
     console.log('These are the guests communication options', reminders)
@@ -66,9 +74,10 @@ console.log(storePartyId[0])
 
 
   return (
-    <div>
-      <h4>What is the best way for us to communicate with you?</h4>
+    <>
 
+      <h4>What is the best way for us to communicate with you?</h4>
+     
         <TextField
           // required
           id="outlined"
@@ -109,26 +118,21 @@ console.log(storePartyId[0])
           onChange={(event) => setPhoneNumber(event.target.value)}
         />  
 
-        
-        <FormGroup>
-          <FormControlLabel 
-              control={<Switch checked={receiveReminders}  onChange={()=> setReceiveReminders(!receiveReminders)} />}
-              label="I would like to receive event updates and reminders."
+        <FormControlLabel
+          control ={
+            <Switch 
+              checked={receiveReminders}
+              onChange={(event) => setReceiveReminders(event.target.checked)}
+             
+            />}
+            label="i want reminders"
           />
-        </FormGroup>
 
-   
-   
-   {/* Original checkbox code */}
-   {/* <FormControlLabel 
-          control={<Switch checked={receiveReminders}   onChange={()=> setReceiveReminders(!receiveReminders)}}
-          // control={< Checkbox style={{color:"#4330DA"}}/>} 
-          label="I would like to receive event updates and reminders."
-          // checked={receiveReminders}
-          // onChange={()=> setReceiveReminders(!receiveReminders)}
-        /> */}
+       
+       
+       
 
-      {/* Back Button */}
+     
         <Button 
           className="backToEventCodePage"
           type="back"
@@ -140,7 +144,7 @@ console.log(storePartyId[0])
           onClick={() => history.push(`/rsvp/${storePartyId}`)}>Back
         </Button>
 
-      {/* Submit Button */}
+    
         <Button 
           className="backToEventCodePage"
           type="back"
@@ -151,9 +155,41 @@ console.log(storePartyId[0])
                   marginLeft:"20px"}}
           onClick={handleRemindersSubmission}>Submit
         </Button>
-   </div>
+
+   </>
   );
 }
 
 
 export default RemindersPage;
+
+//Works
+{/* <FormControlLabel
+            control={
+              <Switch
+                checked={receiveReminders}
+                onChange={(event) => setReceiveReminders(event.target.checked)}
+              />}
+              label="I would like to get receive updates and reminders"
+          
+          /> */}
+
+{/* Original Toggle Code */}
+        {/* <FormGroup>
+          <FormControlLabel 
+              control={<Switch checked={receiveReminders}  onChange={()=> setReceiveReminders(!receiveReminders)} />}
+              label="I would like to receive event updates and reminders."
+          />
+        </FormGroup>
+ */}
+
+
+
+   {/* Original checkbox code */}
+   {/* <FormControlLabel 
+          control={<Switch checked={receiveReminders}   onChange={()=> setReceiveReminders(!receiveReminders)}}
+          // control={< Checkbox style={{color:"#4330DA"}}/>} 
+          label="I would like to receive event updates and reminders."
+          // checked={receiveReminders}
+          // onChange={()=> setReceiveReminders(!receiveReminders)}
+        /> */}

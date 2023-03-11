@@ -29,10 +29,10 @@ function SuccessPage() {
           border:"2px solid #4330DA", 
           marginTop:"25px",
           marginLeft:"20px"}}
-          onClick={() => history.push(`/editReminders/${storedPartyId}`)}>Edit My RSVP
+          onClick={() => history.push(`/editReminders/${storedPartyId[0]}`)}>Edit My RSVP
       </Button>
 
-
+      {/* history.push(`/success/${storePartyId[0]}`) */}
 
 
     </div>
