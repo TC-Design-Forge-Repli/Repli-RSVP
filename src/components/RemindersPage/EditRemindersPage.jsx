@@ -69,6 +69,7 @@ function EditRemindersPage() {
 
             dispatch({
                 type:'SAGA/UPDATE_REMINDERS_PAGE',
+                // payload: reminders
                 payload: remindersToEdit,
             })   
             dispatch({
@@ -183,7 +184,7 @@ https://reactjs.org/link/controlled-components */}
 
 
     {/* Back Button */}
-            <Button 
+            {/* <Button 
                 className="backToEventCodePage"
                 type="back"
                 variant="outlined" 
@@ -192,7 +193,7 @@ https://reactjs.org/link/controlled-components */}
                         marginTop:"25px",
                         marginLeft:"20px"}}
                 onClick={ history.push(`/rsvp/${storePartyId[0]}`)}>Back
-            </Button> 
+            </Button>  */}
 
 
     {/* Submit Updates Button */}

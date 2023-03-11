@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
     const remindersToEdit = req.params.id
 console.log(req.params.id)
-console.log('in editReminders router GET for: email/phone/reminders', req.params.id)
+console.log('in reminders.router GET for: email/phone/reminders', req.params.id)
 
 
     const sqlQuery = 
@@ -39,9 +39,11 @@ console.log('in editReminders router GET for: email/phone/reminders', req.params
 
 //POST route for Guest's: email, phone and receive reminders choice
 router.put('/:id', (req, res) => {
+    // const reminders=req.params.id
     const reminders = req.body;
     console.log(reminders)
-    console.log(req.params, "in put route")
+    console.log(req.params, "in reminders.router PUT for: email/phone/reminders", req.params.id)
+  
 
     const sqlQuery = 
     `
@@ -66,5 +68,40 @@ router.put('/:id', (req, res) => {
             res.sendStatus(500);
         })
 });
+
+
+
+// //POST route for Guest's: email, phone and receive reminders choice
+// router.put('remindersToEdit/:id', (req, res) => {
+//     // const reminders=req.params.id
+//     const reminders = req.body;
+//     console.log(reminders)
+//     console.log(req.params, "in reminders.router PUT for: email/phone/reminders", req.params.id)
+  
+
+//     const sqlQuery = 
+//     `
+//     UPDATE "guests"
+//     SET 
+//     "email_address" =$1, 
+//     "phone_number" = $2, 
+//     "receive_reminders" = $3
+//     WHERE "party_id" = $4
+//     `;
+
+//     const sqlValues = [
+//         reminders.email, 
+//         reminders.phoneNumber,
+//         reminders.receiveReminders,
+//         reminders.party_id
+//     ]
+//     pool.query(sqlQuery, sqlValues)
+//         .then(() => res.sendStatus(201))
+//         .catch((error) => {
+//             console.log('reminders POST failed', error);
+//             res.sendStatus(500);
+//         })
+// });
+
 
 module.exports = router;

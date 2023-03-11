@@ -41,6 +41,23 @@ function* updateRemindersPage(action) {
 }
 
 
+//COPIED OVER FROM REMINDERS.SAGA
+// function* updateRemindersPage(action) {
+//     try{
+
+//         const reminders = action.payload;
+//         //reminders= email, phone# and reminders repsonse
+
+//         const response = yield axios({
+//             method:'PUT',
+//             url:`/api/reminders/${reminders.party_id}`,
+//             data: reminders
+//         });
+//     } catch (error) {
+//         console.log('createReminders SAGA function failed', error)
+//     }
+// }
+
 
 
 
