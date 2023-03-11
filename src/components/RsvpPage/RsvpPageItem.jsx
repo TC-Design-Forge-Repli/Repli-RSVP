@@ -11,7 +11,7 @@ import Select from '@mui/material/Select';
 
 function RsvpPageItem({partyGuest, mealOptions}) {
     
-    const [checked, setChecked] = useState(partyGuest.guest_response);
+    const [checked, setChecked] = useState(true);
 
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
           type: 'SAGA/UPDATE_RESPONSE',
           payload: {
             guest_id: partyGuest.guest_id,
-            response: event.target.checked,
+            response: false,
             meal_id: null
           }
         })
@@ -50,7 +50,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
                 <FormControlLabel 
                     control={
                     <Switch
-                        checked={partyGuest.guest_response}
+                        checked={true || ''}
                         onChange={() => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
@@ -65,7 +65,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
                     required
-                    value={partyGuest.meal_id}
+                    value={partyGuest.meal_id || ''}
                     onChange={updateMealChoice}
                     >
                     {mealOptions.map(mealOption => {
@@ -86,7 +86,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
                 <FormControlLabel 
                     control={
                     <Switch
-                        checked={partyGuest.guest_response}
+                        checked={false}
                         onChange={() => setChecked(true)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
