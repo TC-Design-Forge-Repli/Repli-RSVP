@@ -30,6 +30,7 @@ import RsvpPage from '../RsvpPage/RsvpPage';
 import RemindersPage from '../RemindersPage/RemindersPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
 import EditRemindersPage from '../RemindersPage/EditRemindersPage';
+import EditRsvpPage from '../RsvpPage/EditRsvpPage.jsx';
 
 
 import './App.css';
@@ -117,6 +118,10 @@ function App() {
             <RsvpPage />
           </Route>
 
+          <Route exact path="/editRsvp/:id">
+            <EditRsvpPage />
+          </Route>
+
           <Route exact path="/reminders/:id">
             <RemindersPage />
           </Route>
@@ -150,7 +155,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/dashboard" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
