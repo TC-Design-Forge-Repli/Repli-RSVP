@@ -70,11 +70,17 @@ router.put('/:id', (req, res) => {
 });
 
 
+
+
+
+
+
+
 //POST route for Guest's: email, phone and receive reminders choice
-router.put(':id', (req, res) => {
+router.put('/edit/:id', (req, res) => {
     // const reminders=req.params.id
     const remindersToEdit = req.body;
-    console.log(reminders)
+    console.log('in edit/id put route', remindersToEdit)
     console.log(req.params, "in reminders.router PUT for: email/phone/reminders", req.params.id)
   
 
@@ -89,10 +95,16 @@ router.put(':id', (req, res) => {
     `;
 
     const sqlValues = [
-       remindersToEdit
+        remindersToEdit.email, 
+        remindersToEdit.phoneNumber,
+        remindersToEdit.receiveReminders,
+        remindersToEdit.party_id  
     ]
     pool.query(sqlQuery, sqlValues)
-        .then(() => res.sendStatus(201))
+        .then((dbRes) => {res.sendStatus(201)
+        console.log(dbRes.rows)
+})
+        
         .catch((error) => {
             console.log('reminders POST failed', error);
             res.sendStatus(500);

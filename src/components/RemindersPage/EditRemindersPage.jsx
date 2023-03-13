@@ -24,12 +24,10 @@ function EditRemindersPage() {
     const history = useHistory();
     const params = useParams();
 
-    
+
     const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
     const remindersToEdit = useSelector(store => store.remindersToEdit)
     
-    // const [checked, setChecked] = useState(remindersToEdit.receive_reminders)
-    // const [checked, setChecked] = useState(true)
 
     const handleSwitchToggle = () => {
         setChecked(!checked);
@@ -45,7 +43,7 @@ function EditRemindersPage() {
         })
         dispatch({
             type: 'STORE_PARTY_ID',
-            payload: storePartyId
+            payload: params.id
           })
     },[params.id])
 
@@ -69,13 +67,15 @@ function EditRemindersPage() {
             dispatch({
                 type:'SAGA/UPDATE_REMINDERS_PAGE',
                 // payload: reminders
-                payload: remindersToEdit,
+                payload: {
+                    email:remindersToEdit.email_address,
+                    phoneNumber:remindersToEdit.phone_number,
+                    receiveReminders:remindersToEdit.receive_reminders,
+                    party_id:storePartyId.party_id
+                }
+                
             })   
-            dispatch({
-                type: 'STORE_PARTY_ID',
-                payload: storePartyId
-            })
-            history.push(`/success/${storePartyId[0]}`)
+            history.push(`/success/${storePartyId.party_id}`)
     }
     console.log('in handleUpdateToRemindersPage dispatch', handleUpdateToRemindersPage)
 

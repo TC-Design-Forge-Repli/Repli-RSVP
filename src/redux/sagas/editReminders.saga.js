@@ -29,10 +29,15 @@ function* updateRemindersPage(action) {
     const remindersToEdit = action.payload
     const response = yield axios({
         method: 'PUT',
-        url:`/api/reminders/${remindersToEdit.party_Id}`,
-        data: {remindersToEdit}
-    
+        url:`/api/reminders/edit/${remindersToEdit.party_id}`,
+        data: {
+            email: remindersToEdit.email,
+            phoneNumber: remindersToEdit.phoneNumber,
+            receiveReminders:remindersToEdit.receiveReminders,
+            party_id: remindersToEdit.party_id
+        }
     })
+
 } catch(error) {
     console.log('updateRemindersPage SAGA function failed', error)
 }

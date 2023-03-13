@@ -55,7 +55,7 @@ function RemindersPage() {
       phoneNumber:phoneNumber,
       receiveReminders:receiveReminders,
       // receiveReminders:event.target.checked,
-      party_id:storePartyId[0]
+      party_id:storePartyId.party_id
     }
     console.log('These are the guests communication options', reminders)
 
@@ -63,10 +63,7 @@ function RemindersPage() {
       type:'SAGA/CREATE_REMINDERS',
       payload: reminders
     }) 
-    dispatch({
-      type: 'STORE_PARTY_ID',
-      payload: storePartyId
-    })
+
     history.push(`/success/${storePartyId.party_id}`) //sends guest to the Success Page
   }//end handleCommunicationSubmission
 
