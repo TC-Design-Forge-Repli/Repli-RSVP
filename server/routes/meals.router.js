@@ -40,12 +40,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 // GET
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
+  const event_id = req.params.id
   const sqlQuery = `
-    SELECT * FROM "meal_options";
+    SELECT * FROM "meal_options"
+    WHERE event_id = $1;
   `;
-
-  pool.query(sqlQuery)
+  const sqlValue = [event_id]
+  pool.query(sqlQuery, sqlValue)
     .then((dbRes) => {
       const meals = dbRes.rows;
       res.send(meals);
