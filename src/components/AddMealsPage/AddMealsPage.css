@@ -10,9 +10,10 @@ h2, #mealsParagraph {
 .inputsDiv {
   margin-bottom: 15px;
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
+  align-items: center;
+  margin-left: 22%;
 }
 
 .buttonsDiv {
@@ -26,5 +27,5 @@ h2, #mealsParagraph {
 }
 
 .deleteIconButton {
-  
+  margin-left: 20px;
 }

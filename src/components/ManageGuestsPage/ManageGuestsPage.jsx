@@ -23,8 +23,8 @@ function ManageGuestsPage() {
     })
   }, []);
 
-  console.log('partyNames:', partyNames);
-  console.log('eventDetails:', eventDetails);
+  // console.log('partyNames:', partyNames);
+  // console.log('eventDetails:', eventDetails);
 
   return (
     <section>

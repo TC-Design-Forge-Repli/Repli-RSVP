@@ -36,9 +36,30 @@ function* fetchEvent() {
   }
 }
 
+// PUT
+function* updateEventCode(action) {
+  const newEventCode = action.payload;
+  console.log('newEventCode:', newEventCode);
+  
+  try {
+    const response = yield axios({
+      method: 'PUT',
+      url: '/api/events',
+      data: {newEventCode}
+    })
+
+    yield put({
+      type: 'SAGA/FETCH_EVENT'
+    })
+  } catch (error) {
+    console.error('Error updateEventCode saga:', error);
+  }
+}
+
 function* eventsSaga() {
   yield takeLatest('SAGA/CREATE_EVENT', createEvent);
   yield takeLatest('SAGA/FETCH_EVENT', fetchEvent);
+  yield takeLatest('SAGA/UPDATE_EVENT_CODE', updateEventCode);
 }
 
 

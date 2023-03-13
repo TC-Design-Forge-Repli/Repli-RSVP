@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import CheckIcon from '@mui/icons-material/Check';
 import './ManageEventPage.css';
 
 
@@ -13,6 +14,8 @@ function ManageEventPage() {
   const eventDetails = useSelector((store) => store.eventDetails);
   const meals = useSelector((store) => store.meals);
   const partyGuests = useSelector((store) => store.partyGuests);
+  const [editEventCodeValue, setEditEventCodeValue] = useState(false);
+  const [editedEventCode, setEditedEventCode] = useState('');
 
   useEffect(() => {
     dispatch({
@@ -33,19 +36,37 @@ function ManageEventPage() {
   // *** edit functions *** //
   // event code
   const editEventCode = (singleEvent) => {
-    console.log(`edit ${singleEvent.event_code}:`);
+    console.log(`edit: ${singleEvent.event_code}`);
+    setEditedEventCode(singleEvent.event_code);
+    setEditEventCodeValue(true);
   }
   // event date
   const editEventDate = (singleEvent) => {
-    console.log(`edit ${singleEvent.event_date}:`);
+    console.log(`edit: ${singleEvent.event_date}`);
   }
   // event location
   const editEventLocation = (singleEvent) => {
-    console.log(`edit ${singleEvent.event_location}:`);
+    console.log(`edit: ${singleEvent.event_location}`);
   }
   // event deadline
   const editEventDeadline = (singleEvent) => {
-    console.log(`edit ${singleEvent.event_deadline}:`);
+    console.log(`edit: ${singleEvent.event_deadline}`);
+  }
+
+  // *** handle change functions *** //
+  // event code
+  const handleEventCodeChange = (event) => {
+    setEditedEventCode(event.target.value);
+  }
+
+  // *** save functions *** //
+  // event code
+  const saveEventCode = () => {
+    dispatch({
+      type: 'SAGA/UPDATE_EVENT_CODE',
+      payload: editedEventCode
+    });
+    setEditEventCodeValue(false);
   }
 
   return (
@@ -57,26 +78,40 @@ function ManageEventPage() {
             {/* event code */}
             <div className="paragraphDiv">
               <IconButton onClick={() => editEventCode(singleEvent)}>
-                <EditIcon />
-              </IconButton><p>Event Code: {singleEvent.event_code}</p>
+                {editEventCodeValue ? <div></div> : <EditIcon />}
+              </IconButton>
+              <p>Event Code: {editEventCodeValue ? 
+                <input 
+                  placeholder="New event code..."
+                  value={editedEventCode}
+                  onChange={handleEventCodeChange}
+                />
+                : singleEvent.event_code}
+              </p>
+              <IconButton onClick={saveEventCode}>
+                {editEventCodeValue ? <CheckIcon /> : <div></div>}
+              </IconButton>
             </div>
             {/* event date */}
             <div className="paragraphDiv">
               <IconButton onClick={() => editEventDate(singleEvent)}>
                 <EditIcon />
-              </IconButton><p>Date: {new Date(singleEvent.event_date).toDateString('en-US')}</p>
+              </IconButton>
+              <p>Date: {new Date(singleEvent.event_date).toDateString('en-US')}</p>
             </div>
             {/* event location */}
             <div className="paragraphDiv">
               <IconButton onClick={() => editEventLocation(singleEvent)}>
                 <EditIcon />
-              </IconButton><p>Location: {singleEvent.event_location}</p>
+              </IconButton>
+              <p>Location: {singleEvent.event_location}</p>
             </div>
             {/* event rsvp deadline */}
             <div className="paragraphDiv">
               <IconButton onClick={() => editEventDeadline(singleEvent)}>
                 <EditIcon />
-              </IconButton><p>RSVP Deadline: {new Date(singleEvent.event_deadline).toDateString('en-US')}</p>
+              </IconButton>
+              <p>RSVP Deadline: {new Date(singleEvent.event_deadline).toDateString('en-US')}</p>
             </div>
           </div>
         )

@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-// GET /api/events
+// GET /api/events (all events)
 router.get('/', (req, res) => {
     const sqlQuery = `
         SELECT * FROM "events";
@@ -189,5 +189,26 @@ router.post('/', (req, res) => {
         console.log(dbErr1)
     })
 });
+
+router.put('/', (req, res) => {
+    console.log('req.body:', req.body);
+    console.log('req.body.newEventCode:', req.body.newEventCode)
+
+    const sqlQuery = `
+        UPDATE "events"
+        SET "event_code" = $1;
+    `;
+
+    const sqlValues = [req.body.newEventCode];
+
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(200);
+        })
+        .catch((dbErr) => {
+            console.error('Error PUT /api/events:', dbErr);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = router;
