@@ -11,7 +11,7 @@ import Select from '@mui/material/Select';
 
 function EditRsvpPageItem({partyGuest, mealOptions}) {
     
-    const [checked, setChecked] = useState(null);
+    const [checked, setChecked] = useState(partyGuest.guest_response);
 
     const dispatch = useDispatch();
 
