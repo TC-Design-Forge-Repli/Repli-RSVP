@@ -15,7 +15,7 @@ function* fetchPartyNames(action) {
             
         })
 
-        console.log(response.data)
+        // console.log(response.data)
         
     } catch(error) {
         console.error('fetchPartyNames SAGA function failed', error)
