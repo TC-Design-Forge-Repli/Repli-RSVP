@@ -3,126 +3,60 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.get('/',(req, res) =>{
 
 
-  // GET route code here
+router.get('/', async (req, res) =>{
   const userId = req.user.id
-
-  const sqlQuery = 
-  `
+  let sqlQuery = `
   SELECT
   events.id AS event_id,
   events.event_name,
   events.event_deadline,
   events.event_location,
   events.event_code,
-  events.event_date,
-  party.id AS party_id,
-  party.name AS party_name,
-  guests.id AS guest_id,
-  guests.name AS guest_name,
-  guests.response AS guest_response,
-  guests.phone_number AS guest_phone_number,
-  guests.email_address AS guest_email_address,
-  meal_options.id AS meal_id,
-  meal_options.meal_name AS meal_name,
-  meal_options.description AS meal_description
- FROM
+  events.event_date
+  FROM
   "user"
   JOIN events ON events.event_host_id = "user".id
-  JOIN party ON events.id = party.event_id
-  JOIN guests ON party.id = guests.party_id
-  JOIN meal_options ON events.id = meal_options.event_id
   WHERE "user"."id" = $1;
-
   `
-  const sqlValues = [userId]
-  pool.query(sqlQuery, sqlValues)
-  .then((dbRes) => {
-    const events = [];
-
-      // group rows by event id
-      const rows = dbRes.rows;
-      const groupedRows = {};
-      rows.forEach((row) => {
-        const { event_id, event_name, event_deadline, event_location, event_code, event_date, party_id, party_name, guest_id, guest_name, guest_responses, guest_phone_number, guest_email_address, meal_id, meal_name, meal_description } = row;
-        if (!groupedRows[event_id]) {
-          groupedRows[event_id] = {
-            event_id,
-            event_name,
-            event_deadline,
-            event_location,
-            event_code,
-            event_date,
-            parties: [],
-            meals: []
-          };
-        }
-        const partyIndex = groupedRows[event_id].parties.findIndex((p) => p.party_id === party_id);
-        if (partyIndex === -1) {
-          groupedRows[event_id].parties.push({
-            party_id,
-            party_name,
-            guests: []
-          });
-        }
-        const mealIndex = groupedRows[event_id].meals.findIndex((m) => m.meal_id === meal_id)
-        if(mealIndex === -1){
-            groupedRows[event_id].meals.push({
-                meal_id,
-                meal_name,
-                meal_description
-              });
-        }
-        groupedRows[event_id].parties[groupedRows[event_id].parties.length - 1].guests.push({
-          guest_id,
-          guest_name,
-          guest_responses,
-          guest_phone_number,
-          guest_email_address
-        });
-      });
-
-      // push each event object into the events array
-      Object.values(groupedRows).forEach((event) => {
-        events.push(event);
-      });
-      console.log(events)
-      res.send(events);
+  let sqlValue = [userId];
+  pool.query(sqlQuery, sqlValue)
+    .then((dbRes) =>{
+      console.log(dbRes.rows)
+      res.send(dbRes.rows)
     })
-    .catch((dbErr) => {
-      console.error('Error /api/events GET:', dbErr);
-      res.sendStatus(500);
-    });
-});
-// [
-//     {
-//         event_id: 
-//         event_name: 
-//         deadline: 
-//         location:
-//         event_code:
-//         event_date: 
-//         parties: [{
-//             party_id: 
-//             party_name: 
-//             guests: [{
-//                 guest_id: 
-//                 guest_name: 
-//                 guest_responses: 
-//                 guest_phone_number:
-//                 guest_email_address: 
-//             }]
-//         }],
-//         meals: [{
-//             meal_id:
-//             meal_name: 
-//             meal_description:
-//         }]
-//     }
-// ]
-
+    .catch((dbErr) =>{
+      console.log(dbErr)
+      res.sendStatus(500)
+    })
+})
+router.get('/:id', (req, res) =>{
+  const event_id = req.params.id
+  console.log(event_id)
+  let sqlQuery =`
+  SELECT 
+  events.id AS event_id,
+  events.event_name,
+  events.event_deadline,
+  events.event_location,
+  events.event_code,
+  events.event_date
+  FROM 
+  "events"
+  WHERE events.id = $1;
+  `
+  let sqlValue = [event_id]
+  pool.query(sqlQuery, sqlValue)
+    .then((dbRes) =>{
+      console.log('$$$$$$$$$', dbRes.rows)
+      res.send(dbRes.rows)
+    })
+    .catch((dbErr) =>{
+      res.sendStatus(200)
+      console.log(dbErr)
+    })
+})
 
 // POST /api/events
 router.post('/', async (req, res) => {
@@ -270,5 +204,26 @@ router.post('/', async (req, res) => {
         console.log(dbErr1)
     })
 });
+
+router.put('/', (req, res) => {
+    console.log('req.body:', req.body);
+    console.log('req.body.newEventCode:', req.body.newEventCode)
+
+    const sqlQuery = `
+        UPDATE "events"
+        SET "event_code" = $1;
+    `;
+
+    const sqlValues = [req.body.newEventCode];
+
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(200);
+        })
+        .catch((dbErr) => {
+            console.error('Error PUT /api/events:', dbErr);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = router;

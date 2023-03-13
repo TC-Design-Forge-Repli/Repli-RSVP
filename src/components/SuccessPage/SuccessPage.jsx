@@ -32,6 +32,7 @@ function SuccessPage() {
        <h4>Perfect!!<br></br> You are all set.<br></br> We can't wait to see you on our BIG day!!</h4>
 
       {/* Edit Button */}
+      {/* This button will need to take users to editRSVPPage */}
       <Button 
           className="backToEventCodePage"
           type="back"
@@ -42,7 +43,6 @@ function SuccessPage() {
           marginLeft:"20px"}}
           onClick={() => history.push(`/editRsvp/${storedPartyId.party_id}`)}>Edit My RSVP
       </Button>
-
 
 
 

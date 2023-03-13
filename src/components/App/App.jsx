@@ -97,11 +97,11 @@ function App() {
             <AddMealsPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/manageEvent">
+          <ProtectedRoute exact path="/manageEvent/:id">
             <ManageEventPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/manageGuests">
+          <ProtectedRoute exact path="/manageGuests/:id">
             <ManageGuestsPage />
           </ProtectedRoute>
 

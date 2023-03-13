@@ -3,11 +3,11 @@ import axios from "axios";
 
 
 // GET
-function* fetchMeals() {
+function* fetchMeals(action) {
   try {
     const response = yield axios({
       method: 'GET',
-      url: '/api/meals'
+      url: `/api/meals/${action.payload}`
     })
 
     yield put({
