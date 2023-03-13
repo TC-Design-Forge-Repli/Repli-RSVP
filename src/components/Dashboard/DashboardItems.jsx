@@ -10,7 +10,7 @@ function DashboardItems({event}) {
   const dispatch = useDispatch();
 
   const handleManageClick = () => {
-    history.push('/manageEvent');
+    history.push(`/manageEvent/${event.event_id}`);
   }
 
   return (

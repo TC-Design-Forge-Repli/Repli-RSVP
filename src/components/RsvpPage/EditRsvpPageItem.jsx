@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 //mui imports
 import FormGroup from '@mui/material/FormGroup';
@@ -9,9 +9,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-function RsvpPageItem({partyGuest, mealOptions}) {
+function EditRsvpPageItem({partyGuest, mealOptions}) {
     
-    const [checked, setChecked] = useState(true);
+    const [checked, setChecked] = useState(partyGuest.guest_response);
 
     const dispatch = useDispatch();
 
@@ -40,8 +40,8 @@ function RsvpPageItem({partyGuest, mealOptions}) {
 
     return (
         <>
-            <h4>{partyGuest.guest_name}</h4>
-
+        <h4>{partyGuest.guest_name}</h4>
+        {/* <h4>{partyGuest.guest_name}</h4> */}
         {checked ?
         <>
             {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
@@ -50,7 +50,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
                 <FormControlLabel 
                     control={
                     <Switch
-                        checked={true || ''}
+                        checked={true}
                         onChange={() => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
@@ -95,8 +95,10 @@ function RsvpPageItem({partyGuest, mealOptions}) {
             </form>
         
             }
+              
         </>
     )
 }
 
-export default RsvpPageItem;
+export default EditRsvpPageItem;
+

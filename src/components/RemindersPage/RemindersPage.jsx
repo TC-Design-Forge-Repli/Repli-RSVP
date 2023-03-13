@@ -37,13 +37,11 @@ function RemindersPage() {
   const history = useHistory();
 
 
-console.log(storePartyId[0])
-
   useEffect(() => {
     const party_id=params.id
     dispatch({
-      type: 'SAGA/FETCH_PARTY_ID',
-      payload: party_id
+      type: 'STORE_PARTY_ID',
+      payload: params.id
     })
     console.log(params.id)
   }, [params.id])
@@ -69,7 +67,7 @@ console.log(storePartyId[0])
       type: 'STORE_PARTY_ID',
       payload: storePartyId
     })
-    history.push(`/success/${storePartyId[0]}`) //sends guest to the Success Page
+    history.push(`/success/${storePartyId.party_id}`) //sends guest to the Success Page
   }//end handleCommunicationSubmission
 
 
@@ -141,7 +139,7 @@ console.log(storePartyId[0])
                   border:"2px solid #4330DA", 
                   marginTop:"25px",
                   marginLeft:"20px"}}
-          onClick={() => history.push(`/rsvp/${storePartyId}`)}>Back
+          onClick={() => history.push(`/rsvp/${storePartyId.party_id}`)}>Back
         </Button>
 
     
