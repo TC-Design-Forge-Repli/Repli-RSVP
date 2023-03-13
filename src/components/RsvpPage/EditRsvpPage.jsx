@@ -47,7 +47,7 @@ function EditRsvpPage() {
             <Button
                 className="backToSelectPartyButton"
                 variant="outlined"
-                onClick={() => history.push(`/success/${storedPartyId}`)}
+                onClick={() => history.push(`/success/${partyGuests[0].party_id}`)}
             >
                 Back
             </Button>
@@ -55,7 +55,7 @@ function EditRsvpPage() {
                 className="rsvpSubmitButton"
                 variant="contained"
                 type="submit"
-                onClick={() => history.push(`/editReminders/${storedPartyId}`)}
+                onClick={() => history.push(`/editReminders/${partyGuests[0].party_id}`)}
             >
                 Next
             </Button>

@@ -11,7 +11,6 @@ function RsvpPage() {
   const party_name = partyGuests.party_name;
   const mealOptions = useSelector(store => store.meals);
   const storedEventCode = useSelector(store => store.storeNavigation.storeEventCode);
-  const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -24,10 +23,6 @@ function RsvpPage() {
     })
     dispatch({
       type: 'SAGA/FETCH_MEALS',  
-    })
-    dispatch({
-      type: 'STORE_PARTY_ID',
-      payload: {party_id: params.id}
     })
   }, [params.id])
 
@@ -58,7 +53,7 @@ function RsvpPage() {
         className="rsvpSubmitButton"
         variant="contained"
         type="submit"
-        onClick={() => history.push(`/reminders/${storedPartyId}`)}
+        onClick={() => history.push(`/reminders/${partyGuests[0].party_id}`)}
       >
         Next
       </Button>
