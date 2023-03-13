@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import './ManageEventPage.css';
 
 
@@ -30,27 +32,35 @@ function ManageEventPage() {
 
   return (
     <section>
-      <div className="manageEventDetailsDiv">
-        <h2>Manage {eventDetails[0] && eventDetails[0].event_name}</h2>
-        <p>Event Code: {eventDetails[0] && eventDetails[0].event_code}</p>
-        <p>Date: {eventDetails[0] && eventDetails[0].event_date}</p>
-        <p>Location: {eventDetails[0] && eventDetails[0].event_location}</p>
-        <p>RSVP Deadline: {eventDetails[0] && eventDetails[0].event_deadline}</p>
-      </div>
-      <div className="manageMealOptionsDiv">
-        <h3>Manage Meal Options</h3>
-        {meals && meals.map(meal => {
-          // Create an array of guests with the same meal_id
-          const guestsWithSameMealId = partyGuests.filter(guest => guest.meal_id === meal.id);
-          return (
-            <div key={meal.id}>
-              <p>Name: {meal.meal_name}</p>
-              <p>Number of Guests: {guestsWithSameMealId.length}</p>
-              <p>Description: {meal.description}</p>
-            </div>
-          )
-        })}
-      </div>
+      <Card>
+        <CardContent>
+          <div className="manageEventDetailsDiv">
+            <h2>Manage {eventDetails[0] && eventDetails[0].event_name}</h2>
+            <p>Event Code: {eventDetails[0] && eventDetails[0].event_code}</p>
+            <p>Date: {eventDetails[0] && new Date(eventDetails[0].event_date).toLocaleDateString()}</p>
+            <p>Location: {eventDetails[0] && eventDetails[0].event_location}</p>
+            <p>RSVP Deadline: {eventDetails[0] && new Date(eventDetails[0].event_deadline).toLocaleDateString()}</p>
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent>
+          <div className="manageMealOptionsDiv">
+            <h3>Manage Meal Options</h3>
+            {meals && meals.map(meal => {
+              // Create an array of guests with the same meal_id
+              const guestsWithSameMealId = partyGuests.filter(guest => guest.meal_id === meal.id);
+              return (
+                <div key={meal.id}>
+                  <p>Name: {meal.meal_name}</p>
+                  <p>Number of Guests: {guestsWithSameMealId.length}</p>
+                  <p>Description: {meal.description}</p>
+                </div>
+              )
+            })}
+          </div>
+        </CardContent>
+      </Card>
       <Button
         variant="contained"
         onClick={goToManageGuestList}
