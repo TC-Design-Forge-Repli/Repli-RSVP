@@ -3,26 +3,63 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-// GET /api/events (all events)
-router.get('/', (req, res) => {
-    const sqlQuery = `
-        SELECT * FROM "events";
-    `;
 
-    pool.query(sqlQuery)
-        .then((dbRes) => {
-            const events = dbRes.rows;
-            res.send(events);
-        })
-        .catch((dbErr) => {
-            console.error('Error /api/events GET:', dbErr);
-            res.sendStatus(500);
-        })
-});
+
+router.get('/', async (req, res) =>{
+  const userId = req.user.id
+  let sqlQuery = `
+  SELECT
+  events.id AS event_id,
+  events.event_name,
+  events.event_deadline,
+  events.event_location,
+  events.event_code,
+  events.event_date
+  FROM
+  "user"
+  JOIN events ON events.event_host_id = "user".id
+  WHERE "user"."id" = $1;
+  `
+  let sqlValue = [userId];
+  pool.query(sqlQuery, sqlValue)
+    .then((dbRes) =>{
+      console.log(dbRes.rows)
+      res.send(dbRes.rows)
+    })
+    .catch((dbErr) =>{
+      console.log(dbErr)
+      res.sendStatus(500)
+    })
+})
+router.get('/:id', (req, res) =>{
+  const event_id = req.params.id
+  console.log(event_id)
+  let sqlQuery =`
+  SELECT 
+  events.id AS event_id,
+  events.event_name,
+  events.event_deadline,
+  events.event_location,
+  events.event_code,
+  events.event_date
+  FROM 
+  "events"
+  WHERE events.id = $1;
+  `
+  let sqlValue = [event_id]
+  pool.query(sqlQuery, sqlValue)
+    .then((dbRes) =>{
+      console.log('$$$$$$$$$', dbRes.rows)
+      res.send(dbRes.rows)
+    })
+    .catch((dbErr) =>{
+      res.sendStatus(200)
+      console.log(dbErr)
+    })
+})
 
 // POST /api/events
-router.post('/', (req, res) => {
-  console.log(req.body)
+router.post('/', async (req, res) => {
   const determinePartySize = (party) =>{
     let count = 1;
     let count2 = 2;
@@ -103,26 +140,6 @@ router.post('/', (req, res) => {
     }
     return arrayToHold;
   }
-  
-  // party id then name of guest
-//   parties: [
-//     { name: 'asf', guestList: [Array] },
-//     { name: 'fsdf', guestList: [Array] }
-//   ]
-
-// [ { id: 13 }, { id: 14 } ],
-
-// combined
-// [
-//     {
-//         id: 13,
-//         guestList: [Array]
-//     },
-//     {
-//         id: 14,
-//         guestList: [Array]
-//     }
-// ]
   const userId = req.user.id
   const eventDetails = req.body.eventDetails
   let sqlQuery1 = `
@@ -135,7 +152,6 @@ router.post('/', (req, res) => {
   let sqlValues1 = [userId, eventDetails.eventTitle, eventDetails.rsvpCloseDate, eventDetails.location, eventDetails.eventCode, eventDetails.date]
   pool.query(sqlQuery1, sqlValues1)
     .then((dbRes1) =>{
-        console.log('WHAT I GOT BACK FROM THE DATABASE',dbRes1);
         const eventIdThatWeJustCreated = dbRes1.rows[0].id
         const partyName = req.body.parties
         let sqlQuery2 = `
@@ -148,7 +164,6 @@ router.post('/', (req, res) => {
         let sqlValues2 = dynamicPartySqlValues(partyName, eventIdThatWeJustCreated)
         pool.query(sqlQuery2, sqlValues2)
             .then((dbRes2) =>{
-                console.log(dbRes2)
                 const partyIdArrayOfJustCreatedParties = dbRes2.rows
                 const meals = req.body.meals
                 let sqlQuery3 = `

@@ -1,36 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import './ManageEventPage.css';
 
 
 function ManageEventPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const eventDetails = useSelector((store) => store.eventDetails);
   const meals = useSelector((store) => store.meals);
-  const partyGuests = useSelector((store) => store.partyGuests);
   const [editEventCodeValue, setEditEventCodeValue] = useState(false);
   const [editedEventCode, setEditedEventCode] = useState('');
+  const params = useParams();
+  const event_id = params.id;
+  const eventPressed = useSelector((store) => store.eventPressed);
 
   useEffect(() => {
     dispatch({
-      type: 'SAGA/FETCH_EVENT'
+      type: 'SAGA/FETCH_EVENT',
+      payload: event_id
     })
     dispatch({
-      type: 'SAGA/FETCH_MEALS'
+      type: 'SAGA/FETCH_MEALS',
+      payload: event_id
     })
-    dispatch({
-      type: 'SAGA/FETCH_ALL_GUESTS'
-    })
-  }, [])
+  }, [event_id])
 
   const goToManageGuestList = () => {
-    history.push('/manageGuests');
+    history.push(`/manageGuests/${event_id}`);
   }
 
   // *** edit functions *** //
@@ -71,6 +74,7 @@ function ManageEventPage() {
 
   return (
     <section>
+
       {eventDetails.map((singleEvent) => {
         return (
           <div key={singleEvent.id} className="manageEventDetailsDiv">
@@ -142,6 +146,38 @@ function ManageEventPage() {
         >
           Dashboard
         </Button>
+//****************************
+      <Card>
+        <CardContent>
+          <div className="manageeventPressedDiv">
+            <h2>Manage {eventPressed[0] && eventPressed[0].event_name}</h2>
+            <p>Event Code: {eventPressed[0] && eventPressed[0].event_code}</p>
+            <p>Date: {eventPressed[0] && new Date(eventPressed[0].event_date).toLocaleDateString()}</p>
+            <p>Location: {eventPressed[0] && eventPressed[0].event_location}</p>
+            <p>RSVP Deadline: {eventPressed[0] && new Date(eventPressed[0].event_deadline).toLocaleDateString()}</p>
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent>
+          <div className="manageMealOptionsDiv">
+            <h3>Manage Meal Options</h3>
+            {meals && meals.map(meal => {
+              // Create an array of guests with the same meal_id
+              // const guestsWithSameMealId = partyGuests.filter(guest => guest.meal_id === meal.id);
+              return (
+                <div key={meal.id}>
+                  <p>Name: {meal.meal_name}</p>
+                  {/* <p>Number of Guests: {guestsWithSameMealId.length}</p> */}
+                  <p>Description: {meal.description}</p>
+                </div>
+              )
+            })}
+          </div>
+        </CardContent>
+      </Card>
+//******************************
+
       <Button
         variant="contained"
         onClick={goToManageGuestList}

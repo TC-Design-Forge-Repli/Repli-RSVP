@@ -10,6 +10,10 @@ import meals from './meals.reducer';
 import partyGuests from './partyGuests.reducer';
 import storeNavigation from './storeNavigation.reducer';
 import singleEvent from './singleEvent.reducer';
+import dashboard from './dashboard.reducer'
+import donePosting from './donePosting.reducer';
+import remindersToEdit from './editReminders.reducer'
+import eventPressed from './eventPress.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -22,14 +26,18 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   partyReducer,
-  partyNames, 
+  partyNames, //party names that get mapped through on SelectPartyPage (for the guests)
   eventDetails,
   isEventCodeUnique,
   matchEventCode,
   meals,
   partyGuests,
+  dashboard,
+  donePosting,
   storeNavigation,
-  singleEvent
+  singleEvent,
+  remindersToEdit,//reducer to hold guest's: email, phone number and receive reminders choice
+  eventPressed
 });
 
 export default rootReducer;

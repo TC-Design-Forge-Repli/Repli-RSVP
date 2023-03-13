@@ -43,7 +43,9 @@ function AddMealsPage() {
       type: 'SAGA/CREATE_EVENT', 
       payload: eventObjectToSendToDb
     })
-    history.push("/dashboard")
+    setTimeout(() => {
+      history.push("/dashboard")
+    }, 2000);
     console.log(eventObjectToSendToDb)
   }
 

@@ -19,15 +19,15 @@ function* createEvent(action) {
 }
 
 // GET
-function* fetchEvent() {
+function* fetchEvent(action) {
   try {
     const response = yield axios({
       method: 'GET',
-      url: '/api/events'
+      url: `/api/events/${action.payload}`
     })
 
     yield put({
-      type: 'SET_EVENT_DETAILS',
+      type: 'EVENT_PRESSED',
       payload: response.data
     })
 

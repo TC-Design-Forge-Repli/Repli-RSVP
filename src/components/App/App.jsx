@@ -30,6 +30,7 @@ import RsvpPage from '../RsvpPage/RsvpPage';
 import RemindersPage from '../RemindersPage/RemindersPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
 import EditRemindersPage from '../RemindersPage/EditRemindersPage';
+import EditRsvpPage from '../RsvpPage/EditRsvpPage.jsx';
 
 
 import './App.css';
@@ -64,13 +65,13 @@ function App() {
             Visiting localhost:3000/user will show the Dashboard if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
+          {/* <ProtectedRouted
             // logged in shows Dashboard else shows LoginPage
             exact
             path="/dashboard"
           >
             <Dashboard />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -81,6 +82,9 @@ function App() {
           </ProtectedRoute>
 
           {/* Host Routes */}
+          <ProtectedRoute exact path="/dashboard">
+            <Dashboard />
+          </ProtectedRoute>
           <ProtectedRoute exact path="/createEvent">
             <CreateEventPage />
           </ProtectedRoute>
@@ -93,11 +97,11 @@ function App() {
             <AddMealsPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/manageEvent">
+          <ProtectedRoute exact path="/manageEvent/:id">
             <ManageEventPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/manageGuests">
+          <ProtectedRoute exact path="/manageGuests/:id">
             <ManageGuestsPage />
           </ProtectedRoute>
 
@@ -114,16 +118,20 @@ function App() {
             <RsvpPage />
           </Route>
 
+          <Route exact path="/editRsvp/:id">
+            <EditRsvpPage />
+          </Route>
+
           <Route exact path="/reminders/:id">
             <RemindersPage />
           </Route>
 
-          <Route exact path="/editReminders">
+          <Route exact path="/editReminders/:id">
             <EditRemindersPage />
           </Route>
 
           <Route exact path="/success/:id">
-            <SuccessPage />
+            <SuccessPage />/
           </Route>
 
           <Route
@@ -147,7 +155,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/dashboard" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
