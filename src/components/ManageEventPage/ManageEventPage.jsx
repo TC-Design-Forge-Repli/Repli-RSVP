@@ -74,23 +74,22 @@ function ManageEventPage() {
 
   return (
     <section>
-
-      {eventDetails.map((singleEvent) => {
-        return (
-          <div key={singleEvent.id} className="manageEventDetailsDiv">
-            <h2>{singleEvent.event_name}</h2>
+      <Card>
+        <CardContent>
+          <div className="manageEventDetailsDiv">
+            <h2>{eventPressed[0] && eventPressed[0].event_name}</h2>
             {/* event code */}
             <div className="paragraphDiv">
-              <IconButton onClick={() => editEventCode(singleEvent)}>
+              <IconButton onClick={() => editEventCode(eventPressed[0])}>
                 {editEventCodeValue ? <div></div> : <EditIcon />}
               </IconButton>
-              <p>Event Code: {editEventCodeValue ? 
-                <input 
+              <p>Event Code: {editEventCodeValue ?
+                <input
                   placeholder="New event code..."
                   value={editedEventCode}
                   onChange={handleEventCodeChange}
                 />
-                : singleEvent.event_code}
+                : eventPressed[0] && eventPressed[0].event_code}
               </p>
               <IconButton onClick={saveEventCode}>
                 {editEventCodeValue ? <CheckIcon /> : <div></div>}
@@ -98,63 +97,25 @@ function ManageEventPage() {
             </div>
             {/* event date */}
             <div className="paragraphDiv">
-              <IconButton onClick={() => editEventDate(singleEvent)}>
+              <IconButton onClick={() => editEventDate(eventPressed[0])}>
                 <EditIcon />
               </IconButton>
-              <p>Date: {new Date(singleEvent.event_date).toDateString('en-US')}</p>
+              <p>Date: {new Date(eventPressed[0] && eventPressed[0].event_date).toDateString('en-US')}</p>
             </div>
             {/* event location */}
             <div className="paragraphDiv">
-              <IconButton onClick={() => editEventLocation(singleEvent)}>
+              <IconButton onClick={() => editEventLocation(eventPressed[0])}>
                 <EditIcon />
               </IconButton>
-              <p>Location: {singleEvent.event_location}</p>
+              <p>Location: {eventPressed[0] && eventPressed[0].event_location}</p>
             </div>
             {/* event rsvp deadline */}
             <div className="paragraphDiv">
-              <IconButton onClick={() => editEventDeadline(singleEvent)}>
+              <IconButton onClick={() => editEventDeadline(eventPressed[0])}>
                 <EditIcon />
               </IconButton>
-              <p>RSVP Deadline: {new Date(singleEvent.event_deadline).toDateString('en-US')}</p>
+              <p>RSVP Deadline: {new Date(eventPressed[0] && eventPressed[0].event_deadline).toDateString('en-US')}</p>
             </div>
-          </div>
-        )
-      })}
-      <div className="manageMealOptionsDiv">
-        <h3>Manage Meal Options</h3>
-        {meals && meals.map(meal => {
-          // Create an array of guests with the same meal_id
-          const guestsWithSameMealId = partyGuests.filter(guest => guest.meal_id === meal.id);
-          return (
-            <div key={meal.id}>
-              <p>Name: {meal.meal_name}</p>
-              <p>Number of Guests: {guestsWithSameMealId.length}</p>
-              <p>Description: {meal.description}</p>
-            </div>
-          )
-        })}
-      </div>
-
-      <Button 
-          variant="outlined"
-          style={{
-            color: "#4330DA",
-            fontFamily: "Montserrat",
-            margin: "10px",
-            borderColor: "#4330DA"
-          }}
-        >
-          Dashboard
-        </Button>
-//****************************
-      <Card>
-        <CardContent>
-          <div className="manageeventPressedDiv">
-            <h2>Manage {eventPressed[0] && eventPressed[0].event_name}</h2>
-            <p>Event Code: {eventPressed[0] && eventPressed[0].event_code}</p>
-            <p>Date: {eventPressed[0] && new Date(eventPressed[0].event_date).toLocaleDateString()}</p>
-            <p>Location: {eventPressed[0] && eventPressed[0].event_location}</p>
-            <p>RSVP Deadline: {eventPressed[0] && new Date(eventPressed[0].event_deadline).toLocaleDateString()}</p>
           </div>
         </CardContent>
       </Card>
@@ -176,7 +137,18 @@ function ManageEventPage() {
           </div>
         </CardContent>
       </Card>
-//******************************
+
+      <Button
+        variant="outlined"
+        style={{
+          color: "#4330DA",
+          fontFamily: "Montserrat",
+          margin: "10px",
+          borderColor: "#4330DA"
+        }}
+      >
+        Dashboard
+      </Button>
 
       <Button
         variant="contained"
