@@ -29,7 +29,7 @@ function Dashboard() {
     <div className="container">
       {
       events && events.map(event => {
-        return <DashboardItems event={event}/>
+        return <DashboardItems key={event.id} event={event}/>
       })
       }
     </div>
