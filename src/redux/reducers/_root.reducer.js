@@ -12,6 +12,7 @@ import storeNavigation from './storeNavigation.reducer';
 import dashboard from './dashboard.reducer'
 import donePosting from './donePosting.reducer';
 import remindersToEdit from './editReminders.reducer'
+import eventPressed from './eventPress.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   donePosting,
   storeNavigation,
   remindersToEdit,//reducer to hold guest's: email, phone number and receive reminders choice
+  eventPressed,
 });
 
 export default rootReducer;

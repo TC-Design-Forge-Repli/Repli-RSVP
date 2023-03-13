@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -10,36 +11,37 @@ import './ManageEventPage.css';
 function ManageEventPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const eventDetails = useSelector((store) => store.eventDetails);
-  const meals = useSelector((store) => store.meals);
-  const partyGuests = useSelector((store) => store.partyGuests);
+  const params = useParams();
+  const event_id = params.id
+
+  const eventPressed = useSelector((store) => store.eventPressed)
+  const meals = useSelector((store) => store.meals)
 
   useEffect(() => {
     dispatch({
-      type: 'SAGA/FETCH_EVENT'
+      type: 'SAGA/FETCH_EVENT',
+      payload: event_id
     })
     dispatch({
-      type: 'SAGA/FETCH_MEALS'
+      type: 'SAGA/FETCH_MEALS',
+      payload: event_id
     })
-    dispatch({
-      type: 'SAGA/FETCH_ALL_GUESTS'
-    })
-  }, [])
+  }, [event_id])
 
   const goToManageGuestList = () => {
-    history.push('/manageGuests');
+    history.push(`/manageGuests/${event_id}`);
   }
 
   return (
     <section>
       <Card>
         <CardContent>
-          <div className="manageEventDetailsDiv">
-            <h2>Manage {eventDetails[0] && eventDetails[0].event_name}</h2>
-            <p>Event Code: {eventDetails[0] && eventDetails[0].event_code}</p>
-            <p>Date: {eventDetails[0] && new Date(eventDetails[0].event_date).toLocaleDateString()}</p>
-            <p>Location: {eventDetails[0] && eventDetails[0].event_location}</p>
-            <p>RSVP Deadline: {eventDetails[0] && new Date(eventDetails[0].event_deadline).toLocaleDateString()}</p>
+          <div className="manageeventPressedDiv">
+            <h2>Manage {eventPressed[0] && eventPressed[0].event_name}</h2>
+            <p>Event Code: {eventPressed[0] && eventPressed[0].event_code}</p>
+            <p>Date: {eventPressed[0] && new Date(eventPressed[0].event_date).toLocaleDateString()}</p>
+            <p>Location: {eventPressed[0] && eventPressed[0].event_location}</p>
+            <p>RSVP Deadline: {eventPressed[0] && new Date(eventPressed[0].event_deadline).toLocaleDateString()}</p>
           </div>
         </CardContent>
       </Card>
@@ -49,11 +51,11 @@ function ManageEventPage() {
             <h3>Manage Meal Options</h3>
             {meals && meals.map(meal => {
               // Create an array of guests with the same meal_id
-              const guestsWithSameMealId = partyGuests.filter(guest => guest.meal_id === meal.id);
+              // const guestsWithSameMealId = partyGuests.filter(guest => guest.meal_id === meal.id);
               return (
                 <div key={meal.id}>
                   <p>Name: {meal.meal_name}</p>
-                  <p>Number of Guests: {guestsWithSameMealId.length}</p>
+                  {/* <p>Number of Guests: {guestsWithSameMealId.length}</p> */}
                   <p>Description: {meal.description}</p>
                 </div>
               )
