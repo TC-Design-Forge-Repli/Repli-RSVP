@@ -11,8 +11,8 @@ function* rsvpSaga() {
 function* updateResponse(action) {
     try {
         const guest_id = action.payload.guest_id;
-        const rsvp = action.payload.response
-        const meal_id = action.payload.meal_id
+        const rsvp = action.payload.response;
+        const meal_id = action.payload.meal_id;
         const response = yield axios({
             method: 'PUT',
             url:`/api/rsvp/response/${guest_id}`,
