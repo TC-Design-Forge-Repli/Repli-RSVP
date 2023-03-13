@@ -28,7 +28,7 @@ function EditRemindersPage() {
     const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
     const remindersToEdit = useSelector(store => store.remindersToEdit)
     
-    const [checked, setChecked] = useState(remindersToEdit.receive_reminders)
+    // const [checked, setChecked] = useState(remindersToEdit.receive_reminders)
     // const [checked, setChecked] = useState(true)
 
     const handleSwitchToggle = () => {
@@ -52,9 +52,8 @@ function EditRemindersPage() {
     console.log(remindersToEdit)
 
     const editReceiveReminders = (event) => {
-        event.preventDefault();
             dispatch({
-                type:'SAGA/EDIT_RECEIVE_REMINDERS', 
+                type:'EDIT_RECEIVE_REMINDERS', 
                 payload: event.target.checked
              })
     }
@@ -122,12 +121,12 @@ supplied to `ForwardRef(Switch)`, expected `boolean`
  */}
             {/* <FormControlLabel
                 control={
-                 <Switch
+                    <Switch
                     checked={remindersToEdit}
                     onChange={(event) => remindersToEdit(event.target.checked)}
-                />}
+                    />}
                     label="I would like to get receive updates and reminders"
-            /> 
+                /> 
 
 
         </form>   */}
@@ -147,9 +146,15 @@ https://reactjs.org/link/controlled-components */}
                 /> */}
          
 
+         <FormGroup>
+                <FormControlLabel 
+              control={<Switch checked={remindersToEdit.receive_reminders || false}  
+              onChange={editReceiveReminders}/>}
+              label="I would like to receive event updates and reminders."
+                />
+            </FormGroup>
 
-
-               {checked ? 
+               {/* {checked ? 
             <>
             <form onChange={editReceiveReminders}>
             <FormGroup>
@@ -176,7 +181,7 @@ https://reactjs.org/link/controlled-components */}
             
             </>
 
-            }   
+            }    */}
 
 
 
