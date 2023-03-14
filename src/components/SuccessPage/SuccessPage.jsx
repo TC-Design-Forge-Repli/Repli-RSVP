@@ -43,9 +43,6 @@ function SuccessPage() {
           marginLeft:"20px"}}
           onClick={() => history.push(`/editRsvp/${storedPartyId.party_id}`)}>Edit My RSVP
       </Button>
-
-
-
     </div>
   );
 }

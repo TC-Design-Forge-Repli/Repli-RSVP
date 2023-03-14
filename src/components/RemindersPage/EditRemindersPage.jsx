@@ -89,6 +89,16 @@ function EditRemindersPage() {
                 // required
                 id="outlined-required"
                 label="email"
+                sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& > fieldset": { borderColor: "#4330DA" },
+                    },
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                      "& > fieldset":{borderColor:"#4330DA"}
+                    },
+                    "& label.Mui-focused":{color:"#4330DA"},
+                    margin:"5px"
+                  }}
                 // defaultValue="Phone Number"
                 value={remindersToEdit.email_address || ''}
                 onChange={(event) => dispatch({type: 'EDIT_EMAIL', payload: event.target.value})}
@@ -98,6 +108,16 @@ function EditRemindersPage() {
                 // required
                 id="outlined-required"
                 label="Phone Number"
+                sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& > fieldset": { borderColor: "#4330DA" },
+                    },
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                      "& > fieldset":{borderColor:"#4330DA"}
+                    },
+                    "& label.Mui-focused":{color:"#4330DA"},
+                    margin:"5px"
+                  }}
                 // defaultValue="Phone Number"
                 value={remindersToEdit.phone_number || ''}
                 onChange={(event) => dispatch({type: 'EDIT_PHONE_NUMBER', payload: event.target.value})}
@@ -148,42 +168,11 @@ https://reactjs.org/link/controlled-components */}
 
          <FormGroup>
                 <FormControlLabel 
-              control={<Switch checked={remindersToEdit.receive_reminders || false}  
+              control={<Switch style={{color:"#4330DA"}} track={{color:"#4330DA"}}checked={remindersToEdit.receive_reminders || false}  
               onChange={editReceiveReminders}/>}
               label="I would like to receive event updates and reminders."
                 />
             </FormGroup>
-
-               {/* {checked ? 
-            <>
-            <form onChange={editReceiveReminders}>
-            <FormGroup>
-                <FormControlLabel 
-              control={<Switch checked={checked}  
-              onChange={(event) => setChecked(event.target.checked)}/>}
-              label="I would like to receive event updates and reminders."
-                />
-            </FormGroup>
-            </form>
-            </>
-            :
-            <>
-            <form onChange={editReceiveReminders}>
-            <FormGroup>
-
-                <FormControlLabel 
-              control={<Switch checked={checked}  
-              onChange={(event) => setChecked(event.target.checked)}/>}
-              label="I would like to receive event updates and reminders."
-                />
-            </FormGroup>
-            </form>
-            
-            </>
-
-            }    */}
-
-
 
 
 
