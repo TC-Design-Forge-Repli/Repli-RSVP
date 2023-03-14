@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 //mui imports
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,17 +9,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-function EditRsvpPageItem({partyGuest, mealOptions}) {
+function EditRsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(partyGuest.guest_response);
+    const mealOptions = useSelector(store => store.meals);
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: 'SAGA/FETCH_MEALS',
+            payload: partyGuest.event_id
+          })
+    }, [])
 
     const updateResponse = (event) => {
         dispatch({
           type: 'SAGA/UPDATE_RESPONSE',
           payload: {
             guest_id: partyGuest.guest_id,
+            event_id: partyGuest.event_id,
             response: false,
             meal_id: null
           }
@@ -32,6 +41,7 @@ function EditRsvpPageItem({partyGuest, mealOptions}) {
             type: 'SAGA/UPDATE_MEAL',
             payload: {
                 guest_id: partyGuest.guest_id,
+                event_id: partyGuest.event_id,
                 response: true, 
                 meal_id: event.target.value
             }

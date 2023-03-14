@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 //mui imports
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,11 +9,18 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-function RsvpPageItem({partyGuest, mealOptions}) {
+function RsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(true);
-
+    const mealOptions = useSelector(store => store.meals)
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: 'SAGA/FETCH_MEALS',
+            payload: partyGuest.event_id
+          })
+    }, [])
 
     const updateResponse = (event) => {
         dispatch({
@@ -33,7 +40,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
             payload: {
                 guest_id: partyGuest.guest_id,
                 response: true, 
-                meal_id: event.target.value
+                meal_id: event.target.value,
             }
         })
     }
