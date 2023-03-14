@@ -33,7 +33,7 @@ function SuccessPage() {
 
   return(
     <>
-      <h2>You're all set - see you on the BIG day!</h2>
+      <h2>All set - see you on the BIG day!</h2>
       <h3>Please review your responses before submitting</h3>
       <Table sx={{ minWidth: 200}} aria-label="simple table">
         <TableBody>
@@ -65,29 +65,31 @@ function SuccessPage() {
           className="backEditResponsesPage"
           type="back"
           variant="outlined" 
-          sx={{
+          style={{
             textTransform: 'none',
-            color:"#4330DA", 
-            border:"2px solid #4330DA", 
-            marginTop:"25px",
+            color:"#4330DA",
+            fontFamily: 'Montserrat', 
+            border:"solid #4330DA", 
+            marginTop:"35px",
             marginLeft:"20px"
           }}
           onClick={() => history.push(`/editRsvp/${storedPartyId.party_id}`)}
       >
         Edit My RSVP
       </Button>
-
       <Button
           type="back"
-          sx={{
+          style={{
             textTransform: 'none',
-            backgroundColor: '#43303DA',
-            marginTop:"25px",
-            marginLeft:"20px"
+            backgroundColor: '#4330DA',
+            fontFamily: 'Montserrat',
+            color: 'white',
+            marginTop: '35px',
+            marginLeft: '20px',
           }}
           onClick={() => history.push(`/about`)}
       >
-        Learn more about Repli
+        Learn More About Repli
       </Button> 
     </>
   )
