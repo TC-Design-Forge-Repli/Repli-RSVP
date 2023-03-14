@@ -4,15 +4,16 @@ import { useHistory, useParams } from 'react-router-dom';
 
 
 //MUI Imports
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
-
-
-
 
 function SuccessPage() {
 
   const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
-  const partyGuests = useSelector(store => store.storeNavigation.partyGuests);
+  const partyGuests = useSelector(store => store.partyGuests);
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -33,36 +34,38 @@ function SuccessPage() {
   return(
     <>
       <h2>You're all set - see you on the BIG day!</h2>
-
       <h3>Please review your responses before submitting</h3>
-    
-      {/* {partyGuests.map((partyGuest) => (
-        <div key={partyGuest.guest_id}>
-        {partyGuest.response ?
-          <>
-            <li>{partyGuest.name}</li>
-            <li>{partyGuest.response}</li>
-            <li>{partyGues.meal_id}</li>
-          </>
+      <Table sx={{ minWidth: 200}} aria-label="simple table">
+        <TableBody>
+        {partyGuests.map((partyGuest) => {
+          return (
+            <TableRow key={partyGuest.guest_id}>
+               <TableCell>{partyGuest.guest_name}</TableCell>
+              {partyGuest.guest_response ?
+              
+              <>
+                {/* <TableCell>{partyGuest.guest_name}</TableCell> */}
+                <TableCell>Attending</TableCell>
+                <TableCell>{partyGuest.meal_name}</TableCell>
+              </>
 
-          :
-          <>
-            <li>{partyGuest.name}</li>
-            <li>{partyGuest.response}</li>
-            <li>{partyGues.meal_id}</li>
-          </>
-        }
-        </div>
-      ))} */}
-          
-        
-      
-
+              :
+              <>
+                {/* <TableCell>{partyGuest.guest_name}</TableCell> */}
+                <TableCell>Not Attending</TableCell>
+                <TableCell></TableCell>
+              </>
+              }
+            </TableRow>
+          )
+        })}
+        </TableBody>
+      </Table>
       <Button
           className="backEditResponsesPage"
           type="back"
           variant="outlined" 
-          style={{
+          sx={{
             textTransform: 'none',
             color:"#4330DA", 
             border:"2px solid #4330DA", 
@@ -76,9 +79,9 @@ function SuccessPage() {
 
       <Button
           type="back"
-          style={{
+          sx={{
             textTransform: 'none',
-            color: '#43303DA',
+            backgroundColor: '#43303DA',
             marginTop:"25px",
             marginLeft:"20px"
           }}

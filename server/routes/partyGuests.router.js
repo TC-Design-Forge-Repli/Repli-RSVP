@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
     pool.query(sqlQuery, sqlValue)
     .then(dbRes => {
         res.send(dbRes.rows);
-        console.log('here are the guests you requested', dbRes.rows);
+        //console.log('here are the guests you requested', dbRes.rows);
      })
      .catch(dbErr => {
         console.log('GET route for partyGuests failed', dbErr);
