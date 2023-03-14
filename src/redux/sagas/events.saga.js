@@ -10,21 +10,24 @@ function* createEvent(action) {
         url: '/api/events',
         data: action.payload
     })
+    yield put({
+      type: 'SAGA/FETCH_EVENT'
+    })
   } catch (error) {
     console.error('Event code check error', error);
   }
 }
 
 // GET
-function* fetchEvent() {
+function* fetchEvent(action) {
   try {
     const response = yield axios({
       method: 'GET',
-      url: '/api/events'
+      url: `/api/events/${action.payload}`
     })
 
     yield put({
-      type: 'SET_EVENT_DETAILS',
+      type: 'EVENT_PRESSED',
       payload: response.data
     })
 
@@ -33,9 +36,30 @@ function* fetchEvent() {
   }
 }
 
+// PUT
+function* updateEventCode(action) {
+  const newEventCode = action.payload;
+  console.log('newEventCode:', newEventCode);
+  
+  try {
+    const response = yield axios({
+      method: 'PUT',
+      url: '/api/events',
+      data: {newEventCode}
+    })
+
+    yield put({
+      type: 'SAGA/FETCH_EVENT'
+    })
+  } catch (error) {
+    console.error('Error updateEventCode saga:', error);
+  }
+}
+
 function* eventsSaga() {
   yield takeLatest('SAGA/CREATE_EVENT', createEvent);
   yield takeLatest('SAGA/FETCH_EVENT', fetchEvent);
+  yield takeLatest('SAGA/UPDATE_EVENT_CODE', updateEventCode);
 }
 
 

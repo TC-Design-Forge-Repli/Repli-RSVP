@@ -9,10 +9,10 @@ const storeEventCode = (state = [], action) => {
     }
 }
 
-const storePartyId = (state = [], action) => {
+const storePartyId = (state = {}, action) => {
     switch(action.type) {
         case 'STORE_PARTY_ID':
-            return [...state, action.payload]
+            return {...state, party_id: action.payload}
         default:
             return state;
     }

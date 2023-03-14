@@ -8,10 +8,24 @@ h2, #mealsParagraph {
 }
 
 .inputsDiv {
-  margin-left: 24%;
   margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 22%;
 }
 
-.backAndSubmitButtons {
-  margin-left: 25%;
+.buttonsDiv {
+  display: flex;
+  justify-content: center;
+}
+
+#addMealsButton {
+  display: flex;
+  justify-content: center;
+}
+
+.deleteIconButton {
+  margin-left: 20px;
 }

@@ -30,6 +30,7 @@ import RsvpPage from '../RsvpPage/RsvpPage';
 import RemindersPage from '../RemindersPage/RemindersPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
 import EditRemindersPage from '../RemindersPage/EditRemindersPage';
+import EditRsvpPage from '../RsvpPage/EditRsvpPage.jsx';
 
 
 import './App.css';
@@ -96,11 +97,11 @@ function App() {
             <AddMealsPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/manageEvent">
+          <ProtectedRoute exact path="/manageEvent/:id">
             <ManageEventPage />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/manageGuests">
+          <ProtectedRoute exact path="/manageGuests/:id">
             <ManageGuestsPage />
           </ProtectedRoute>
 
@@ -115,6 +116,10 @@ function App() {
 
           <Route exact path="/rsvp/:id">
             <RsvpPage />
+          </Route>
+
+          <Route exact path="/editRsvp/:id">
+            <EditRsvpPage />
           </Route>
 
           <Route exact path="/reminders/:id">
@@ -150,7 +155,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/dashboard" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
