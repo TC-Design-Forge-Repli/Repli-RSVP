@@ -5,7 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
-
+import { PieChart } from 'react-minimal-pie-chart';
 
 function ManageGuestsPage() {
   const dispatch = useDispatch();
@@ -23,8 +23,37 @@ function ManageGuestsPage() {
     })
   }, []);
 
-  console.log('partyNames:', partyNames);
-  console.log('eventDetails:', eventDetails);
+  const getResponseCount = () => {
+    let yes = 0;
+    let no = 0;
+    let noResponse = 0;
+    partyGuests.forEach((guest) => {
+      if (guest.response === true) {
+        yes++;
+      } else if (guest.response === false) {
+        no++;
+      } else {
+        noResponse++;
+      }
+    });
+    return [
+      {
+        title: 'Accepted',
+        value: yes,
+        color: '#4caf50',
+      },
+      {
+        title: 'Declined',
+        value: no,
+        color: '#f44336',
+      },
+      {
+        title: 'No response',
+        value: noResponse,
+        color: 'gray',
+      },
+    ];
+  };
 
   return (
     <section>
@@ -42,18 +71,29 @@ function ManageGuestsPage() {
               if (guest.party_id === party.id) {
                 return (
                   <AccordionDetails key={guest.id}>
-                    <Typography>
-                      {guest.name}
-                    </Typography>
+                    <Typography>{guest.name}</Typography>
                   </AccordionDetails>
-                )
+                );
               }
             })}
           </Accordion>
-        )
+        );
       })}
+      <br/>
+      <br/>
+      {partyGuests.map((guest) => guest.response !== null) && (
+        <div style={{ width: "400px", height: "300px" }}>
+             <PieChart
+                data={getResponseCount()}
+                label={({ dataEntry }) => `${dataEntry.title}: ${dataEntry.value}`}
+                labelStyle={{ fontSize: '4px', fontFamily: 'sans-serif' }}
+                labelPosition={65}
+                radius={40}
+              />
+        </div>
+      )}
     </section>
-  )
+  );
 }
 
 
