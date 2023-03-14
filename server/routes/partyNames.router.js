@@ -7,7 +7,7 @@ const router = express.Router();
  */
 router.get('/:id', (req, res) => {
     console.log(req.params.id)
-    console.log('in partyNames.router GET route for Party Names', req.body.id)
+   //  console.log('in partyNames.router GET route for Party Names', req.body.id)
     const sqlQuery = 
     `
     SELECT "party"."id", "party"."name", "party"."event_id", "events"."event_name", "events"."event_code"

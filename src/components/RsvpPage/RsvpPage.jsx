@@ -9,7 +9,6 @@ function RsvpPage() {
 
   const partyGuests = useSelector(store => store.partyGuests);
   const party_name = partyGuests.party_name;
-  const mealOptions = useSelector(store => store.meals);
   const storedEventCode = useSelector(store => store.storeNavigation.storeEventCode);
   const params = useParams();
   const dispatch = useDispatch();
@@ -20,9 +19,6 @@ function RsvpPage() {
     dispatch({
       type: 'SAGA/FETCH_PARTY_GUESTS',
       payload: params.id
-    })
-    dispatch({
-      type: 'SAGA/FETCH_MEALS',  
     })
   }, [params.id])
 
@@ -36,7 +32,6 @@ function RsvpPage() {
             <RsvpPageItem  
               key={partyGuest.guest_id}
               partyGuest={partyGuest}
-              mealOptions={mealOptions}
             />
         )
       })}

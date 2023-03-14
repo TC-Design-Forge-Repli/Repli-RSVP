@@ -1,9 +1,9 @@
-const eventDetails = (state = {}, action) => {
+const eventDetails = (state = [], action) => {
     switch (action.type) {
       case 'SET_EVENT_DETAILS':
         return action.payload;
       case 'UNSET_EVENT_DETAILS':
-        return {};
+        return [];
       default:
         return state;
     }

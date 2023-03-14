@@ -7,10 +7,13 @@ import Swal from 'sweetalert2'
 import IconButton from "@mui/material/IconButton";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-
 function DashboardItems({ event }) {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const handleManageClick = () => {
+    history.push(`/manageEvent/${event.event_id}`);
+  }
   const deleteEvent = (eventId, eventName) => {
     Swal.fire({
       title: `Are you sure you want to Delete ${eventName}?`,
@@ -36,14 +39,11 @@ function DashboardItems({ event }) {
       }
     })
   }
-  const handleManageClick = () => {
-    history.push(`/manageEvent/${event.event_id}`);
-  }
 
   return (
-    <div className="container">
+    <div key={event.id} className="container">
       <h2>{event.event_name}</h2>
-      <p>{event.event_date}</p>
+      <p>{new Date(event.event_date).toDateString('en-US')}</p>
       <IconButton color="error" onClick={() => deleteEvent(event.event_id, event.event_name)}>
         <DeleteForeverIcon />
       </IconButton>
