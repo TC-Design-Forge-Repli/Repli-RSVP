@@ -60,7 +60,7 @@ function ManageGuestsPage() {
 
   console.log('partyNames:', partyNames);
   console.log('eventPressed:', eventPressed);
-  console.log('these are partyGuests', partyguests);
+  console.log('these are partyGuests', partyGuests);
   
 
 
