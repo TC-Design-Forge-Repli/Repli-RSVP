@@ -24,11 +24,13 @@ function SuccessPage() {
       type: 'STORE_PARTY_ID',
       payload: params.id
     })
+
     dispatch({
       type: 'SAGA/FETCH_PARTY_GUESTS',
       payload: params.id
     })
     console.log(params.id)
+
   }, [params.id])
 
   return(

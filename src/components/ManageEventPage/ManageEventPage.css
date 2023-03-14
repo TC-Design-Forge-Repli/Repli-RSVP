@@ -13,3 +13,7 @@ h3 {
 .paragraphDiv {
   display: inline-flex;
 }
+
+#eventNameDiv {
+  display: inline-flex;
+}
