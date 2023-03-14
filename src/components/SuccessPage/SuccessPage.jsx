@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 function SuccessPage() {
  
   const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
-  
+  const partyGuests = useSelector(store => store.storeNavigation.partyGuests);
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,32 +22,51 @@ function SuccessPage() {
       type: 'STORE_PARTY_ID',
       payload: params.id
     })
+    dispatch({
+      type: 'SAGA/FETCH_PARTY_GUESTS',
+      payload: params.id
+    })
     console.log(params.id)
   }, [params.id])
 
 
-
   return (
-    <div>
-       <h4>Perfect!!<br></br> You are all set.<br></br> We can't wait to see you on our BIG day!!</h4>
+    <>
+     <h4>Perfect!!<br></br> You are all set.<br></br> We can't wait to see you on our BIG day!!</h4>
 
       {/* Edit Button */}
       {/* This button will need to take users to editRSVPPage */}
-      <Button 
-          className="backToEventCodePage"
+      <Button
+          className="backEditResponsesPage"
           type="back"
           variant="outlined" 
-          style={{color:"#4330DA", 
-          border:"2px solid #4330DA", 
-          marginTop:"25px",
-          marginLeft:"20px"}}
-          onClick={() => history.push(`/editRsvp/${storedPartyId.party_id}`)}>Edit My RSVP
+          style={{
+            textTransform: 'none',
+            color:"#4330DA", 
+            border:"2px solid #4330DA", 
+            marginTop:"25px",
+            marginLeft:"20px"
+          }}
+          onClick={() => history.push(`/editRsvp/${storedPartyId.party_id}`)}
+      >
+        Edit My RSVP
       </Button>
 
-
-
-    </div>
+      <Button
+          type="back"
+          style={{
+            textTransform: 'none',
+            color: '#43303DA',
+            marginTop:"25px",
+            marginLeft:"20px"
+          }}
+          onClick={() => history.push(`/about`)}
+      >
+        Learn more about Repli
+      </Button>
+    </>
   );
+ 
 }
 
 export default SuccessPage;

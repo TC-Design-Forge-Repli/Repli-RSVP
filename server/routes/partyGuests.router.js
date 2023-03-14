@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
 
     const sqlQuery = 
     `
-    SELECT "guests"."id" AS "guest_id", "party"."id" AS "party_id", 
+    SELECT "guests"."id" AS "guest_id", "party"."id" AS "party_id","party"."event_id" AS "event_id", 
     "guests"."name" AS "guest_name", "party"."name" AS "party_name",
     "guests"."response" AS "guest_response", "guests"."meal_id" AS "meal_id"
         FROM "guests"

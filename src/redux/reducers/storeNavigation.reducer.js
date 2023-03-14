@@ -20,5 +20,5 @@ const storePartyId = (state = {}, action) => {
 
 export default combineReducers({
    storeEventCode,
-   storePartyId
+   storePartyId,
 })
