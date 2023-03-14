@@ -42,14 +42,29 @@ function EditRsvpPage() {
             <Button
                 className="backToSelectPartyButton"
                 variant="outlined"
+                style={{
+                    textTransform: 'none',
+                    color:"#4330DA",
+                    fontFamily: 'Montserrat', 
+                    border:"1.5px solid #4330DA", 
+                    marginTop:"35px",
+                    marginLeft:"20px"
+                  }}
                 onClick={() => history.push(`/success/${partyGuests[0].party_id}`)}
             >
                 Back
             </Button>
             <Button
-                className="rsvpSubmitButton"
+                className="RsvpPageButton"
                 variant="contained"
-                type="submit"
+                style={{
+                    textTransform: 'none',
+                    backgroundColor: '#4330DA',
+                    fontFamily: 'Montserrat',
+                    color: 'white',
+                    marginTop: '35px',
+                    marginLeft: '20px',
+                  }}
                 onClick={() => history.push(`/editReminders/${partyGuests[0].party_id}`)}
             >
                 Next

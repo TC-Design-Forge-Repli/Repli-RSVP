@@ -69,7 +69,7 @@ function SuccessPage() {
             textTransform: 'none',
             color:"#4330DA",
             fontFamily: 'Montserrat', 
-            border:"solid #4330DA", 
+            border:"1.5px solid #4330DA", 
             marginTop:"35px",
             marginLeft:"20px"
           }}
