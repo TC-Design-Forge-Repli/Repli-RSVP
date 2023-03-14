@@ -5,7 +5,6 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* rsvpSaga() {
     yield takeEvery('SAGA/UPDATE_RESPONSE', updateResponse);
     yield takeEvery('SAGA/UPDATE_MEAL', updateMeal);
-    // yield takeEvery ('SAGA/FETCH_EVENT_ID', fetchEventId);
 }
 
 // Will get Party Names to be listed on the Party Names page

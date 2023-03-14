@@ -8,8 +8,9 @@ import Button from '@mui/material/Button';
 
 
 
+
 function SuccessPage() {
- 
+
   const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
   const partyGuests = useSelector(store => store.storeNavigation.partyGuests);
   const params = useParams();
@@ -29,13 +30,34 @@ function SuccessPage() {
     console.log(params.id)
   }, [params.id])
 
-
-  return (
+  return(
     <>
-     <h4>Perfect!!<br></br> You are all set.<br></br> We can't wait to see you on our BIG day!!</h4>
+      <h2>You're all set - see you on the BIG day!</h2>
 
-      {/* Edit Button */}
-      {/* This button will need to take users to editRSVPPage */}
+      <h3>Please review your responses before submitting</h3>
+    
+      {/* {partyGuests.map((partyGuest) => (
+        <div key={partyGuest.guest_id}>
+        {partyGuest.response ?
+          <>
+            <li>{partyGuest.name}</li>
+            <li>{partyGuest.response}</li>
+            <li>{partyGues.meal_id}</li>
+          </>
+
+          :
+          <>
+            <li>{partyGuest.name}</li>
+            <li>{partyGuest.response}</li>
+            <li>{partyGues.meal_id}</li>
+          </>
+        }
+        </div>
+      ))} */}
+          
+        
+      
+
       <Button
           className="backEditResponsesPage"
           type="back"
@@ -63,10 +85,13 @@ function SuccessPage() {
           onClick={() => history.push(`/about`)}
       >
         Learn more about Repli
-      </Button>
+      </Button> 
     </>
-  );
- 
+  )
 }
 
+
 export default SuccessPage;
+
+
+

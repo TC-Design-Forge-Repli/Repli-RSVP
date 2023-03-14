@@ -25,12 +25,22 @@ router.get('/:id', (req, res) => {
 
     const sqlQuery = 
     `
-    SELECT "guests"."id" AS "guest_id", "party"."id" AS "party_id","party"."event_id" AS "event_id", 
-    "guests"."name" AS "guest_name", "party"."name" AS "party_name",
-    "guests"."response" AS "guest_response", "guests"."meal_id" AS "meal_id"
+        SELECT 
+            "guests"."id" AS "guest_id",
+            "party"."id" AS "party_id", 
+            "party"."event_id" AS "event_id",  
+            "party"."name" AS "party_name",
+            "guests"."name" AS "guest_name", 
+            "guests"."response" AS "guest_response", 
+            "guests"."meal_id" AS "meal_id",
+            "meal_options"."meal_name" AS "meal_name"
         FROM "guests"
-        JOIN "party" ON "guests"."party_id" = "party"."id"
-        WHERE "guests"."party_id" = $1
+        JOIN "party" 
+            ON "guests"."party_id" = "party"."id"
+        FULL OUTER JOIN "meal_options" 
+            ON "guests"."meal_id" = "meal_options"."id"
+        WHERE "guests"."party_id" = $1 
+            
         ORDER BY "guest_id" ASC;
     `;
     const sqlValue = [party_id]

@@ -18,7 +18,17 @@ const storePartyId = (state = {}, action) => {
     }
 }
 
+const storeEventId =  (state = {}, action) => {
+    switch(action.type) {
+        case 'STORE_EVENT_ID':
+            return {...state, party_id: action.payload}
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
    storeEventCode,
    storePartyId,
+   storeEventId
 })
