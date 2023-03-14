@@ -27,7 +27,7 @@ function RsvpPageItem({partyGuest, mealOptions}) {
     }
 
     const updateMealChoice = (event) => {
-        console.log('meal choice:', event.target.value)
+        // console.log('meal choice:', event.target.value)
         dispatch({
             type: 'SAGA/UPDATE_MEAL',
             payload: {

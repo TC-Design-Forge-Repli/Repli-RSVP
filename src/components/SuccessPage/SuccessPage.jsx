@@ -22,7 +22,7 @@ function SuccessPage() {
       type: 'STORE_PARTY_ID',
       payload: params.id
     })
-    console.log(params.id)
+    // console.log(params.id)
   }, [params.id])
 
 
