@@ -18,7 +18,6 @@ function* fetchDashboardData() {
             payload: response.data,
             
         })
-        console.log(response.data)
     } catch(error) {
         console.log('fetchDashboard SAGA function failed', error)
     }

@@ -44,6 +44,22 @@ router.get('/:id', (req, res) => {
         res.sendStatus(500);
      })
 });
+router.delete('/:id', (req, res) =>{
+    const guestId = req.params.id
+    const sqlQuery = `
+    DELETE FROM "guests"
+    WHERE "id" = $1;
+    `
+    const sqlValue = [guestId]
+    pool.query(sqlQuery, sqlValue)
+        .then((dbRes) =>{
+            res.sendStatus(200)
+        })
+        .catch((dbErr) =>{
+            console.log('Problem deleting one guest in server', dbErr)
+            res.sendStatus(500)
+        })
+})
 
 
 

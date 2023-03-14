@@ -28,11 +28,22 @@ router.get('/:id', (req, res) => {
 
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
-});
+router.delete('/:id', (req, res) =>{
+   const partyId = req.params.id
+
+   const sqlQuery = `
+   DELETE FROM "party"
+   WHERE "id" = $1;
+   `
+   const sqlValue = [partyId]
+   pool.query(sqlQuery, sqlValue)
+       .then((dbRes) =>{
+           res.sendStatus(200)
+       })
+       .catch((dbErr) =>{
+           console.log('Problem deleting one party in server', dbErr);
+           res.sendStatus(500)
+       })
+})
 
 module.exports = router;
