@@ -9,3 +9,11 @@ h3 {
   margin: 15px;
   text-align: center;
 }
+
+.paragraphDiv {
+  display: inline-flex;
+}
+
+#eventNameDiv {
+  display: inline-flex;
+}

@@ -57,6 +57,22 @@ router.get('/:id', (req, res) => {
       res.sendStatus(500);
     })
 })
+router.delete('/:id', (req, res) =>{
+  const mealId = req.params.id
+    const sqlQuery = `
+    DELETE FROM "meal_options"
+    WHERE "id" = $1;
+    `
+    const sqlValue = [mealId]
+    pool.query(sqlQuery, sqlValue)
+        .then((dbRes) =>{
+            res.sendStatus(200)
+        })
+        .catch((dbErr) =>{
+            console.log('Problem deleting one meal in server', dbErr)
+            res.sendStatus(500)
+        })
+})
 
 
 module.exports = router;

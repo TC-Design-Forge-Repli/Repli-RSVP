@@ -7,7 +7,7 @@ const router = express.Router();
  */
 router.get('/:id', (req, res) => {
     console.log(req.params.id)
-    console.log('in partyNames.router GET route for Party Names', req.body.id)
+   //  console.log('in partyNames.router GET route for Party Names', req.body.id)
     const sqlQuery = 
     `
     SELECT "party"."id", "party"."name", "party"."event_id", "events"."event_name", "events"."event_code"
@@ -28,11 +28,22 @@ router.get('/:id', (req, res) => {
 
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
-});
+router.delete('/:id', (req, res) =>{
+   const partyId = req.params.id
+
+   const sqlQuery = `
+   DELETE FROM "party"
+   WHERE "id" = $1;
+   `
+   const sqlValue = [partyId]
+   pool.query(sqlQuery, sqlValue)
+       .then((dbRes) =>{
+           res.sendStatus(200)
+       })
+       .catch((dbErr) =>{
+           console.log('Problem deleting one party in server', dbErr);
+           res.sendStatus(500)
+       })
+})
 
 module.exports = router;

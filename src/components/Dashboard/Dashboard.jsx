@@ -9,6 +9,7 @@ function Dashboard() {
   const history = useHistory();
   const dispatch = useDispatch();
   const events = useSelector(store => store.dashboard);
+  const deleted = useSelector((store) => store.deleted);
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM
 
@@ -16,7 +17,7 @@ function Dashboard() {
     dispatch({
       type: 'SAGA/FETCH_ALL_DATA'
     })
-  }, [])
+  }, [deleted])
 
   const handleManageClick = () => {
     history.push('/manageEvent');
@@ -29,7 +30,7 @@ function Dashboard() {
     <div className="container">
       {
       events && events.map(event => {
-        return <DashboardItems event={event}/>
+        return <DashboardItems key={event.id} event={event}/>
       })
       }
     </div>

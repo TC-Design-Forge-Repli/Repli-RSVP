@@ -12,6 +12,10 @@ import eventsSaga from './events.saga'
 import mealsSaga from './meals.saga';
 import dashboardSaga from './dashboard.saga';
 import editRemindersPageSaga from './editReminders.saga';
+import deleteOneGuestSaga from './deleteOneGuest.saga'
+import deleteOnePartySaga from './deleteOneParty.saga'
+import deleteOneMealSaga from './deleteOneMeal.saga'
+import deleteOneEventSaga from './deleteOneEvent.saga'
 
 
 // rootSaga is the primary saga.
@@ -36,5 +40,9 @@ export default function* rootSaga() {
     mealsSaga(),
     dashboardSaga(),
     editRemindersPageSaga(),//fetches email, phone and receive updates/reminders from db/guests table to edit
+    deleteOneGuestSaga(), // Handles the delete for one guest
+    deleteOnePartySaga(), // Handles deleting one party
+    deleteOneMealSaga(), // Handles deleting one meal
+    deleteOneEventSaga(), // Handles deleting one event
   ]);
 }

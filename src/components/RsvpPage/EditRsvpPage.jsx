@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 function EditRsvpPage() {
 
     const partyGuests = useSelector(store => store.partyGuests);
-    const mealOptions = useSelector(store => store.meals);
     const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
     const params = useParams();
     const dispatch = useDispatch();
@@ -19,9 +18,6 @@ function EditRsvpPage() {
         dispatch({
           type: 'SAGA/FETCH_PARTY_GUESTS',
           payload: params.id
-        })
-        dispatch({
-          type: 'SAGA/FETCH_MEALS',  
         })
         dispatch({
           type: 'STORE_PARTY_ID',
@@ -38,7 +34,6 @@ function EditRsvpPage() {
                     <EditRsvpPageItem  
                     key={partyGuest.guest_id}
                     partyGuest={partyGuest}
-                    mealOptions={mealOptions}
                     />
                 )
             })}

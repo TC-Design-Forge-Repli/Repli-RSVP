@@ -32,7 +32,7 @@ function EventCodePage() {
   const matchEventCode = () => {
     if (doesEventCodeMatch === true) {
       history.push(`/selectParty/${eventCode}`);
-      console.log('event code matches to an event');
+      // console.log('event code matches to an event');
       dispatch({
         type: 'DOES_EVENT_CODE_MATCH',
         payload:''
@@ -40,7 +40,7 @@ function EventCodePage() {
     }
     else if (doesEventCodeMatch === false) {
       alert('this event code does not exist');
-      console.log('event code does not match to an event');
+      // console.log('event code does not match to an event');
       dispatch({
         type: 'DOES_EVENT_CODE_MATCH',
         payload:'' 
@@ -49,7 +49,7 @@ function EventCodePage() {
   }
 
   const enterEventCode = (event) => {
-    console.log('event code entered:', eventCode);
+    // console.log('event code entered:', eventCode);
     dispatch({
       type: 'SAGA/MATCH_EVENT_CODE',
       payload: eventCode
