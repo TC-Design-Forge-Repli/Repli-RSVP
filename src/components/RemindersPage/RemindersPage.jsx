@@ -14,7 +14,8 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { Switch } from '@material-ui/core';
+
+import { makeStyles, Switch } from '@material-ui/core';
 
 
 // import { SwitchBase } from '@material-ui/core/SwitchBase';
@@ -24,6 +25,23 @@ function RemindersPage() {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
+
+  // const useStyles = makeStyles({
+  //   switch: {
+  //     '&$checked': {
+  //       color: "#4330DA",
+  //     },
+  //     '&$checked + $track': {
+  //       backgroundColor: "#4330DA",
+  //     },
+  //   },
+  //   checked: {},
+  //   track: {},
+  // });
+
+  // function CustomSwitch() {
+  //   const classes = useStyles();
+  // }
   
   
   const [checked, setChecked] = useState(false);
@@ -116,11 +134,21 @@ function RemindersPage() {
         <FormControlLabel
           control ={
             <Switch 
+            style={{
+              color: "#4330DA",
+              '& .MuiSwitchTrack': {
+                backgroundColor: 'lightgray',
+              },
+              "& .MuiSwitchColorPrimary.MuiChecked + .MuiSwitchTrack": {
+                backgroundColor: '#4330DA',
+              },
+            }}
+              // style={{color:"#4330DA", }} trackcolor="green" checkedtrackcolor="#4330DA" 
               checked={receiveReminders}
               onChange={(event) => setReceiveReminders(event.target.checked)}
              
             />}
-            label="i want reminders"
+            label="I would like to receive updates and reminders"
           />
 
        
