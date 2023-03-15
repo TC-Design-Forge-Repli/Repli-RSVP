@@ -14,7 +14,7 @@ const checkEventCodeRouter = require('./routes/checkEventCode.router')
 const eventsRouter = require('./routes/events.router')
 const mealsRouter = require('./routes/meals.router');
 const remindersRouter = require('./routes/reminders.router');
-const partyGustRouter = require('./routes/partyGuests.router');
+const partyGuestsRouter = require('./routes/partyGuests.router');
 const rsvpRouter = require('./routes/rsvp.router');
 
 
@@ -35,7 +35,7 @@ app.use('/api/checkEventCode', checkEventCodeRouter);
 app.use('/api/events', eventsRouter)
 app.use('/api/meals', mealsRouter);
 app.use('/api/reminders', remindersRouter);
-app.use('/api/partyGuests', partyGustRouter);
+app.use('/api/partyGuests', partyGuestsRouter);
 app.use('/api/rsvp', rsvpRouter);
 
 // Party Names Router

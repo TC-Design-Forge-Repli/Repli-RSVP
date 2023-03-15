@@ -15,19 +15,19 @@ CREATE TABLE "events" (
 
 CREATE TABLE "party" (
 	"id" SERIAL PRIMARY KEY,
-	"event_id" INT REFERENCES "events",
+	"event_id" INT REFERENCES "events" ON DELETE CASCADE,
 	"name" VARCHAR(500) NOT NULL
 );
 CREATE TABLE "meal_options" (
 	"id" SERIAL PRIMARY KEY,
-	"event_id" INT REFERENCES "events",
+	"event_id" INT REFERENCES "events" ON DELETE CASCADE,
 	"meal_name" VARCHAR(500) NOT NULL,
 	"description" VARCHAR(500)
 );
 
 CREATE TABLE "guests" (
 	"id" SERIAL PRIMARY KEY,
-	"party_id" INT REFERENCES "party",
+	"party_id" INT REFERENCES "party" ON DELETE CASCADE,
 	"name" VARCHAR(500) NOT NULL,
 	"response" BOOLEAN DEFAULT NULL,
 	"meal_id" INT REFERENCES "meal_options",

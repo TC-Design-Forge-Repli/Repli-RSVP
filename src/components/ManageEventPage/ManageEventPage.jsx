@@ -8,15 +8,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Swal from 'sweetalert2'
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import './ManageEventPage.css';
 
 
 function ManageEventPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const meals = useSelector((store) => store.meals);
   const params = useParams();
   const event_id = params.id;
+  const meals = useSelector((store) => store.meals);
   const eventPressed = useSelector((store) => store.eventPressed);
   const partyGuests = useSelector((store) => store.partyGuests);
   // event code state
@@ -34,6 +36,7 @@ function ManageEventPage() {
   // event deadline state
   const [editEventDeadlineValue, setEditEventDeadlineValue] = useState(false);
   const [editedEventDeadline, setEditedEventDeadline] = useState('');
+  const deleted = useSelector((store) => store.deleted);
 
   useEffect(() => {
     dispatch({
@@ -44,7 +47,32 @@ function ManageEventPage() {
       type: 'SAGA/FETCH_MEALS',
       payload: event_id
     })
-  }, [event_id])
+  }, [event_id, deleted])
+  const deleteMeal = (mealId, mealName) =>{
+    Swal.fire({
+      title: `Are you sure you want to Delete ${mealName}?`,
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+      customClass: {
+        actions: 'my-actions',
+        cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Saved!', '', 'success')
+        dispatch({
+          type: 'SAGA/DELETE_ONE_MEAL',
+          payload: mealId
+        })
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
 
   const goToManageGuestList = () => {
     history.push(`/manageGuests/${event_id}`);
@@ -283,6 +311,9 @@ function ManageEventPage() {
                   {/* NOT WORKING */}
                   <p>Number of Guests: {guestsWithSameMealId.length}</p>
                   <p>Description: {meal.description}</p>
+                  <IconButton color="error" onClick={() => deleteMeal(meal.id, meal.meal_name)}>
+                    <DeleteForeverIcon />
+                  </IconButton>
                 </div>
               )
             })}
