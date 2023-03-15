@@ -14,6 +14,7 @@ import dashboard from './dashboard.reducer'
 import donePosting from './donePosting.reducer';
 import remindersToEdit from './editReminders.reducer'
 import eventPressed from './eventPress.reducer';
+import deleted from './deleted.reducer'
 
 
 // rootReducer is the primary reducer for our entire project
@@ -37,7 +38,8 @@ const rootReducer = combineReducers({
   storeNavigation,
   singleEvent,
   remindersToEdit,//reducer to hold guest's: email, phone number and receive reminders choice
-  eventPressed
+  eventPressed,
+  deleted,
 });
 
 export default rootReducer;

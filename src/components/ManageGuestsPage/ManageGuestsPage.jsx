@@ -6,6 +6,10 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
+import IconButton from "@mui/material/IconButton";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useState } from 'react';
+import Swal from 'sweetalert2'
 import { PieChart } from 'react-minimal-pie-chart';
 
 function ManageGuestsPage() {
@@ -14,6 +18,8 @@ function ManageGuestsPage() {
   const partyNames = useSelector((store) => store.partyNames);
   const eventPressed = useSelector((store) => store.eventPressed);
   const partyGuests = useSelector((store) => store.partyGuests);
+  const deleted = useSelector((store) => store.deleted);
+  const [swalProps, setSwalProps] = useState({});
 
   useEffect(() => {
     dispatch({
@@ -23,7 +29,42 @@ function ManageGuestsPage() {
     dispatch({
       type: 'SAGA/FETCH_ALL_GUESTS'
     })
-  }, []);
+    dispatch({
+      type: 'DELETED',
+      payload: 'reset'
+    })
+  }, [deleted]);
+  const deleteGuest = (guestId) => {
+    dispatch({
+      type: 'SAGA/DELETE_ONE_GUEST',
+      payload: guestId
+    })
+  }
+  const deleteParty = (partyId, partyName) =>{
+    Swal.fire({
+      title: `Are you sure you want to Delete ${partyName}?`,
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+      customClass: {
+        actions: 'my-actions',
+        cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Saved!', '', 'success')
+        dispatch({
+          type: 'SAGA/DELETE_ONE_PARTY',
+          payload: partyId
+        })
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
 
 
   const getResponseCount = () => {
@@ -60,7 +101,7 @@ function ManageGuestsPage() {
 
   console.log('partyNames:', partyNames);
   console.log('eventPressed:', eventPressed);
-  console.log('these are partyGuests', partyguests);
+  console.log('these are partyGuests', partyGuests);
   
 
 
@@ -75,12 +116,22 @@ function ManageGuestsPage() {
               id="panel1a-header"
             >
               <Typography>{party.name}</Typography>
+              <IconButton color="error" onClick={() => deleteParty(party.id, party.name)}>
+                <DeleteForeverIcon />
+              </IconButton>
+              
+              
             </AccordionSummary>
             {partyGuests.map((guest) => {
               if (guest.party_id === party.id) {
                 return (
                   <AccordionDetails key={guest.id}>
-                    <Typography>{guest.name}</Typography>
+                    <Typography>
+                      {guest.name}
+                      <IconButton color="error" onClick={() => deleteGuest(guest.id)}>
+                        <DeleteForeverIcon />
+                      </IconButton>
+                    </Typography>
                   </AccordionDetails>
                 );
               }
