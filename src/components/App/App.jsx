@@ -131,7 +131,7 @@ function App() {
           </Route>
 
           <Route exact path="/success/:id">
-            <SuccessPage />/
+            <SuccessPage />
           </Route>
 
           <Route

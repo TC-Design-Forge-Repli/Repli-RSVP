@@ -6,9 +6,14 @@ import { useHistory } from 'react-router-dom';
 //mui imports
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid'; // Grid version 1
-import Grid2 from '@mui/material/Unstable_Grid2'; // Grid version 2
 import Container from '@mui/material/Container';
+import { Grid, Typogrpahy, Box, Stack, Mask } from '@mui/material';
+
+import connor from './images/connor.jpg';
+import HappyGirl from './images/HappyGirl.jpeg';
+import Hearts from './images/Hearts.jpeg';
+import ManyHearts from './images/ManyHearts.jpeg';
+import FlowersHearts from './images/FlowersHearts.jpeg'
 
 
 function EventCodePage() {
@@ -60,20 +65,57 @@ function EventCodePage() {
   return (
     <>
 
-    <div>
-      <body style={{
-          backgroundImage:"url('./images/hearts.jpg')"
-      }}>
+<Box
+      sx={{
+        // backgroundImage: `url(${ManyHearts})`,
+        // backgroundImage: `url(${HappyGirl})`,
+        // backgroundImage: `url(${Hearts})`,
+        backgroundImage: `url(${FlowersHearts})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        marginTop:"-30px",
+        minHeight: '100vh', // set the minimum height of the element to 100% of the viewport height
+        // filter: 'grayscale(100%)' ,
+        // mask:"rgba(0,0,0.6)"
+      }}></Box>
+        <Box
+      sx={{
+        backgroundColor: "#E34973",
+        top:"100%",
         
-      </body>
-    </div>
-     
-          
-          <h1>Welcome to Repli</h1>
-          <h3>RSVP here for the big day.</h3>
+      
+      }}>
 
-        <form>
-          <TextField
+        <TextField label="Event Code"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+              "& > fieldset": { borderColor: "#4330DA" },
+              },
+              "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset":{borderColor:"#4330DA"}
+              },
+              "& label.Mui-focused":{color:"#4330DA"},
+              margin:"5px"
+            }}
+            // variant="standard"
+            onChange={(event) => setEventCode(event.target.value)}
+          />
+
+<Button
+            className="eventCodeSubmitButton"
+            style={{backgroundColor:"#4330DA"}}
+            variant="contained"
+            onClick={enterEventCode}>Enter
+          </Button>
+      </Box>
+
+   
+
+
+    
+
+       
+          {/* <TextField
             id="outlined"
             className="eventCodeInput"
             required
@@ -100,24 +142,11 @@ function EventCodePage() {
             variant="contained"
             onClick={enterEventCode}>Enter
           </Button>
-        </form>
      
+        */}
 
 
-
-      {/* <header>
-        <div
-          className='p-5 text-center bg-image'
-          style={{ 
-              //  backgroundImage: "url('https://media.gettyimages.com/id/165503175/vector/brunette-bride-and-groom.jpg?s=612x612&w=gi&k=20&c=AisK8hgse_fUNiJUAoo_UqqoY2WTWCJGY-QNCCuyyOk=')", 
-              backgroundImage: "url('./images/hearts.jpg')", 
-              // height: "100vh", 
-               backgroundRepeat: "no-repeat" ,
-               backgroundSize: "cover",
-              //  minWidth: 200
-          }}>
-        </div>
-      </header> */}
+     
     </>
   );
 }
