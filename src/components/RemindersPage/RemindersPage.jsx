@@ -26,22 +26,24 @@ function RemindersPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
 
-  // const useStyles = makeStyles({
-  //   switch: {
-  //     '&$checked': {
-  //       color: "#4330DA",
-  //     },
-  //     '&$checked + $track': {
-  //       backgroundColor: "#4330DA",
-  //     },
-  //   },
-  //   checked: {},
-  //   track: {},
-  // });
+  const useStyles = makeStyles({
+    switch: {
+      // '& .MuiSwitch-thumb': {
+      //   backgroundColor: "#4330DA",
+      // },
+      "& .Mui-checked": {
+        color: "#4330DA"
+        // transform: "translateX(25px) !important"
+      },
+      "& .MuiSwitch-track": {
+        backgroundColor: "#4330DA !important"
+      }
+    },
+    checked: {},
+    track: {},
+  });
 
-  // function CustomSwitch() {
-  //   const classes = useStyles();
-  // }
+ 
   
   
   const [checked, setChecked] = useState(false);
@@ -53,6 +55,8 @@ function RemindersPage() {
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const classes= useStyles();
 
 
   useEffect(() => {
@@ -134,26 +138,44 @@ function RemindersPage() {
         <FormControlLabel
           control ={
             <Switch 
-            style={{
-              color: "#4330DA",
-              '& .MuiSwitchTrack': {
-                backgroundColor: 'lightgray',
-              },
-              "& .MuiSwitchColorPrimary.MuiChecked + .MuiSwitchTrack": {
-                backgroundColor: '#4330DA',
-              },
-            }}
-              // style={{color:"#4330DA", }} trackcolor="green" checkedtrackcolor="#4330DA" 
+              className={classes.switch}
               checked={receiveReminders}
               onChange={(event) => setReceiveReminders(event.target.checked)}
-             
             />}
             label="I would like to receive updates and reminders"
           />
 
        
+{/* Original Code */}
        
-       
+
+{/* ChatGPT */}
+{/* style={{
+              '& .MuiSwitchThumb': {
+                backgroundColor: "#4330DA",
+              },
+              '& .MuiSwitchTrack': {
+                backgroundColor: "#4330DA",
+              },
+              '& .MuiSwitchThumb.MuiChecked': {
+                backgroundColor: "#4330DA",
+              },
+              '& .MuiSwitchTrack.MuiChecked': {
+                backgroundColor: "#4330DA",
+              },
+            }} */}
+
+            
+
+
+
+
+
+
+
+
+
+
 
      
         <Button 

@@ -13,7 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import styled from "styled-components";
 import { Grid } from "@mui/material";
-import { Switch } from '@material-ui/core';
+import { makeStyles, Switch } from '@material-ui/core';
 
 
 
@@ -27,7 +27,26 @@ function EditRemindersPage() {
 
     const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
     const remindersToEdit = useSelector(store => store.remindersToEdit)
+
+    const useStyles = makeStyles({
+        switch: {
+          // '& .MuiSwitch-thumb': {
+          //   backgroundColor: "#4330DA",
+          // },
+          "& .Mui-checked": {
+            color: "#4330DA"
+            // transform: "translateX(25px) !important"
+          },
+          "& .MuiSwitch-track": {
+            backgroundColor: "#4330DA !important"
+          }
+        },
+        checked: {},
+        track: {},
+      });
     
+      const classes= useStyles();
+
 
     const handleSwitchToggle = () => {
         setChecked(!checked);
@@ -168,7 +187,13 @@ https://reactjs.org/link/controlled-components */}
 
          <FormGroup>
                 <FormControlLabel 
-              control={<Switch style={{color:"#4330DA"}} track={{color:"#4330DA"}}checked={remindersToEdit.receive_reminders || false}  
+              control={
+              <Switch 
+              className={classes.switch}
+            //   style={{color:"#4330DA"}} 
+            //   track={{color:"#4330DA"}}
+
+              checked={remindersToEdit.receive_reminders || false}  
               onChange={editReceiveReminders}/>}
               label="I would like to receive event updates and reminders."
                 />
