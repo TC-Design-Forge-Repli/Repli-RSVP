@@ -9,7 +9,6 @@ import CheckIcon from '@mui/icons-material/Check';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Swal from 'sweetalert2'
-import IconButton from "@mui/material/IconButton";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import './ManageEventPage.css';
 
