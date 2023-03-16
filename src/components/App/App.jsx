@@ -85,6 +85,7 @@ function App() {
           <ProtectedRoute exact path="/dashboard">
             <Dashboard />
           </ProtectedRoute>
+          
           <ProtectedRoute exact path="/createEvent">
             <CreateEventPage />
           </ProtectedRoute>
@@ -131,7 +132,7 @@ function App() {
           </Route>
 
           <Route exact path="/success/:id">
-            <SuccessPage />/
+            <SuccessPage />
           </Route>
 
           <Route
