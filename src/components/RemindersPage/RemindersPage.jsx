@@ -5,20 +5,12 @@ import {useSelector} from 'react-redux';
 // MUI Imports
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import styled from "styled-components";
-import { Grid } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-
-
 import { makeStyles, Switch } from '@material-ui/core';
 
-
-// import { SwitchBase } from '@material-ui/core/SwitchBase';
 
 function RemindersPage() {
  
@@ -26,25 +18,22 @@ function RemindersPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
 
-  // const useStyles = makeStyles({
-  //   switch: {
-  //     '&$checked': {
-  //       color: "#4330DA",
-  //     },
-  //     '&$checked + $track': {
-  //       backgroundColor: "#4330DA",
-  //     },
-  //   },
-  //   checked: {},
-  //   track: {},
-  // });
-
-  // function CustomSwitch() {
-  //   const classes = useStyles();
-  // }
-  
-  
-  const [checked, setChecked] = useState(false);
+  const useStyles = makeStyles({
+    switch: {
+      // '& .MuiSwitch-thumb': {
+      //   backgroundColor: "#4330DA",
+      // },
+      "& .Mui-checked": {
+        color: "#4330DA"
+        // transform: "translateX(25px) !important"
+      },
+      "& .MuiSwitch-track": {
+        backgroundColor: "#4330DA !important"
+      }
+    },
+    checked: {},
+    track: {},
+  });
   
   
   const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
@@ -53,6 +42,8 @@ function RemindersPage() {
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const classes= useStyles();
 
 
   useEffect(() => {
@@ -72,7 +63,6 @@ function RemindersPage() {
       email:email,
       phoneNumber:phoneNumber,
       receiveReminders:receiveReminders,
-      // receiveReminders:event.target.checked,
       party_id:storePartyId.party_id
     }
     console.log('These are the guests communication options', reminders)
@@ -134,28 +124,14 @@ function RemindersPage() {
         <FormControlLabel
           control ={
             <Switch 
-            style={{
-              color: "#4330DA",
-              '& .MuiSwitchTrack': {
-                backgroundColor: 'lightgray',
-              },
-              "& .MuiSwitchColorPrimary.MuiChecked + .MuiSwitchTrack": {
-                backgroundColor: '#4330DA',
-              },
-            }}
-              // style={{color:"#4330DA", }} trackcolor="green" checkedtrackcolor="#4330DA" 
+              className={classes.switch}
               checked={receiveReminders}
               onChange={(event) => setReceiveReminders(event.target.checked)}
-             
             />}
             label="I would like to receive updates and reminders"
           />
 
        
-       
-       
-
-     
         <Button 
           className="backToEventCodePage"
           type="back"
@@ -178,7 +154,6 @@ function RemindersPage() {
                   marginLeft:"20px"}}
           onClick={handleRemindersSubmission}>Submit
         </Button>
-
    </>
   );
 }
@@ -186,33 +161,3 @@ function RemindersPage() {
 
 export default RemindersPage;
 
-//Works
-{/* <FormControlLabel
-            control={
-              <Switch
-                checked={receiveReminders}
-                onChange={(event) => setReceiveReminders(event.target.checked)}
-              />}
-              label="I would like to get receive updates and reminders"
-          
-          /> */}
-
-{/* Original Toggle Code */}
-        {/* <FormGroup>
-          <FormControlLabel 
-              control={<Switch checked={receiveReminders}  onChange={()=> setReceiveReminders(!receiveReminders)} />}
-              label="I would like to receive event updates and reminders."
-          />
-        </FormGroup>
- */}
-
-
-
-   {/* Original checkbox code */}
-   {/* <FormControlLabel 
-          control={<Switch checked={receiveReminders}   onChange={()=> setReceiveReminders(!receiveReminders)}}
-          // control={< Checkbox style={{color:"#4330DA"}}/>} 
-          label="I would like to receive event updates and reminders."
-          // checked={receiveReminders}
-          // onChange={()=> setReceiveReminders(!receiveReminders)}
-        /> */}

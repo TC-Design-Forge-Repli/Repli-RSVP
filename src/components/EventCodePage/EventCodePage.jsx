@@ -77,76 +77,57 @@ function EventCodePage() {
         minHeight: '100vh', // set the minimum height of the element to 100% of the viewport height
         // filter: 'grayscale(100%)' ,
         // mask:"rgba(0,0,0.6)"
-      }}></Box>
-        <Box
-      sx={{
-        backgroundColor: "#E34973",
-        top:"100%",
-        
-      
       }}>
-
-        <TextField label="Event Code"
+      
+     <Box
+     sx={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height:'60vh',
+     }}
+     
+     >
+      <Stack>
+      <TextField 
+      id="filled-basic"
+      variant="filled"
+      label="Event Code"
             sx={{
-              "& .MuiOutlinedInput-root": {
-              "& > fieldset": { borderColor: "#4330DA" },
+              backgroundColor: "#4330DA",
+              textAlign:"center",
+            
+              '& .MuiInput-underline:after': {
+                borderBottomColor: 'white',
               },
-              "& .MuiOutlinedInput-root.Mui-focused": {
-              "& > fieldset":{borderColor:"#4330DA"}
+              '& .MuiInputLabel-root': {
+                color: 'white',
               },
-              "& label.Mui-focused":{color:"#4330DA"},
+              '& .MuiFilledInput-input': {
+                color: 'white',
+              },
+              "& .MuiFilledInput-root": {
+              "& > fieldset": { borderColor: "white" },
+              },
+              "& .MuiFilledInput-root.Mui-focused": {
+              "& > fieldset":{borderColor:"white"}
+              },
+              "& label.Mui-focused":{color:"white"},
               margin:"5px"
             }}
             // variant="standard"
             onChange={(event) => setEventCode(event.target.value)}
           />
-
-<Button
-            className="eventCodeSubmitButton"
-            style={{backgroundColor:"#4330DA"}}
-            variant="contained"
-            onClick={enterEventCode}>Enter
-          </Button>
-      </Box>
-
-   
-
-
-    
-
-       
-          {/* <TextField
-            id="outlined"
-            className="eventCodeInput"
-            required
-            value={eventCode}
-            label="Event Code"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-              "& > fieldset": { borderColor: "#4330DA" },
-              },
-              "& .MuiOutlinedInput-root.Mui-focused": {
-              "& > fieldset":{borderColor:"#4330DA"}
-              },
-              "& label.Mui-focused":{color:"#4330DA"},
-              margin:"5px"
-            }}
-            // variant="standard"
-            onChange={(event) => setEventCode(event.target.value)}
-          />
-
 
           <Button
             className="eventCodeSubmitButton"
-            style={{backgroundColor:"#4330DA"}}
+            style={{backgroundColor:"#4330DA", marginLeft:"50px", marginRight:"50px"}}
             variant="contained"
             onClick={enterEventCode}>Enter
           </Button>
-     
-        */}
-
-
-     
+          </Stack>
+          </Box>
+      </Box>   
     </>
   );
 }

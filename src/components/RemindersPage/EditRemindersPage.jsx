@@ -10,12 +10,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import styled from "styled-components";
-import { Grid } from "@mui/material";
-import { Switch } from '@material-ui/core';
-
-
+import { makeStyles, Switch } from '@material-ui/core';
 
 
 function EditRemindersPage() {
@@ -27,12 +22,25 @@ function EditRemindersPage() {
 
     const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
     const remindersToEdit = useSelector(store => store.remindersToEdit)
+
+    const useStyles = makeStyles({
+        switch: {
+          // '& .MuiSwitch-thumb': {
+          //   backgroundColor: "#4330DA",
+          // },
+          "& .Mui-checked": {
+            color: "#4330DA"
+            // transform: "translateX(25px) !important"
+          },
+          "& .MuiSwitch-track": {
+            backgroundColor: "#4330DA !important"
+          }
+        },
+        checked: {},
+        track: {},
+      });
     
-
-    const handleSwitchToggle = () => {
-        setChecked(!checked);
-    }
-
+      const classes= useStyles();
 
 
     useEffect(() => {
@@ -86,7 +94,6 @@ function EditRemindersPage() {
         <>
      
             <TextField
-                // required
                 id="outlined-required"
                 label="email"
                 sx={{
@@ -99,13 +106,11 @@ function EditRemindersPage() {
                     "& label.Mui-focused":{color:"#4330DA"},
                     margin:"5px"
                   }}
-                // defaultValue="Phone Number"
                 value={remindersToEdit.email_address || ''}
                 onChange={(event) => dispatch({type: 'EDIT_EMAIL', payload: event.target.value})}
             />  
 
             <TextField
-                // required
                 id="outlined-required"
                 label="Phone Number"
                 sx={{
@@ -118,67 +123,24 @@ function EditRemindersPage() {
                     "& label.Mui-focused":{color:"#4330DA"},
                     margin:"5px"
                   }}
-                // defaultValue="Phone Number"
                 value={remindersToEdit.phone_number || ''}
                 onChange={(event) => dispatch({type: 'EDIT_PHONE_NUMBER', payload: event.target.value})}
             /> 
-
- {/* <form onChange={editReceiveReminders}>
-<FormControlLabel 
-              control={<Switch checked={remindersToEdit.receive_reminders}  
-              onChange={(event) => setChecked(event.target.checked)}/>}
-              label="I would like to receive event updates and reminders."
-                />
-                </form> */}
-
-
-
-
-{/* The following code "works" BUT I get this warning: 
-react.development.js:220 Warning: Failed prop type: 
-Invalid prop `checked` of type `object` 
-supplied to `ForwardRef(Switch)`, expected `boolean`
- */}
-            {/* <FormControlLabel
-                control={
-                    <Switch
-                    checked={remindersToEdit}
-                    onChange={(event) => remindersToEdit(event.target.checked)}
-                    />}
-                    label="I would like to get receive updates and reminders"
-                /> 
-
-
-        </form>   */}
-
-
-{/* The following code gets an error: react-dom.development.js:67 Warning: 
-A component is changing an uncontrolled input to be controlled. 
-This is likely caused by the value changing from undefined to a defined value, 
-which should not happen. Decide between using a controlled or 
-uncontrolled input element for the lifetime of the component
-https://reactjs.org/link/controlled-components */}
-                {/* <FormControlLabel control={<Switch 
-                value={remindersToEdit.receive_reminders}
-                checked={remindersToEdit.receive_reminders} 
-                onChange={handleSwitchToggle} />}
-                label="I want to get reminders"
-                /> */}
          
 
-         <FormGroup>
+            <FormGroup>
                 <FormControlLabel 
-              control={<Switch style={{color:"#4330DA"}} track={{color:"#4330DA"}}checked={remindersToEdit.receive_reminders || false}  
-              onChange={editReceiveReminders}/>}
-              label="I would like to receive event updates and reminders."
+                    control={<Switch 
+                            className={classes.switch}
+                            checked={remindersToEdit.receive_reminders || false}  
+                            onChange={editReceiveReminders}/>}
+                            label="I would like to receive event updates and reminders."
                 />
             </FormGroup>
 
 
-
-
     {/* Back Button */}
-            {/* <Button 
+            <Button 
                 className="backToEventCodePage"
                 type="back"
                 variant="outlined" 
@@ -187,7 +149,7 @@ https://reactjs.org/link/controlled-components */}
                         marginTop:"25px",
                         marginLeft:"20px"}}
                 onClick={ history.push(`/rsvp/${storePartyId[0]}`)}>Back
-            </Button>  */}
+            </Button>  
 
 
     {/* Submit Updates Button */}
@@ -199,8 +161,7 @@ https://reactjs.org/link/controlled-components */}
                         border:"2px solid #4330DA", 
                         marginTop:"25px",
                         marginLeft:"20px"}}
-                onClick={handleUpdateToRemindersPage}
-                >Submit Updates
+                onClick={handleUpdateToRemindersPage}>Submit Updates
             </Button>
         </>
     )
