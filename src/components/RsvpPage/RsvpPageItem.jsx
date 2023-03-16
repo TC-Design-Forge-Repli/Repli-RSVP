@@ -8,12 +8,25 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 function RsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(true);
     const mealOptions = useSelector(store => store.meals)
+    const [activeStep, setActiveStep] = useState(2);
     const dispatch = useDispatch();
+
+    const steps = [
+      { label: '' },
+      { label: '' },
+      { label: '' },
+      { label: '' },
+      { label: '' },
+  
+    ];
 
     useEffect(() => {
         dispatch({
@@ -46,64 +59,73 @@ function RsvpPageItem({partyGuest}) {
     }
 
     return (
-        <>
-            <h4>{partyGuest.guest_name}</h4>
+      <>
+        <Stepper activeStep={activeStep}>
+          {steps.map((step, index) => (
+            <Step key={index}>
+              <StepLabel>{step.label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <h4>{partyGuest.guest_name}</h4>
 
-        {checked ?
-        <>
+        {checked ? (
+          <>
             {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
             <form onChange={updateResponse}>
-                <FormGroup>
-                <FormControlLabel 
-                    control={
+              <FormGroup>
+                <FormControlLabel
+                  control={
                     <Switch
-                        checked={true || ''}
-                        onChange={() => setChecked(false)}
-                    />} 
-                    label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                      checked={true || ""}
+                      onChange={() => setChecked(false)}
+                    />
+                  }
+                  label={`${
+                    checked ? "Politely Accept" : "Regretfully Decline"
+                  }`}
                 />
-                </FormGroup>
+              </FormGroup>
             </form>
 
             <form>
-                <FormControl sx={{ m: 1, minWidth: 95 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                    required
-                    value={partyGuest.meal_id || ''}
-                    onChange={updateMealChoice}
-                    >
-                    {mealOptions.map(mealOption => {
-                        return (
-                            <MenuItem key={mealOption.id} value={mealOption.id}>{mealOption.meal_name}</MenuItem>
-                        )
-                    })}
-                    </Select>
-                </FormControl>
+              <FormControl sx={{ m: 1, minWidth: 95 }}>
+                <InputLabel id="demo-simple-select-helper-label">
+                  Meals
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  required
+                  value={partyGuest.meal_id || ""}
+                  onChange={updateMealChoice}
+                >
+                  {mealOptions.map((mealOption) => {
+                    return (
+                      <MenuItem key={mealOption.id} value={mealOption.id}>
+                        {mealOption.meal_name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
             </form>
-        </>
-
-        :
-
-        // only show toggle(switch) if they are currently declining the invitation
-         <form onChange={updateResponse}>
-                <FormGroup>
-                <FormControlLabel 
-                    control={
-                    <Switch
-                        checked={false}
-                        onChange={() => setChecked(true)}
-                    />} 
-                    label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
-                />
-                </FormGroup>
-            </form>
-        
-            }
-        </>
-    )
+          </>
+        ) : (
+          // only show toggle(switch) if they are currently declining the invitation
+          <form onChange={updateResponse}>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch checked={false} onChange={() => setChecked(true)} />
+                }
+                label={`${checked ? "Politely Accept" : "Regretfully Decline"}`}
+              />
+            </FormGroup>
+          </form>
+        )}
+      </>
+    );
 }
 
 export default RsvpPageItem;

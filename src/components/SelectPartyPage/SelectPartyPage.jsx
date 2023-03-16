@@ -10,6 +10,9 @@ import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 // import styled from "styled-components";
 import { Grid } from "@mui/material";
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 // Alternate way to style...
 // From Laura's solo project
@@ -31,8 +34,19 @@ function SelectPartyPage() {
   const history = useHistory();
 
   const partyNames = useSelector((store) => store.partyNames);
+  const [activeStep, setActiveStep] = useState(1);
+
+  const steps = [
+    { label: '' },
+    { label: '' },
+    { label: '' },
+    { label: '' },
+    { label: '' },
+
+  ];
 
   const sendToRSVP = (event, id) => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     dispatch({
       type: 'STORE_PARTY_ID',
       payload: id
@@ -51,6 +65,14 @@ function SelectPartyPage() {
 
   return (
     <>
+      <Stepper activeStep={activeStep}>
+        {steps.map((step, index) => (
+          <Step key={index}>
+            <StepLabel>{step.label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+
       <h4 style={{marginLeft:"15px", fontFamily:"roboto"}}>Welcome, please select your party:</h4>
 
 
