@@ -21,7 +21,7 @@ function Dashboard() {
   }, [deleted])
 
   const createEvent = () => {
-
+    history.push("/createEvent")
   }
 
   return (

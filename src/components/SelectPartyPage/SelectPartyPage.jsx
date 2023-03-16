@@ -118,3 +118,19 @@ function SelectPartyPage() {
 }
 
 export default SelectPartyPage;
+
+
+// type="back"
+
+// //         
+//         style={{color:"#4330DA", 
+//               border:"2px solid #4330DA", 
+//               marginTop:"25px",
+//               marginLeft:"20px"}}
+//               variant="outlined" 
+
+// style={{
+//   backgroundColor: "#4330DA",
+//   marginLeft: "50px",
+//   marginRight: "50px"}},
+//   variant="contained"
