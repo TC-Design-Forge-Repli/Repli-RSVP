@@ -44,7 +44,9 @@ router.get('/:id', (req, res) => {
   const event_id = req.params.id
   const sqlQuery = `
     SELECT * FROM "meal_options"
-    WHERE event_id = $1;
+      WHERE "event_id" = $1
+      ORDER BY "id" ASC
+    ;
   `;
   const sqlValue = [event_id]
   pool.query(sqlQuery, sqlValue)
@@ -57,21 +59,81 @@ router.get('/:id', (req, res) => {
       res.sendStatus(500);
     })
 })
+
+// DELETE
 router.delete('/:id', (req, res) =>{
   const mealId = req.params.id
-    const sqlQuery = `
+  const sqlQuery = `
     DELETE FROM "meal_options"
-    WHERE "id" = $1;
+      WHERE "id" = $1;
     `
-    const sqlValue = [mealId]
-    pool.query(sqlQuery, sqlValue)
-        .then((dbRes) =>{
-            res.sendStatus(200)
-        })
-        .catch((dbErr) =>{
-            console.log('Problem deleting one meal in server', dbErr)
-            res.sendStatus(500)
-        })
+  const sqlValue = [mealId]
+  pool.query(sqlQuery, sqlValue)
+    .then((dbRes) =>{
+        res.sendStatus(200)
+    })
+    .catch((dbErr) =>{
+        console.log('Problem deleting one meal in server', dbErr)
+        res.sendStatus(500)
+    })
+})
+
+// PUT meal option
+router.put('/meal_option:meal_id/:id', (req, res) => {
+  // console.log('req.body:', req.body);
+  // console.log('req.params:', req.params);
+
+  const id = req.body.meal_id;
+  const event_id = req.body.event_id;
+  const meal_name = req.body.meal_name;
+
+  const sqlQuery = `
+  UPDATE "meal_options"
+    SET "meal_name" = $1
+    WHERE "id" = $2 AND "event_id" = $3
+  ;
+  `;
+
+  const sqlValues = [meal_name, id, event_id];
+
+  pool.query(sqlQuery, sqlValues)
+    .then((dbRes) => {
+      // console.log('dbRes:', dbRes);
+      res.sendStatus(200);
+    })
+    .catch((dbErr) => {
+      console.error(`Error PUT /api/meals/meal_option${id}/${event_id}`, dbErr);
+      res.sendStatus(500);
+    })
+})
+
+// PUT meal description
+router.put('/meal_description:meal_id/:id', (req, res) => {
+  console.log('req.body:', req.body);
+  console.log('req.params:', req.params);
+
+  const id = req.body.meal_id;
+  const event_id = req.body.event_id;
+  const meal_description = req.body.meal_description;
+
+  const sqlQuery = `
+  UPDATE "meal_options"
+    SET "description" = $1
+    WHERE "id" = $2 AND "event_id" = $3
+  ;
+  `;
+
+  const sqlValues = [meal_description, id, event_id];
+
+  pool.query(sqlQuery, sqlValues)
+    .then((dbRes) => {
+      // console.log('dbRes:', dbRes);
+      res.sendStatus(200);
+    })
+    .catch((dbErr) => {
+      console.error(`Error PUT /api/meals/meal_description${id}/${event_id}`, dbErr);
+      res.sendStatus(500);
+    })
 })
 
 
