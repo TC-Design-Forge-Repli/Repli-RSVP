@@ -8,6 +8,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { makeStyles } from '@material-ui/core';
 
 function RsvpPageItem({partyGuest}) {
     
@@ -45,6 +46,23 @@ function RsvpPageItem({partyGuest}) {
         })
     }
 
+    const useStyles = makeStyles({
+        switch: {
+          // '& .MuiSwitch-thumb': {
+          //   backgroundColor: "#4330DA",
+          // },
+          "& .Mui-checked": {
+            color: "#4330DA"
+            // transform: "translateX(25px) !important"
+          },
+          "& .MuiSwitch-track": {
+            backgroundColor: "#4330DA !important"
+          }
+        },
+        checked: {},
+        track: {},
+      });
+
     return (
         <>
             <h4>{partyGuest.guest_name}</h4>
@@ -57,6 +75,7 @@ function RsvpPageItem({partyGuest}) {
                 <FormControlLabel 
                     control={
                     <Switch
+                
                         checked={true || ''}
                         onChange={() => setChecked(false)}
                     />} 
