@@ -34,6 +34,7 @@ function Dashboard() {
       <Button
         variant="contained"
         style={{
+          color: "white",
           backgroundColor: "#4330DA",
           fontFamily: "Montserrat",
           margin: "10px",
