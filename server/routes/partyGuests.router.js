@@ -4,10 +4,25 @@ const router = express.Router();
 
 // get all guests
 router.get('/', (req, res) => {
+    // const sqlQuery = `
+    //     SELECT * FROM "guests"
+    //     ORDER BY "id" ASC;
+    // `;
     const sqlQuery = `
-        SELECT * FROM "guests"
-        ORDER BY "id" ASC;
-    `;
+    SELECT 
+        "guests"."id" AS "guest_id",
+        "party_id",
+        "guests"."name" AS "guest_name",
+        "meal_name",
+        "guests"."response" AS "guest_response",
+        "meal_options"."event_id"
+        FROM "guests"
+        JOIN "meal_options" ON "guests"."meal_id" = "meal_options"."id"
+        JOIN "events" ON "meal_options"."event_id" = "events"."id"
+        WHERE "event_code" = '222newcode'
+        ORDER BY "guest_id" ASC
+    ;
+    `
 
     pool.query(sqlQuery)
         .then((dbRes) => {
@@ -54,6 +69,7 @@ router.get('/:id', (req, res) => {
         res.sendStatus(500);
      })
 });
+
 router.delete('/:id', (req, res) =>{
     const guestId = req.params.id
     const sqlQuery = `
@@ -70,7 +86,6 @@ router.delete('/:id', (req, res) =>{
             res.sendStatus(500)
         })
 })
-
 
 
 module.exports = router;
