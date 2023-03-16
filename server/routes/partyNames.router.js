@@ -50,7 +50,6 @@ FROM "guests"
             }
             newArray.push(partyObject);
          }
-         console.log('$$$$$$$$$$$$$', newArray)
          // Declare a new array
          let uniqueArray = [];
 
@@ -71,7 +70,6 @@ FROM "guests"
          for (i in uniqueObject) {
             uniqueArray.push(uniqueObject[i]);
          }
-         console.log('@@@@@@@@@@@@', uniqueArray)
          res.send(uniqueArray)
       })
       .catch(dbErr => {
