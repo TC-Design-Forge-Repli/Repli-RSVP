@@ -113,16 +113,21 @@ function ManageGuestsPage() {
   console.log('these are partyGuests', partyGuests);
 
   // const guestResponseCount = () => {
+  //   let responseCount = 0;
+
   //   for (let party of partyNames) {
   //     console.log('party:', party);
 
-  //     for (let )
+  //     for (let guest of partyGuests) {
+  //       if (guest.party_id === party.id && guest.response !== null) {
+  //         responseCount ++;
+  //       }
+  //     }
   //   }
+  //   console.log('responseCount:', responseCount);
   // }
   // guestResponseCount();
-  // if (guest.party_id === party.id && guest.response === true || false) {
-  //   responseCount ++;
-  // }
+  
 
   return (
     <section>
@@ -151,8 +156,14 @@ function ManageGuestsPage() {
                       <IconButton color="error" onClick={() => deleteGuest(guest.id)}>
                         <DeleteForeverIcon />
                       </IconButton>
-                      <Typography>
-                        {guest.name}
+                      <Typography sx={{margin: "5px"}}>
+                        {guest.guest_name}
+                      </Typography>
+                      <Typography sx={{margin: "5px"}}>
+                      {guest.guest_response === true ? ' Attending' : ' Not Attending'}
+                      </Typography>
+                      <Typography sx={{margin: "5px"}}>
+                      {guest.meal_name}
                       </Typography>
                     </AccordionDetails>
                   );
