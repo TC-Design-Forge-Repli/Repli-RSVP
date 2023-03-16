@@ -328,22 +328,23 @@ router.put('/event_deadline/:id', (req, res) => {
     })
 })
 
-
-router.delete('/:id', (req, res) =>{
+// DELETE
+router.delete('/:id', (req, res) => {
   const eventId = req.params.id
-    const sqlQuery = `
+  const sqlQuery = `
     DELETE FROM "events"
     WHERE "id" = $1;
     `
-    const sqlValue = [eventId]
-    pool.query(sqlQuery, sqlValue)
-        .then((dbRes) =>{
-            res.sendStatus(200)
-        })
-        .catch((dbErr) =>{
-            console.log('Problem deleting one event in server', dbErr)
-            res.sendStatus(500)
-        })
+  const sqlValue = [eventId]
+  pool.query(sqlQuery, sqlValue)
+    .then((dbRes) => {
+      res.sendStatus(200)
+    })
+    .catch((dbErr) => {
+      console.log('Problem deleting one event in server', dbErr)
+      res.sendStatus(500)
+    })
 });
+
 
 module.exports = router;

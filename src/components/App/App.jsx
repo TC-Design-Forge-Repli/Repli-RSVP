@@ -85,6 +85,7 @@ function App() {
           <ProtectedRoute exact path="/dashboard">
             <Dashboard />
           </ProtectedRoute>
+          
           <ProtectedRoute exact path="/createEvent">
             <CreateEventPage />
           </ProtectedRoute>

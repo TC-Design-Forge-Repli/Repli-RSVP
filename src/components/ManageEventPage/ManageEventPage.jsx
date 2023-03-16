@@ -17,10 +17,16 @@ function ManageEventPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
+  const meal_id = params.meal_id;
   const event_id = params.id;
   const meals = useSelector((store) => store.meals);
   const eventPressed = useSelector((store) => store.eventPressed);
   const partyGuests = useSelector((store) => store.partyGuests);
+  const deleted = useSelector((store) => store.deleted);
+  const [editMealOptionValue, setEditMealOptionValue] = useState(null);
+  const [editedMealOption, setEditedMealOption] = useState('');
+  const [editMealDescriptionValue, setEditMealDescriptionValue] = useState(null);
+  const [editedMealDescription, setEditedMealDescription] = useState('');
   // event code state
   const [editEventCodeValue, setEditEventCodeValue] = useState(false);
   const [editedEventCode, setEditedEventCode] = useState('');
@@ -36,7 +42,6 @@ function ManageEventPage() {
   // event deadline state
   const [editEventDeadlineValue, setEditEventDeadlineValue] = useState(false);
   const [editedEventDeadline, setEditedEventDeadline] = useState('');
-  const deleted = useSelector((store) => store.deleted);
 
   useEffect(() => {
     dispatch({
@@ -48,7 +53,8 @@ function ManageEventPage() {
       payload: event_id
     })
   }, [event_id, deleted])
-  const deleteMeal = (mealId, mealName) =>{
+
+  const deleteMeal = (mealId, mealName) => {
     Swal.fire({
       title: `Are you sure you want to Delete ${mealName}?`,
       showDenyButton: true,
@@ -112,6 +118,18 @@ function ManageEventPage() {
     // console.log(`edit: ${singleEvent.event_deadline}`);
     setEditedEventDeadline(singleEvent.event_deadline);
     setEditEventDeadlineValue(true);
+  }
+  // meal option
+  const editMealOption = (meal) => {
+    // console.log('editMealOption:', meal);
+    setEditedMealOption(meal.meal_name);
+    setEditMealOptionValue(meal.id);
+  }
+  // meal description
+  const editMealDescription = (meal) => {
+    // console.log('editMealDescription:', meal);
+    setEditedMealDescription(meal.description);
+    setEditMealDescriptionValue(meal.id);
   }
 
   // *** handle change functions *** //
@@ -192,6 +210,31 @@ function ManageEventPage() {
     })
     setEditEventDeadlineValue(false);
   }
+  const saveMealName = (meal) => {
+    // console.log('saveMealName:', editedMealOption);
+    dispatch({
+      type: 'SAGA/UPDATE_MEAL_NAME',
+      payload: {
+        meal_id: meal.id,
+        event_id: meal.event_id,
+        meal_name: editedMealOption
+      }
+    })
+    setEditMealOptionValue(null);
+  }
+
+  const saveMealDescription = (meal) => {
+    console.log('saveMealDescription:', meal);
+    dispatch({
+      type: 'SAGA/UPDATE_MEAL_DESCRIPTION',
+      payload: {
+        meal_id: meal.id,
+        event_id: meal.event_id,
+        description: editedMealDescription
+      }
+    })
+    setEditMealDescriptionValue(null);
+  }
 
   return (
     <section>
@@ -243,13 +286,13 @@ function ManageEventPage() {
               <IconButton onClick={() => editEventDate(eventPressed[0])}>
                 {editEventDateValue ? <div></div> : <EditIcon />}
               </IconButton>
-              <p>Date: {editEventDateValue ? 
+              <p>Date: {editEventDateValue ?
                 <input
                   type="date"
                   // placeholder="New event date"
                   value={editedEventDate}
                   onChange={handleEventDateChange}
-                /> 
+                />
                 : new Date(eventPressed[0] && eventPressed[0].event_date).toDateString('en-US')}
               </p>
               <IconButton onClick={saveEventDate}>
@@ -260,15 +303,15 @@ function ManageEventPage() {
             {/* event location */}
             <div className="paragraphDiv">
               <IconButton onClick={() => editEventLocation(eventPressed[0])}>
-              {editEventLocationValue ? <div></div> : <EditIcon />}
+                {editEventLocationValue ? <div></div> : <EditIcon />}
               </IconButton>
-              <p>Location: {editEventLocationValue ? 
+              <p>Location: {editEventLocationValue ?
                 <input
                   type="text"
                   placeholder="New event location..."
                   value={editedEventLocation}
                   onChange={handleEventLocationChange}
-                /> 
+                />
                 : eventPressed[0] && eventPressed[0].event_location}
               </p>
               <IconButton onClick={saveEventLocation}>
@@ -279,14 +322,14 @@ function ManageEventPage() {
             {/* event rsvp deadline */}
             <div className="paragraphDiv">
               <IconButton onClick={() => editEventDeadline(eventPressed[0])}>
-              {editEventDeadlineValue ? <div></div> : <EditIcon />}
+                {editEventDeadlineValue ? <div></div> : <EditIcon />}
               </IconButton>
-              <p>RSVP Deadline: {editEventDeadlineValue ? 
+              <p>RSVP Deadline: {editEventDeadlineValue ?
                 <input
                   type="date"
                   value={editedEventDeadline}
                   onChange={handleEventDeadlineChange}
-                /> 
+                />
                 : new Date(eventPressed[0] && eventPressed[0].event_deadline).toDateString('en-US')}
               </p>
               <IconButton onClick={saveEventDeadline}>
@@ -304,17 +347,56 @@ function ManageEventPage() {
             {meals && meals.map(meal => {
               // Create an array of guests with the same meal_id
               // NOT WORKING
-              const guestsWithSameMealId = partyGuests.filter(guest => guest.meal_id === meal.id);
+              const guestsWithSameMealId = partyGuests.filter((guest) => guest.meal_id === meal.id);
               return (
-                <div key={meal.id}>
-                  <p>Name: {meal.meal_name}</p>
-                  {/* NOT WORKING */}
-                  <p>Number of Guests: {guestsWithSameMealId.length}</p>
-                  <p>Description: {meal.description}</p>
-                  <IconButton color="error" onClick={() => deleteMeal(meal.id, meal.meal_name)}>
-                    <DeleteForeverIcon />
-                  </IconButton>
-                </div>
+                <Card>
+                  <CardContent>
+                    <div className="mealCard" key={meal.id}>
+                      <div className="paragraphDiv">
+                        <IconButton onClick={() => editMealOption(meal)}>
+                          {editMealOptionValue === meal.id ? <div></div> : <EditIcon />}
+                        </IconButton>
+                        <p>Name: {editMealOptionValue === meal.id ?
+                          <input
+                            type="text"
+                            placeholder="New meal option..."
+                            value={editedMealOption}
+                            onChange={(event) => setEditedMealOption(event.target.value)}
+                          />
+                          : meal.meal_name}
+                        </p>
+                        <IconButton onClick={() => saveMealName(meal)}>
+                          {editMealOptionValue === meal.id ? <CheckIcon /> : <div></div>}
+                        </IconButton>
+                      </div>
+
+                      <div className="paragraphDiv">
+                        <IconButton onClick={() => editMealDescription(meal)}>
+                          {editMealDescriptionValue === meal.id ? <div></div> : <EditIcon />}
+                        </IconButton>
+                        <p>Description: {editMealDescriptionValue === meal.id ?
+                          <input
+                            type="text"
+                            placeholder="New meal description..."
+                            value={editedMealDescription}
+                            onChange={(event) => setEditedMealDescription(event.target.value)}
+                          />
+                          : meal.description}
+                        </p>
+                        <IconButton onClick={() => saveMealDescription(meal)}>
+                          {editMealDescriptionValue === meal.id ? <CheckIcon /> : <div></div>}
+                        </IconButton>
+                      </div>
+
+                      {/* NOT WORKING */}
+                      <p>{guestsWithSameMealId.length} guest(s) chose {meal.meal_name}</p>
+
+                      <IconButton color="error" onClick={() => deleteMeal(meal.id, meal.meal_name)}>
+                        <DeleteForeverIcon />
+                      </IconButton>
+                    </div>
+                  </CardContent>
+                </Card>
               )
             })}
           </div>
