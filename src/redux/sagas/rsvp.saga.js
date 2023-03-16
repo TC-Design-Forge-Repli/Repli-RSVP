@@ -40,6 +40,7 @@ function* updateMeal(action) {
                 meal_id: meal_id
             }
         })  
+        
     //store in reducer?
     } catch(error) {
         console.log('updateMeal SAGA function failed', error)
