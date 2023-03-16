@@ -53,27 +53,26 @@ app.use('/api/partyNames', partyNamesRouter);
 // 30 15 * * *  every day at 3:30 
 cron.schedule('30 15 * * *', function () {
   console.log('running a task every minute');
-  const today = dayjs().format('YYYY-MM-DD')
+  const today = dayjs().format('YYYY-MM-DD')  // format todays date
   const sqlQuery = `
   SELECT * FROM "events"
   `
-  pool.query(sqlQuery)
+  pool.query(sqlQuery)  // select all events in the database
     .then((dbRes) => {
       const eventArray = dbRes.rows
       console.log(eventArray)
-      for (let i = 0; i < eventArray.length; i++) {
-        const dateToCheck = new Date(eventArray[i].event_deadline).toLocaleDateString('en-CA')
+      for (let i = 0; i < eventArray.length; i++) {   // looping through all the events in the database
+        const dateToCheck = new Date(eventArray[i].event_deadline).toLocaleDateString('en-CA')  // formats the deadline in each event. 
         let date1 = new Date(dateToCheck);
         let date2 = new Date(today);
         let Difference_In_Time = date2.getTime() - date1.getTime();
-        let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-        console.log(Difference_In_Days)
+        let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); // find the difference in days, between today and the event deadline
       
-        if (Difference_In_Days === -30) {
+        if (Difference_In_Days === -30) {  // if 30 days away
           getGuestsFromEvent(eventArray[i].id, 30) // array of objects
           
         }
-        if (Difference_In_Days === -7) {
+        if (Difference_In_Days === -7) {  // if 7 days away
           getGuestsFromEvent(eventArray[i].id, 7) // array of objects
         
         }
@@ -96,11 +95,11 @@ function getGuestsFromEvent(eventId, daysAway) {
   GROUP BY guests.id;
   `
   let sqlValue = [eventId];
-  pool.query(sqlQuery, sqlValue)
+  pool.query(sqlQuery, sqlValue) // Selects all the guests by event id so one event
     .then((dbRes) => {
       const guestToSendRemindersTo = dbRes.rows
       for (let i = 0; i < guestToSendRemindersTo.length; i++) {
-        if (guestToSendRemindersTo[i].guest_recieve_reminders === true) {
+        if (guestToSendRemindersTo[i].guest_recieve_reminders === true) { // if the guest wants reminders then send them
           const msg = {
             to: `${guestToSendRemindersTo[i].guest_email_address}`, // recipient 
             from: 'jeremyhanson506@outlook.com', // Change to your verified sender
