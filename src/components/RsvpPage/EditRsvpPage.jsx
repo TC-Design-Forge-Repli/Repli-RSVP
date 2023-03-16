@@ -8,20 +8,21 @@ import Button from '@mui/material/Button';
 function EditRsvpPage() {
 
     const partyGuests = useSelector(store => store.partyGuests);
-    const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
+    const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
     const params = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
   
     useEffect(() => {
         const party_id = params.id;
+        console.log('params.id', params.id)
         dispatch({
           type: 'SAGA/FETCH_PARTY_GUESTS',
           payload: params.id
         })
         dispatch({
           type: 'STORE_PARTY_ID',
-          payload: {party_id: params.id}
+          payload: params.id
         })
       }, [params.id])
 
@@ -50,7 +51,7 @@ function EditRsvpPage() {
                     marginTop:"35px",
                     marginLeft:"20px"
                   }}
-                onClick={() => history.push(`/success/${partyGuests[0].party_id}`)}
+                onClick={() => history.push(`/success/${storePartyId.party_id}`)}
             >
                 Back
             </Button>
@@ -65,7 +66,7 @@ function EditRsvpPage() {
                     marginTop: '35px',
                     marginLeft: '20px',
                   }}
-                onClick={() => history.push(`/editReminders/${partyGuests[0].party_id}`)}
+                onClick={() => history.push(`/editReminders/${storePartyId.party_id}`)}
             >
                 Next
             </Button>

@@ -148,7 +148,7 @@ function EditRemindersPage() {
                         border:"2px solid #4330DA", 
                         marginTop:"25px",
                         marginLeft:"20px"}}
-                onClick={ history.push(`/rsvp/${storePartyId[0]}`)}>Back
+                onClick={ history.push(`/editRsvp/${storePartyId.party_id}`)}>Back
             </Button>  
 
 

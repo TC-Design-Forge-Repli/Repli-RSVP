@@ -134,7 +134,6 @@ function RemindersPage() {
        
         <Button 
           className="backToRsvpPage"
-          type="back"
           variant="outlined" 
           style={{
             textTransform: 'none',
@@ -149,8 +148,7 @@ function RemindersPage() {
 
     
         <Button 
-          className="backToEventCodePage"
-          type="back"
+          className="sendToSuccessPage"
           variant="contained" 
           style={{
             textTransform: 'none',

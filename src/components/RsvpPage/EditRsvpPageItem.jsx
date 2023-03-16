@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import './RsvpAndEditRsvp.css';
 //mui imports
+import Grid from '@mui/material/Grid';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
@@ -72,8 +74,10 @@ function EditRsvpPageItem({partyGuest}) {
 
     return (
         <>
+        {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }}> */}
         <h4>{partyGuest.guest_name}</h4>
-        {/* <h4>{partyGuest.guest_name}</h4> */}
+       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }}>
+        
         {checked ?
         <>
             {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
@@ -85,6 +89,7 @@ function EditRsvpPageItem({partyGuest}) {
                         className={classes.switch}
                         checked={true}
                         onChange={() => setChecked(false)}
+                        style={{marginLeft: '10px'}}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
                 />
@@ -92,7 +97,7 @@ function EditRsvpPageItem({partyGuest}) {
             </form>
 
             <form>
-                <FormControl sx={{ m: 1, minWidth: 95 }}>
+                <FormControl sx={{ m: 1, minWidth: 85 }}>
                     <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
                     <Select
                     labelId="demo-simple-select-standard-label"
@@ -129,7 +134,7 @@ function EditRsvpPageItem({partyGuest}) {
             </form>
         
             }
-              
+            </Grid>
         </>
     )
 }
