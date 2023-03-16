@@ -121,7 +121,12 @@ function EventCodePage() {
 
           <Button
             className="eventCodeSubmitButton"
-            style={{backgroundColor:"#4330DA", marginLeft:"50px", marginRight:"50px"}}
+            style={{
+              textTransform: 'none',
+              backgroundColor:"#4330DA", 
+              marginLeft:"50px", 
+              marginRight:"50px"
+            }}
             variant="contained"
             onClick={enterEventCode}>Enter
           </Button>

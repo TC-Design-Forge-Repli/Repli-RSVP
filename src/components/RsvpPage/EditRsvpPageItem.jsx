@@ -8,7 +8,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import makeStyles from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 function EditRsvpPageItem({partyGuest}) {
     
@@ -18,6 +18,25 @@ function EditRsvpPageItem({partyGuest}) {
 
 
     const dispatch = useDispatch();
+
+    const useStyles = makeStyles({
+        switch: {
+          // '& .MuiSwitch-thumb': {
+          //   backgroundColor: "#4330DA",
+          // },
+          "& .Mui-checked": {
+            color: "#4330DA"
+            // transform: "translateX(25px) !important"
+          },
+          "& .MuiSwitch-track": {
+            backgroundColor: "#4330DA !important"
+          }
+        },
+        checked: {},
+        track: {},
+      });
+
+    const classes= useStyles();
 
     useEffect(() => {
         dispatch({
@@ -63,6 +82,7 @@ function EditRsvpPageItem({partyGuest}) {
                 <FormControlLabel 
                     control={
                     <Switch
+                        className={classes.switch}
                         checked={true}
                         onChange={() => setChecked(false)}
                     />} 
@@ -78,7 +98,7 @@ function EditRsvpPageItem({partyGuest}) {
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
                     required
-                    value={mealChoice || ''}
+                    value={mealChoice}
                     onChange={() => setMealChoice(event.target.value)}
                     >
                     {mealOptions.map(mealOption => {
@@ -99,6 +119,7 @@ function EditRsvpPageItem({partyGuest}) {
                 <FormControlLabel 
                     control={
                     <Switch
+                        className={classes.switch}
                         checked={false}
                         onChange={() => setChecked(true)}
                     />} 
