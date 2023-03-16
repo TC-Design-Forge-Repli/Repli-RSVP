@@ -1,8 +1,9 @@
 import React, { useEffect, } from 'react';
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import DashboardItems from './DashboardItems';
+import Button from '@material-ui/core/Button';
 
 
 function Dashboard() {
@@ -19,37 +20,32 @@ function Dashboard() {
     })
   }, [deleted])
 
-  const handleManageClick = () => {
-    history.push('/manageEvent');
-  }
-  const test = () =>{
-    console.log(events)
+  const createEvent = () => {
+
   }
 
   return (
     <div className="container">
       {
-      events && events.map(event => {
-        return <DashboardItems key={event.id} event={event}/>
-      })
+        events && events.map(event => {
+          return <DashboardItems key={event.id} event={event} />
+        })
       }
+      <Button
+        variant="contained"
+        style={{
+          color: "white",
+          backgroundColor: "#4330DA",
+          fontFamily: "Montserrat",
+          margin: "10px",
+          left: "250px",
+        }}
+        onClick={createEvent}
+      >
+        +
+      </Button>
     </div>
   );
 }
 
-{/* <div key={event.event_id}>
-          <h2>{event.event_name}</h2>
-          <p>{event.event_date}</p>
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: "#4330DA",
-              fontFamily: "Montserrat",
-              margin: "10px"
-            }}
-            onClick={handleManageClick}
-          >
-            Manage 
-          </Button>
-        </div> */}
 export default Dashboard;
