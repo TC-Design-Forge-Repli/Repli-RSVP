@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -8,11 +8,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import IconButton from "@mui/material/IconButton";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import Button from '@mui/material/Button';
 import { useState } from 'react';
 import Swal from 'sweetalert2'
 import { PieChart } from 'react-minimal-pie-chart';
+import './ManageGuests.css';
 
 function ManageGuestsPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
   const partyNames = useSelector((store) => store.partyNames);
@@ -34,13 +37,15 @@ function ManageGuestsPage() {
       payload: 'reset'
     })
   }, [deleted]);
+
   const deleteGuest = (guestId) => {
     dispatch({
       type: 'SAGA/DELETE_ONE_GUEST',
       payload: guestId
     })
   }
-  const deleteParty = (partyId, partyName) =>{
+
+  const deleteParty = (partyId, partyName) => {
     Swal.fire({
       title: `Are you sure you want to Delete ${partyName}?`,
       showDenyButton: true,
@@ -65,7 +70,6 @@ function ManageGuestsPage() {
       }
     })
   }
-
 
   const getResponseCount = () => {
     let yes = 0;
@@ -99,57 +103,88 @@ function ManageGuestsPage() {
     ];
   };
 
+  const goToManageEvent = () => {
+    const event_id = params.id;
+    history.push(`/manageEvent/:${event_id}`);
+  }
+
   console.log('partyNames:', partyNames);
   console.log('eventPressed:', eventPressed);
   console.log('these are partyGuests', partyGuests);
-  
 
+  // const guestResponseCount = () => {
+  //   for (let party of partyNames) {
+  //     console.log('party:', party);
+
+  //     for (let )
+  //   }
+  // }
+  // guestResponseCount();
+  // if (guest.party_id === party.id && guest.response === true || false) {
+  //   responseCount ++;
+  // }
 
   return (
     <section>
+      <h3>Manage Guest List</h3>
       {partyNames.map((party) => {
         return (
-          <Accordion key={party.id}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>{party.name}</Typography>
-              <IconButton color="error" onClick={() => deleteParty(party.id, party.name)}>
-                <DeleteForeverIcon />
-              </IconButton>
-              
-              
-            </AccordionSummary>
-            {partyGuests.map((guest) => {
-              if (guest.party_id === party.id) {
-                return (
-                  <AccordionDetails key={guest.id}>
-                    <Typography>
-                      {guest.name}
+          <div className="partyAccordian">
+            <IconButton color="error" onClick={() => deleteParty(party.id, party.name)}>
+              <DeleteForeverIcon />
+            </IconButton>
+            <Accordion key={party.id}>
+
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography sx={{ margin: '10px' }}>{party.name}</Typography>
+                <Typography sx={{ margin: '10px' }}>{'X/X Responses'}</Typography>
+
+              </AccordionSummary>
+              {partyGuests.map((guest) => {
+                if (guest.party_id === party.id) {
+                  return (
+                    <AccordionDetails sx={{ display: 'flex' }} key={guest.id}>
                       <IconButton color="error" onClick={() => deleteGuest(guest.id)}>
                         <DeleteForeverIcon />
                       </IconButton>
-                    </Typography>
-                  </AccordionDetails>
-                );
-              }
-            })}
-          </Accordion>
+                      <Typography>
+                        {guest.name}
+                      </Typography>
+                    </AccordionDetails>
+                  );
+                }
+              })}
+            </Accordion>
+          </div>
         );
       })}
-      <br/>
-      <br/>
+
+      <Button
+        variant="outlined"
+        onClick={goToManageEvent}
+        style={{
+          color: "#4330DA",
+          fontFamily: "Montserrat",
+          margin: "10px",
+          borderColor: "#4330DA"
+        }}
+      >
+        Back
+      </Button>
+
       {partyGuests.map((guest) => guest.response !== null) && (
         <div style={{ width: "400px", height: "300px" }}>
-             <PieChart
-                data={getResponseCount()}
-                label={({ dataEntry }) => `${dataEntry.title}: ${dataEntry.value}`}
-                labelStyle={{ fontSize: '4px', fontFamily: 'sans-serif' }}
-                labelPosition={65}
-                radius={40}
-              />
+          <PieChart
+            data={getResponseCount()}
+            label={({ dataEntry }) => `${dataEntry.title}: ${dataEntry.value}`}
+            labelStyle={{ fontSize: '4px', fontFamily: 'sans-serif' }}
+            labelPosition={65}
+            radius={40}
+          />
         </div>
       )}
     </section>
