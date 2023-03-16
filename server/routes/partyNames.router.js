@@ -12,6 +12,7 @@ router.get('/:id', (req, res) => {
       `
     SELECT 
 "guests".id AS guest_id,
+"guests"."name" AS guest_name,
 "guests".response AS guest_response,
 "guests".party_id AS id,
 "guests".meal_id AS meal_id,
@@ -39,20 +40,13 @@ FROM "guests"
             }
             for (let x = 0; x < dbRes.rows.length; x++) {
                let guestObject = {}
-               if (i != x) {
                   if (dbRes.rows[i].id === dbRes.rows[x].id) {
                      guestObject.guest_id = dbRes.rows[x].guest_id
+                     guestObject.guest_name = dbRes.rows[x].guest_name
                      guestObject.guest_response = dbRes.rows[x].guest_response
                      guestObject.meal_id = dbRes.rows[x].meal_id
                      partyObject.guests.push(guestObject)
                   }
-               }
-               if (x === dbRes.rows.length - 1) {
-                  guestObject.guest_id = dbRes.rows[x].guest_id
-                  guestObject.guest_response = dbRes.rows[x].guest_response
-                  guestObject.meal_id = dbRes.rows[x].meal_id
-                  partyObject.guests.push(guestObject)
-               }
             }
             newArray.push(partyObject);
          }
@@ -77,7 +71,7 @@ FROM "guests"
          for (i in uniqueObject) {
             uniqueArray.push(uniqueObject[i]);
          }
-         console.log('@@@@@@@@@@@@', uniqueArray[2].guests)
+         console.log('@@@@@@@@@@@@', uniqueArray)
          res.send(uniqueArray)
       })
       .catch(dbErr => {
