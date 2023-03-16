@@ -12,6 +12,7 @@ import Select from '@mui/material/Select';
 function EditRsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(partyGuest.guest_response);
+    const [mealChoice, setMealChoice] = useState(partyGuest.meal_id);
     const mealOptions = useSelector(store => store.meals);
 
     const dispatch = useDispatch();
@@ -43,7 +44,7 @@ function EditRsvpPageItem({partyGuest}) {
                 guest_id: partyGuest.guest_id,
                 event_id: partyGuest.event_id,
                 response: true, 
-                meal_id: event.target.value
+                meal_id: mealChoice
             }
         })
     }
@@ -75,8 +76,8 @@ function EditRsvpPageItem({partyGuest}) {
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
                     required
-                    value={partyGuest.meal_id || ''}
-                    onChange={updateMealChoice}
+                    value={mealChoice || ''}
+                    onChange={() => setMealChoice(event.target.value)}
                     >
                     {mealOptions.map(mealOption => {
                         return (
