@@ -5,20 +5,12 @@ import {useSelector} from 'react-redux';
 // MUI Imports
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import styled from "styled-components";
-import { Grid } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-
-
 import { makeStyles, Switch } from '@material-ui/core';
 
-
-// import { SwitchBase } from '@material-ui/core/SwitchBase';
 
 function RemindersPage() {
  
@@ -42,11 +34,6 @@ function RemindersPage() {
     checked: {},
     track: {},
   });
-
- 
-  
-  
-  const [checked, setChecked] = useState(false);
   
   
   const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
@@ -76,7 +63,6 @@ function RemindersPage() {
       email:email,
       phoneNumber:phoneNumber,
       receiveReminders:receiveReminders,
-      // receiveReminders:event.target.checked,
       party_id:storePartyId.party_id
     }
     console.log('These are the guests communication options', reminders)
@@ -146,38 +132,6 @@ function RemindersPage() {
           />
 
        
-{/* Original Code */}
-       
-
-{/* ChatGPT */}
-{/* style={{
-              '& .MuiSwitchThumb': {
-                backgroundColor: "#4330DA",
-              },
-              '& .MuiSwitchTrack': {
-                backgroundColor: "#4330DA",
-              },
-              '& .MuiSwitchThumb.MuiChecked': {
-                backgroundColor: "#4330DA",
-              },
-              '& .MuiSwitchTrack.MuiChecked': {
-                backgroundColor: "#4330DA",
-              },
-            }} */}
-
-            
-
-
-
-
-
-
-
-
-
-
-
-     
         <Button 
           className="backToEventCodePage"
           type="back"
@@ -200,7 +154,6 @@ function RemindersPage() {
                   marginLeft:"20px"}}
           onClick={handleRemindersSubmission}>Submit
         </Button>
-
    </>
   );
 }
@@ -208,33 +161,3 @@ function RemindersPage() {
 
 export default RemindersPage;
 
-//Works
-{/* <FormControlLabel
-            control={
-              <Switch
-                checked={receiveReminders}
-                onChange={(event) => setReceiveReminders(event.target.checked)}
-              />}
-              label="I would like to get receive updates and reminders"
-          
-          /> */}
-
-{/* Original Toggle Code */}
-        {/* <FormGroup>
-          <FormControlLabel 
-              control={<Switch checked={receiveReminders}  onChange={()=> setReceiveReminders(!receiveReminders)} />}
-              label="I would like to receive event updates and reminders."
-          />
-        </FormGroup>
- */}
-
-
-
-   {/* Original checkbox code */}
-   {/* <FormControlLabel 
-          control={<Switch checked={receiveReminders}   onChange={()=> setReceiveReminders(!receiveReminders)}}
-          // control={< Checkbox style={{color:"#4330DA"}}/>} 
-          label="I would like to receive event updates and reminders."
-          // checked={receiveReminders}
-          // onChange={()=> setReceiveReminders(!receiveReminders)}
-        /> */}
