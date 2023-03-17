@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+//MUI imports
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useHistory } from "react-router-dom";
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 function addGuestsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const [newPartyInput, setNewPartyInput] = useState([]);
+  const [activeStep, setActiveStep] = useState(1);
+
+  const steps = [
+    { label: '' },
+    { label: '' },
+    { label: '' },
+  ];
 
   // This function takes an argument called partyIndex, which is used to determine which party's guest list should be updated.
   // The function uses the setNewPartyInput function (which was created by the useState hook earlier) to update the newPartyInput state value.
@@ -103,6 +115,14 @@ function addGuestsPage() {
   // label="Required"
   return (
     <>
+      <Stepper activeStep={activeStep}>
+        {steps.map((step, index) => (
+          <Step key={index}>
+            <StepLabel>{step.label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+
       <h2>Add Guests</h2>
       <br />
       <h4>How many guests?</h4>
@@ -181,37 +201,38 @@ function addGuestsPage() {
 
         <br />
         <br />
-     
       </form>
 
       <Button
-          className="backButton"
-          variant="outlined"
-          style={{
-            textTransform: 'none',
-            color:"#4330DA",
-            fontFamily: 'Montserrat', 
-            border:"1.5px solid #4330DA", 
-            marginTop:"35px",
-            marginLeft:"10px"
-          }}
-          onClick={backButton}>
-          Back
-        </Button>
-        <Button
-          className="backButton"
-          variant="contained"
-          style={{
-            textTransform: 'none',
-            backgroundColor: '#4330DA',
-            fontFamily: 'Montserrat',
-            color: 'white',
-            marginTop: '35px',
-            marginLeft: '20px',
-          }}
-          onClick={addNewParty}>
-          Next
-        </Button>
+        className="backButton"
+        variant="outlined"
+        style={{
+          textTransform: "none",
+          color: "#4330DA",
+          fontFamily: "Montserrat",
+          border: "1.5px solid #4330DA",
+          marginTop: "35px",
+          marginLeft: "10px",
+        }}
+        onClick={backButton}
+      >
+        Back
+      </Button>
+      <Button
+        className="backButton"
+        variant="contained"
+        style={{
+          textTransform: "none",
+          backgroundColor: "#4330DA",
+          fontFamily: "Montserrat",
+          color: "white",
+          marginTop: "35px",
+          marginLeft: "20px",
+        }}
+        onClick={addNewParty}
+      >
+        Next
+      </Button>
     </>
   );
 }
