@@ -60,7 +60,7 @@ function EditRsvpPageItem({partyGuest}) {
     }
 
     const updateMealChoice = (event) => {
-        console.log('meal choice:', event.target.value)
+        console.log('meal choice:',)
         dispatch({
             type: 'SAGA/UPDATE_MEAL',
             payload: {
@@ -74,9 +74,9 @@ function EditRsvpPageItem({partyGuest}) {
 
     return (
         <>
-        {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }}> */}
-        <h4>{partyGuest.guest_name}</h4>
-       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }}>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
+        <h4 style={{marginRight: '5px' }}>{partyGuest.guest_name}</h4>
+        {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2 }} style={{marginLeft: '15px'}}> */}
         
         {checked ?
         <>
@@ -84,12 +84,13 @@ function EditRsvpPageItem({partyGuest}) {
             <form onChange={updateResponse}>
                 <FormGroup>
                 <FormControlLabel 
+
+                    style={{marginTop: '13px'}}
                     control={
                     <Switch
                         className={classes.switch}
                         checked={true}
                         onChange={() => setChecked(false)}
-                        style={{marginLeft: '10px'}}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
                 />
@@ -97,14 +98,14 @@ function EditRsvpPageItem({partyGuest}) {
             </form>
 
             <form>
-                <FormControl sx={{ m: 1, minWidth: 85 }}>
+                <FormControl sx={{ m: 1, minWidth: 75 }}>
                     <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
                     <Select
                     labelId="demo-simple-select-standard-label"
                     id="demo-simple-select-standard"
                     required
-                    value={mealChoice}
-                    onChange={() => setMealChoice(event.target.value)}
+                    value={partyGuest.meal_id}
+                    onChange={() => {updateMealChoice(setMealChoice(event.target.value))}}
                     >
                     {mealOptions.map(mealOption => {
                         return (
@@ -122,6 +123,7 @@ function EditRsvpPageItem({partyGuest}) {
          <form onChange={updateResponse}>
                 <FormGroup>
                 <FormControlLabel 
+                    style={{marginTop: '13px'}}
                     control={
                     <Switch
                         className={classes.switch}

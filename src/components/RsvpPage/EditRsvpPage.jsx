@@ -62,7 +62,7 @@ function EditRsvpPage() {
 
             <div>
             <Button
-                className="backToSelectPartyButton"
+                className="backToSuccessPage"
                 variant="outlined"
                 style={{
                     textTransform: 'none',
@@ -77,7 +77,7 @@ function EditRsvpPage() {
                 Back
             </Button>
             <Button
-                className="RsvpPageButton"
+                className="sendToEditReminders"
                 variant="contained"
                 style={{
                     textTransform: 'none',
@@ -87,7 +87,10 @@ function EditRsvpPage() {
                     marginTop: '35px',
                     marginLeft: '20px',
                   }}
-                onClick={() => history.push(`/editReminders/${storePartyId.party_id}`)}
+                onClick={() => history.push(`/editReminders/${storePartyId.party_id.party_id}`)}
+                // onClick={() => history.push(`/editReminders/1`)}
+                // onClick={() => console.log('storePartyId.party_id:', storePartyId.party_id) }
+                // onClick={() => history.push(`/reminders/${storePartyId.party_id}`)}
             >
                 Next
             </Button>
