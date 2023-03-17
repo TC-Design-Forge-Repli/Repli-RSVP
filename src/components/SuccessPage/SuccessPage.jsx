@@ -92,13 +92,12 @@ function SuccessPage() {
 
       <Button
           className="backEditResponsesPage"
-          type="back"
           variant="outlined" 
           style={{
             textTransform: 'none',
             color:"#4330DA",
             fontFamily: 'Montserrat', 
-            border:"solid #4330DA", 
+            border:"1.5px solid #4330DA", 
             marginTop:"35px",
             marginLeft:"20px"
           }}
@@ -107,7 +106,7 @@ function SuccessPage() {
         Edit My RSVP
       </Button>
       <Button
-          type="back"
+          className="sendToAboutPage"
           style={{
             textTransform: 'none',
             backgroundColor: '#4330DA',

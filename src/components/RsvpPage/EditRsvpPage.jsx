@@ -29,13 +29,14 @@ function EditRsvpPage() {
   
     useEffect(() => {
         const party_id = params.id;
+        console.log('params.id', params.id)
         dispatch({
           type: 'SAGA/FETCH_PARTY_GUESTS',
           payload: params.id
         })
         dispatch({
           type: 'STORE_PARTY_ID',
-          payload: {party_id: params.id}
+          payload: params.id
         })
       }, [params.id])
 
@@ -61,6 +62,7 @@ function EditRsvpPage() {
 
             <div>
             <Button
+
                 className="backToSelectPartyButton"
                 variant="outlined"
                 onClick={() => history.push(`/success/${partyGuests[0].party_id}`)}
@@ -99,6 +101,39 @@ function EditRsvpPage() {
                 // sends me here: http://localhost:3000/#/editRsvp/editReminders/[object%20Object]
 
             >Next
+
+                className="backToSuccessPage"
+                variant="outlined"
+                style={{
+                    textTransform: 'none',
+                    color:"#4330DA",
+                    fontFamily: 'Montserrat', 
+                    border:"1.5px solid #4330DA", 
+                    marginTop:"35px",
+                    marginLeft:"20px"
+                  }}
+                onClick={() => history.push(`/success/${storePartyId.party_id}`)}
+            >
+                Back
+            </Button>
+            <Button
+                className="sendToEditReminders"
+                variant="contained"
+                style={{
+                    textTransform: 'none',
+                    backgroundColor: '#4330DA',
+                    fontFamily: 'Montserrat',
+                    color: 'white',
+                    marginTop: '35px',
+                    marginLeft: '20px',
+                  }}
+                onClick={() => history.push(`/editReminders/${storePartyId.party_id}`)}
+                // onClick={() => history.push(`/editReminders/1`)}
+                // onClick={() => console.log('storePartyId.party_id:', storePartyId.party_id) }
+                // onClick={() => history.push(`/reminders/${storePartyId.party_id}`)}
+            >
+                Next
+
             </Button>
             </div>
         </>

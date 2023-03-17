@@ -101,18 +101,22 @@ function SelectPartyPage() {
 
 
     {/* Back Button - will send user back to the Event Code page */}
-      <Button 
-        className="backToEventCodePage"
-        type="back"
-        variant="outlined" 
-        style={{color:"#4330DA", 
-              border:"2px solid #4330DA", 
-              marginTop:"25px",
-              marginLeft:"20px"}}
+    <Button
+      className="backToEventCode"
+      variant="outlined"
+      style={{
+        textTransform: 'none',
+        color:"#4330DA",
+        fontFamily: 'Montserrat', 
+        border:"1.5px solid #4330DA", 
+        marginTop:"35px",
+        marginLeft:"20px"
+        }}
         onClick={() => history.push('/eventCode')}
-        >
-          Back
-      </Button>
+    >
+      Back
+    </Button>
+
     </>
   );
 }

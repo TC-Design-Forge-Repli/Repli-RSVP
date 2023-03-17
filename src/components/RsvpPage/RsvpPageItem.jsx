@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //mui imports
+import Grid from '@mui/material/Grid';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
@@ -8,6 +9,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { makeStyles } from '@material-ui/core';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 
 function RsvpPageItem({partyGuest}) {
@@ -18,6 +23,27 @@ function RsvpPageItem({partyGuest}) {
     const mealOptions = useSelector(store => store.meals)
 
     const dispatch = useDispatch();
+    
+    
+    const useStyles = makeStyles({
+        switch: {
+          // '& .MuiSwitch-thumb': {
+          //   backgroundColor: "#4330DA",
+          // },
+          "& .Mui-checked": {
+            color: "#4330DA"
+            // transform: "translateX(25px) !important"
+          },
+          "& .MuiSwitch-track": {
+            backgroundColor: "#4330DA !important"
+          }
+        },
+        checked: {},
+        track: {},
+      });
+
+    const classes= useStyles();
+   
 
 
     useEffect(() => {
@@ -52,6 +78,7 @@ function RsvpPageItem({partyGuest}) {
     }
   
     return (
+
         <>
             <h4
             style={{ marginLeft:"20px",
@@ -122,6 +149,73 @@ function RsvpPageItem({partyGuest}) {
             )}
         </>
     )
+
+      <>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
+        <h4>{partyGuest.guest_name}</h4>
+
+            {checked ? (
+            // show toggle(switch) and meal drop down if guest is accepting the invitation
+              <>
+                <form onChange={updateResponse}>
+                  <FormGroup>
+                    <FormControlLabel
+                      style={{marginTop: '13px', marginLeft: '10px'}}
+                      control={
+                        <Switch
+                            className={classes.switch}
+                          checked={true || ""}
+                          onChange={() => setChecked(false)}
+                        />
+                    
+                      }
+                  label={`${
+                    checked ? "Politely Accept" : "Regretfully Decline"
+                  }`}
+                    />
+                  </FormGroup>
+                </form>
+
+            <form>
+              <FormControl sx={{ m: 1, minWidth: 80 }}>
+                <InputLabel id="demo-simple-select-helper-label">
+                  Meals
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  required
+                  value={partyGuest.meal_id || ""}
+                  onChange={updateMealChoice}
+                >
+                  {mealOptions.map((mealOption) => {
+                    return (
+                      <MenuItem key={mealOption.id} value={mealOption.id}>
+                        {mealOption.meal_name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </form>
+          </>
+        ) : (
+          // only show toggle(switch) if they are currently declining the invitation
+          <form onChange={updateResponse}>
+            <FormGroup>
+              <FormControlLabel
+                style={{marginTop: '13px', marginLeft: '10px'}}
+                control={
+                  <Switch checked={false} onChange={() => setChecked(true)} />
+                }
+                label={`${checked ? "Politely Accept" : "Regretfully Decline"}`}
+              />
+            </FormGroup>
+          </form>
+        )}
+        </Grid>
+      </>
+    );
 }
 
 

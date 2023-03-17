@@ -69,11 +69,15 @@ import { makeStyles } from '@mui/styles';
       <div>
       <Button
         className="backToSelectPartyButton"
-        style={{color:"#4330DA",
-                border: "2px solid #4330DA",
-                marginTop:"25px",
-                marginLeft:"20px"}}
-                variant="outlined"
+        variant="outlined"
+        style={{
+          textTransform: 'none',
+          color:"#4330DA",
+          fontFamily: 'Montserrat', 
+          border:"1.5px solid #4330DA", 
+          marginTop:"35px",
+          marginLeft:"20px"
+        }}
         onClick={() => history.push(`/selectParty/${storedEventCode}`)}
         style={{
           textTransform:"none", 
@@ -85,14 +89,15 @@ import { makeStyles } from '@mui/styles';
       
       <Button
         className="rsvpSubmitButton"
+        variant="contained"
         style={{
-          backgroundColor: "#4330DA",
-          marginTop: "25px",
-          marginLeft: "30px",
-          marginRight: "20px",
+          textTransform: 'none',
+          backgroundColor: '#4330DA',
+          fontFamily: 'Montserrat',
+          color: 'white',
+          marginTop: '35px',
+          marginLeft: '20px',
         }}
-          variant="contained"
-        type="submit"
         onClick={() => history.push(`/reminders/${partyGuests[0].party_id}`)}
         style={{
           backgroundColor:"#4330DA", 
