@@ -181,28 +181,37 @@ function addGuestsPage() {
 
         <br />
         <br />
-        <Button
+     
+      </form>
+
+      <Button
           className="backButton"
-          type="submit"
           variant="outlined"
-          color="secondary"
-          size="large"
-          onClick={backButton}
-          sx={{ color: "#4330DA", margin: "15px", marginRight: "50px" }}
-        >
+          style={{
+            textTransform: 'none',
+            color:"#4330DA",
+            fontFamily: 'Montserrat', 
+            border:"1.5px solid #4330DA", 
+            marginTop:"35px",
+            marginLeft:"10px"
+          }}
+          onClick={backButton}>
           Back
         </Button>
         <Button
           className="backButton"
-          type="submit"
-          variant="outlined"
-          color="primary"
-          size="large"
-          sx={{ backgroundColor: "#4330DA", margin: "15px" }}
-        >
+          variant="contained"
+          style={{
+            textTransform: 'none',
+            backgroundColor: '#4330DA',
+            fontFamily: 'Montserrat',
+            color: 'white',
+            marginTop: '35px',
+            marginLeft: '20px',
+          }}
+          onClick={addNewParty}>
           Next
         </Button>
-      </form>
     </>
   );
 }

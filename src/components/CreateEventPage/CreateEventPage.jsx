@@ -104,15 +104,32 @@ function CreateEventPage() {
       value={rsvpCloseDate}
       onChange={(event) => setRsvpCloseDate(event.target.value)}
       />
+      <br/>
       <Button 
       className='backButton' 
       variant="outlined"
+      style={{
+        textTransform: 'none',
+        color:"#4330DA",
+        fontFamily: 'Montserrat', 
+        border:"1.5px solid #4330DA", 
+        marginTop:"35px",
+        marginLeft:"10px"
+      }}
       onClick={backButton}
       >Back</Button>
       {
         (eventTitle != '' && eventCode != '' && date != '' && location != '' && rsvpCloseDate != '') ? <Button 
         className='nextButton' 
         variant="contained"
+        style={{
+          textTransform: 'none',
+          backgroundColor: '#4330DA',
+          fontFamily: 'Montserrat',
+          color: 'white',
+          marginTop: '35px',
+          marginLeft: '20px',
+        }}
         onClick={nextButton}
         >Next</Button>
         : <div></div>
