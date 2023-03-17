@@ -27,9 +27,9 @@ function RsvpPageItem({partyGuest}) {
     
     const useStyles = makeStyles({
         switch: {
-          // '& .MuiSwitch-thumb': {
-          //   backgroundColor: "#4330DA",
-          // },
+          '& .MuiSwitch-thumb': {
+            backgroundColor: "#4330DA",
+          },
           "& .Mui-checked": {
             color: "#4330DA"
             // transform: "translateX(25px) !important"
@@ -79,7 +79,7 @@ function RsvpPageItem({partyGuest}) {
   
     return (
 <>
-        <>
+         {/* <>
             <h4
             style={{ marginLeft:"20px",
             marginRight:"20px"}}
@@ -88,7 +88,7 @@ function RsvpPageItem({partyGuest}) {
 
         {checked ? (
           <>
-            {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
+            show toggle(switch) and meal drop down if guest is accepting the invitation
             <form onChange={updateResponse}>
               <FormGroup>
                 <FormControlLabel
@@ -128,11 +128,11 @@ function RsvpPageItem({partyGuest}) {
                     </Select>
                 </FormControl>
             </form>
-        </>
+        </> 
 
        ) : (
 
-        // only show toggle(switch) if they are currently declining the invitation
+        only show toggle(switch) if they are currently declining the invitation
          <form onChange={updateResponse}>
                 <FormGroup>
                 <FormControlLabel 
@@ -148,7 +148,7 @@ function RsvpPageItem({partyGuest}) {
         
             )}
         </>
-    
+     */}
 
       <>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
@@ -163,7 +163,7 @@ function RsvpPageItem({partyGuest}) {
                       style={{marginTop: '13px', marginLeft: '10px'}}
                       control={
                         <Switch
-                            className={classes.switch}
+                          className={classes.switch}
                           checked={true || ""}
                           onChange={() => setChecked(false)}
                         />
@@ -185,7 +185,8 @@ function RsvpPageItem({partyGuest}) {
                   labelId="demo-simple-select-standard-label"
                   id="demo-simple-select-standard"
                   required
-                  value={partyGuest.meal_id || ""}
+                //   value={partyGuest.meal_id || ""}
+                value={mealChoice}
                   onChange={updateMealChoice}
                 >
                   {mealOptions.map((mealOption) => {

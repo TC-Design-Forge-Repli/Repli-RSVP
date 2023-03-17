@@ -74,10 +74,10 @@ function EditRsvpPageItem({partyGuest}) {
     return (
         <>
 
-        <h4
+        {/* <h4
          style={{ marginLeft:"20px",
          marginRight:"20px"}}
-        >{partyGuest.guest_name}</h4>
+        >{partyGuest.guest_name}</h4> */}
         {/* <h4>{partyGuest.guest_name}</h4> */}
 
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
