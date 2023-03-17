@@ -87,8 +87,8 @@ function RemindersPage() {
     }) 
 
     history.push(`/success/${storePartyId.party_id}`) //sends guest to the Success Page
-  }//end handleCommunicationSubmission
-
+  //end handleCommunicationSubmission
+  }
 
   return (
     <>

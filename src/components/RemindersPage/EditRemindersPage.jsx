@@ -78,11 +78,11 @@ function EditRemindersPage() {
                 
             })   
             history.push(`/success/${storePartyId.party_id}`)
-
+          }
 
     return (
-        <>
-     
+        
+     <>
             <TextField
                 id="outlined-required"
                 label="email"
@@ -120,16 +120,18 @@ function EditRemindersPage() {
 
             <FormGroup>
                 <FormControlLabel 
-                    control={<Switch 
-                            className={classes.switch}
-                            checked={remindersToEdit.receive_reminders || false}  
-                            onChange={editReceiveReminders}/>}
-                            label="I would like to receive event updates and reminders."
+                    control={
+                    <Switch 
+                        className={classes.switch}
+                        checked={remindersToEdit.receive_reminders || false}  
+                        onChange={editReceiveReminders}
+                    />}
+                        label="I would like to receive event updates and reminders."
                 />
             </FormGroup>
 
 
-    {/* Back Button */}
+
             <Button
               className="backToEditRsvpPage"
               variant="outlined"
@@ -164,6 +166,6 @@ function EditRemindersPage() {
         </>
     )
 }
-}
+
 
 export default EditRemindersPage;
