@@ -33,5 +33,5 @@ CREATE TABLE "guests" (
 	"meal_id" INT REFERENCES "meal_options",
 	"phone_number" VARCHAR(20),
 	"email_address" VARCHAR(500),
-	"recieve_reminders" BOOLEAN DEFAULT FALSE
+	"receive_reminders" BOOLEAN DEFAULT FALSE
 );

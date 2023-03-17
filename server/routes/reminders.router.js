@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
     const remindersToEdit = req.params.id
 console.log(req.params.id)
+console.log('req.body', req.body)
 console.log('in reminders.router GET for: email/phone/reminders', req.params.id)
 
 

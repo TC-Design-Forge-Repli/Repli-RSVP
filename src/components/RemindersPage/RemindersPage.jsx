@@ -153,29 +153,40 @@ function RemindersPage() {
             label="I would like to receive updates and reminders"
           />
 
-       
-        <Button 
-          className="backToEventCodePage"
-          type="back"
-          variant="outlined" 
-          style={{color:"#4330DA", 
-                  border:"2px solid #4330DA", 
-                  marginTop:"25px",
-                  marginLeft:"20px"}}
-          onClick={() => history.push(`/rsvp/${storePartyId.party_id}`)}>Back
-        </Button>
 
-    
-        <Button 
-          className="backToEventCodePage"
-          type="back"
-          variant="outlined" 
-          style={{color:"#4330DA", 
-                  border:"2px solid #4330DA", 
-                  marginTop:"25px",
-                  marginLeft:"20px"}}
-          onClick={handleRemindersSubmission}>Submit
+
+        <Button
+          className="backToRsvpPage"
+          variant="outlined"
+          style={{
+            textTransform: 'none',
+            color:"#4330DA",
+            fontFamily: 'Montserrat', 
+            border:"1.5px solid #4330DA", 
+            marginTop:"35px",
+            marginLeft:"20px"
+          }}
+          onClick={() => history.push(`/rsvp/${storePartyId.party_id}`)}
+        >
+          Back
         </Button>
+      
+      <Button
+        className="sendToSuccessPage"
+        variant="contained"
+        style={{
+          textTransform: 'none',
+          backgroundColor: '#4330DA',
+          fontFamily: 'Montserrat',
+          color: 'white',
+          marginTop: '35px',
+          marginLeft: '20px',
+        }}
+        onClick={handleRemindersSubmission}
+      >
+        Submit
+      </Button>
+  
    </>
   );
 }

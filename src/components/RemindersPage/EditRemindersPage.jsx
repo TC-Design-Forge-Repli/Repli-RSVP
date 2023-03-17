@@ -50,12 +50,10 @@ function EditRemindersPage() {
             payload: party_id
         })
         dispatch({
-            type: 'STORE_PARTY_ID',
-            payload: params.id
-          })
+          type: 'STORE_PARTY_ID',
+          payload: params.id
+        })
     },[params.id])
-
-    console.log(remindersToEdit)
 
     const editReceiveReminders = (event) => {
             dispatch({
@@ -67,10 +65,6 @@ function EditRemindersPage() {
 
     const handleUpdateToRemindersPage = (event) => {
         event.preventDefault();
-
-        let partyId ={
-            party_id:storePartyId[0]
-        }
 
             dispatch({
                 type:'SAGA/UPDATE_REMINDERS_PAGE',
@@ -84,11 +78,7 @@ function EditRemindersPage() {
                 
             })   
             history.push(`/success/${storePartyId.party_id}`)
-    }
-    console.log('in handleUpdateToRemindersPage dispatch', handleUpdateToRemindersPage)
-
-  
-        
+    }  
 
     return (
         <>
@@ -140,28 +130,36 @@ function EditRemindersPage() {
 
 
     {/* Back Button */}
-            <Button 
-                className="backToEventCodePage"
-                type="back"
-                variant="outlined" 
-                style={{color:"#4330DA", 
-                        border:"2px solid #4330DA", 
-                        marginTop:"25px",
-                        marginLeft:"20px"}}
-                onClick={ history.push(`/rsvp/${storePartyId[0]}`)}>Back
+            <Button
+              className="backToEditRsvpPage"
+              variant="outlined"
+              style={{
+                textTransform: 'none',
+                color:"#4330DA",
+                fontFamily: 'Montserrat', 
+                border:"1.5px solid #4330DA", 
+                marginTop:"35px",
+                marginLeft:"20px"
+              }}
+              onClick={() => history.push(`/editRsvp/${storePartyId.party_id}`)}>
+              Back
             </Button>  
-
 
     {/* Submit Updates Button */}
             <Button 
-                className="backToEventCodePage"
-                type="back"
-                variant="outlined" 
-                style={{color:"#4330DA", 
-                        border:"2px solid #4330DA", 
-                        marginTop:"25px",
-                        marginLeft:"20px"}}
-                onClick={handleUpdateToRemindersPage}>Submit Updates
+              className="sendToSuccessPage"
+              variant="contained"
+              style={{
+                textTransform: 'none',
+                backgroundColor: '#4330DA',
+                fontFamily: 'Montserrat',
+                color: 'white',
+                marginTop: '35px',
+                marginLeft: '20px',
+              }}
+              onClick={handleUpdateToRemindersPage}
+            >
+              Submit Updates
             </Button>
         </>
     )
