@@ -18,6 +18,7 @@ function ManageGuestsPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
+  const event_id = params.id;
   const partyNames = useSelector((store) => store.partyNames);
   const eventPressed = useSelector((store) => store.eventPressed);
   const partyGuests = useSelector((store) => store.partyGuests);
@@ -30,13 +31,14 @@ function ManageGuestsPage() {
       payload: eventPressed[0] && eventPressed[0].event_code
     })
     dispatch({
-      type: 'SAGA/FETCH_ALL_GUESTS'
+      type: 'SAGA/FETCH_GUESTS_PER_PARTY',
+      payload: event_id
     })
     dispatch({
       type: 'DELETED',
       payload: 'reset'
     })
-  }, [deleted]);
+  }, [deleted, event_id]);
 
   const deleteGuest = (guestId) => {
     dispatch({
@@ -105,7 +107,7 @@ function ManageGuestsPage() {
 
   const goToManageEvent = () => {
     const event_id = params.id;
-    history.push(`/manageEvent/:${event_id}`);
+    history.push(`/manageEvent/${event_id}`);
   }
 
   console.log('partyNames:', partyNames);

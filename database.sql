@@ -5,7 +5,7 @@ CREATE TABLE "user" (
 );
 CREATE TABLE "events" (
 	"id" SERIAL PRIMARY KEY,
-	"event_host_id" INT REFERENCES "user",
+	"event_host_id" INT REFERENCES "user" ON DELETE CASCADE,
 	"event_name" VARCHAR(500) NOT NULL,
 	"event_deadline" DATE NOT NULL,
 	"event_location" VARCHAR(500) NOT NULL,

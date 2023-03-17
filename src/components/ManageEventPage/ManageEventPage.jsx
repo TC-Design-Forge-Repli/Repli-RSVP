@@ -52,6 +52,9 @@ function ManageEventPage() {
       type: 'SAGA/FETCH_MEALS',
       payload: event_id
     })
+    dispatch({
+      type: 'SAGA/FETCH_ALL_GUESTS'
+    })
   }, [event_id, deleted])
 
   const deleteMeal = (mealId, mealName) => {
