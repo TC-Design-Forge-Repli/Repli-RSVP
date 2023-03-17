@@ -103,7 +103,7 @@ function RsvpPageItem({partyGuest}) {
                 </form>
 
             <form>
-              <FormControl sx={{ m: 1, minWidth: 75 }}>
+              <FormControl sx={{ m: 1, minWidth: 80 }}>
                 <InputLabel id="demo-simple-select-helper-label">
                   Meals
                 </InputLabel>
