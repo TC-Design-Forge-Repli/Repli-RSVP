@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './RsvpAndEditRsvp.css';
 //mui imports
 import Grid from '@mui/material/Grid';
 import FormGroup from '@mui/material/FormGroup';

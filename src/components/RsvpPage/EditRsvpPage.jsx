@@ -87,7 +87,7 @@ function EditRsvpPage() {
                     marginTop: '35px',
                     marginLeft: '20px',
                   }}
-                onClick={() => history.push(`/editReminders/${storePartyId.party_id.party_id}`)}
+                onClick={() => history.push(`/editReminders/${storePartyId.party_id}`)}
                 // onClick={() => history.push(`/editReminders/1`)}
                 // onClick={() => console.log('storePartyId.party_id:', storePartyId.party_id) }
                 // onClick={() => history.push(`/reminders/${storePartyId.party_id}`)}
