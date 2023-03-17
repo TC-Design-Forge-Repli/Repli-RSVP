@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
+
+// MUI Imports
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
@@ -14,6 +20,13 @@ function AddMealsPage() {
   let eventDetails = useSelector((store) => store.eventDetails)
   let guests = useSelector((store) => store.partyReducer)
   const [inputFields, setInputFields] = useState([{ name: '', description: '' }]);
+  const [activeStep, setActiveStep] = useState(2);
+
+  const steps = [
+    { label: '' },
+    { label: '' },
+    { label: '' },
+  ];
   
 
   const handleFormChange = (index, event) => {
@@ -60,6 +73,15 @@ function AddMealsPage() {
   }
 
   return (
+  <>
+    <Stepper activeStep={activeStep}>
+    {steps.map((step, index) => (
+      <Step key={index}>
+        <StepLabel>{step.label}</StepLabel>
+      </Step>
+    ))}
+  </Stepper>
+
     <section>
       <h2>Add Meals</h2>
       <p id="mealsParagraph">How many meals?</p>
@@ -158,7 +180,9 @@ function AddMealsPage() {
         </Button>
       </div>
     </section>
+    </>
   );
+
 }
 
 

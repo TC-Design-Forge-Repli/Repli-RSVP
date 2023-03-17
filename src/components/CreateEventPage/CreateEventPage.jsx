@@ -6,6 +6,11 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
+// MUI Imports
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+
 
 function CreateEventPage() {
   
@@ -18,6 +23,13 @@ function CreateEventPage() {
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [rsvpCloseDate, setRsvpCloseDate] = useState('');
+  const [activeStep, setActiveStep] = useState(0);
+
+  const steps = [
+    { label: '' },
+    { label: '' },
+    { label: '' },
+  ];
   const backButton = () =>{
     history.push('/dashboard')
   }
@@ -63,6 +75,14 @@ function CreateEventPage() {
   }
   return (
     <div>
+          <Stepper activeStep={activeStep}>
+        {steps.map((step, index) => (
+          <Step key={index}>
+            <StepLabel>{step.label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <br/>
       <div>What is the event's name?</div>
       <TextField 
       required
