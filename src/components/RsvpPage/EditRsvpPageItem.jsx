@@ -52,7 +52,10 @@ function EditRsvpPageItem({partyGuest}) {
 
     return (
         <>
-        <h4>{partyGuest.guest_name}</h4>
+        <h4
+         style={{ marginLeft:"20px",
+         marginRight:"20px"}}
+        >{partyGuest.guest_name}</h4>
         {/* <h4>{partyGuest.guest_name}</h4> */}
         {checked ?
         <>
@@ -66,6 +69,10 @@ function EditRsvpPageItem({partyGuest}) {
                         onChange={() => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                    style={{textTransform:"none", 
+                    marginTop:"-20px",
+                    marginLeft:"20px",
+                    marginRight:"20px"}}
                 />
                 </FormGroup>
             </form>
@@ -75,6 +82,10 @@ function EditRsvpPageItem({partyGuest}) {
                     <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
                     <Select
                     labelId="demo-simple-select-standard-label"
+                    style={{textTransform:"none", 
+                    marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"}}
                     id="demo-simple-select-standard"
                     required
                     value={partyGuest.meal_id || ''}

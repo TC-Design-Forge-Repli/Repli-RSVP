@@ -85,7 +85,6 @@ function EditRemindersPage() {
             })   
             history.push(`/success/${storePartyId.party_id}`)
     }
-    console.log('in handleUpdateToRemindersPage dispatch', handleUpdateToRemindersPage)
 
   
         

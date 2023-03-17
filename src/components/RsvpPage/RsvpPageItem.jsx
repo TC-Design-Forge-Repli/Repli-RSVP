@@ -12,15 +12,18 @@ import Select from '@mui/material/Select';
 function RsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(true);
+    const [mealChoice, setMealChoice] = useState(partyGuest.meal_id)
+
     const mealOptions = useSelector(store => store.meals)
     const dispatch = useDispatch();
+
 
     useEffect(() => {
         dispatch({
             type: 'SAGA/FETCH_MEALS',
             payload: partyGuest.event_id
           })
-    }, [])
+    }, [partyGuest])
 
     const updateResponse = (event) => {
         dispatch({
@@ -35,6 +38,7 @@ function RsvpPageItem({partyGuest}) {
 
     const updateMealChoice = (event) => {
         // console.log('meal choice:', event.target.value)
+        setMealChoice(event.target.value)
         dispatch({
             type: 'SAGA/UPDATE_MEAL',
             payload: {
@@ -47,7 +51,11 @@ function RsvpPageItem({partyGuest}) {
 
     return (
         <>
-            <h4>{partyGuest.guest_name}</h4>
+            <h4
+            style={{ marginLeft:"20px",
+            marginRight:"20px"}}
+            
+            >{partyGuest.guest_name}</h4>
 
         {checked ?
         <>
@@ -61,6 +69,10 @@ function RsvpPageItem({partyGuest}) {
                         onChange={() => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                    style={{textTransform:"none", 
+                    marginTop:"-20px",
+                    marginLeft:"20px",
+                    marginRight:"20px"}}
                 />
                 </FormGroup>
             </form>
@@ -70,9 +82,13 @@ function RsvpPageItem({partyGuest}) {
                     <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
                     <Select
                     labelId="demo-simple-select-standard-label"
+                    style={{textTransform:"none", 
+                    marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"}}
                     id="demo-simple-select-standard"
                     required
-                    value={partyGuest.meal_id || ''}
+                    value={mealChoice}
                     onChange={updateMealChoice}
                     >
                     {mealOptions.map(mealOption => {
@@ -97,6 +113,7 @@ function RsvpPageItem({partyGuest}) {
                         onChange={() => setChecked(true)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                    
                 />
                 </FormGroup>
             </form>

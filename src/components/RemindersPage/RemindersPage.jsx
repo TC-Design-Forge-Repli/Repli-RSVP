@@ -79,7 +79,10 @@ function RemindersPage() {
   return (
     <>
 
-      <h4>What is the best way for us to communicate with you?</h4>
+      <h4
+        style={{ marginLeft:"20px",
+        marginRight:"20px"}}
+      >What is the best way for us to communicate with you?</h4>
      
         <TextField
           // required
@@ -93,14 +96,20 @@ function RemindersPage() {
               "& > fieldset":{borderColor:"#4330DA"}
             },
             "& label.Mui-focused":{color:"#4330DA"},
-            margin:"5px"
+            margin:"5px",
+            marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"
           }}
           // defaultValue="Email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
 
-        <h4>OR</h4>
+        <h4
+          style={{ marginLeft:"20px",
+          marginRight:"20px"}}
+        >OR</h4>
 
         <TextField
           // required
@@ -114,7 +123,10 @@ function RemindersPage() {
               "& > fieldset":{borderColor:"#4330DA"}
             },
             "& label.Mui-focused":{color:"#4330DA"},
-            margin:"5px"
+            margin:"5px",
+            marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"
           }}
           // defaultValue="Phone Number"
           value={phoneNumber}
@@ -129,6 +141,10 @@ function RemindersPage() {
               onChange={(event) => setReceiveReminders(event.target.checked)}
             />}
             label="I would like to receive updates and reminders"
+            style={{ 
+              marginLeft:"20px",
+              marginTop:"15px"
+        }}
           />
 
        
