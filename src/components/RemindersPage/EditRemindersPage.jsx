@@ -130,29 +130,36 @@ function EditRemindersPage() {
 
 
     {/* Back Button */}
-            <Button 
-                className="backToEventCodePage"
-                type="back"
-                variant="outlined" 
-                style={{
-                  color:"#4330DA", 
-                  border:"2px solid #4330DA", 
-                  marginTop:"25px",
-                  marginLeft:"20px"
-                }}
-                onClick={() => history.push(`/editRsvp/${storePartyId.party_id}`)}>Back
+            <Button
+              className="backToEditRsvpPage"
+              variant="outlined"
+              style={{
+                textTransform: 'none',
+                color:"#4330DA",
+                fontFamily: 'Montserrat', 
+                border:"1.5px solid #4330DA", 
+                marginTop:"35px",
+                marginLeft:"20px"
+              }}
+              onClick={() => history.push(`/editRsvp/${storePartyId.party_id}`)}>
+              Back
             </Button>  
 
     {/* Submit Updates Button */}
             <Button 
-                className="backToEventCodePage"
-                type="back"
-                variant="outlined" 
-                style={{color:"#4330DA", 
-                        border:"2px solid #4330DA", 
-                        marginTop:"25px",
-                        marginLeft:"20px"}}
-                onClick={handleUpdateToRemindersPage}>Submit Updates
+              className="sendToSuccessPage"
+              variant="contained"
+              style={{
+                textTransform: 'none',
+                backgroundColor: '#4330DA',
+                fontFamily: 'Montserrat',
+                color: 'white',
+                marginTop: '35px',
+                marginLeft: '20px',
+              }}
+              onClick={handleUpdateToRemindersPage}
+            >
+              Submit Updates
             </Button>
         </>
     )

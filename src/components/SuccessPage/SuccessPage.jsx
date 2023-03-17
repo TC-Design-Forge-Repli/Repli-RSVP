@@ -85,7 +85,6 @@ function SuccessPage() {
       </Table>
       <Button
           className="backEditResponsesPage"
-          type="back"
           variant="outlined" 
           style={{
             textTransform: 'none',
@@ -100,7 +99,7 @@ function SuccessPage() {
         Edit My RSVP
       </Button>
       <Button
-          type="back"
+          className="sendToAboutPage"
           style={{
             textTransform: 'none',
             backgroundColor: '#4330DA',
