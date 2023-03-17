@@ -56,8 +56,14 @@ function SuccessPage() {
         ))}
       </Stepper>
       <h2>All set - see you on the BIG day!</h2>
-      <h3>Please review your responses before submitting</h3>
-      <Table sx={{ minWidth: 200}} aria-label="simple table">
+      <h3>You can review your responses below:</h3>
+      <Table sx={{ 
+                minWidth: 200, 
+                // display:"flex", 
+                // alignItems:"center",
+                // justifyContent:"center"
+              }} 
+                aria-label="simple table">
         <TableBody>
         {partyGuests.map((partyGuest) => {
           return (
@@ -77,12 +83,13 @@ function SuccessPage() {
                 <TableCell>Not Attending</TableCell>
                 <TableCell></TableCell>
               </>
-              }
-            </TableRow>
+              }  
+            </TableRow>       
           )
         })}
         </TableBody>
       </Table>
+
       <Button
           className="backEditResponsesPage"
           variant="outlined" 

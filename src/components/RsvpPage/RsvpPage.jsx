@@ -79,9 +79,14 @@ import { makeStyles } from '@mui/styles';
           marginLeft:"20px"
         }}
         onClick={() => history.push(`/selectParty/${storedEventCode}`)}
-      >
-        Back
+        style={{
+          textTransform:"none", 
+          marginTop:"10px",
+          marginLeft:"20px",
+          marginRight:"20px"
+        }}>Back
       </Button>
+      
       <Button
         className="rsvpSubmitButton"
         variant="contained"
@@ -94,8 +99,13 @@ import { makeStyles } from '@mui/styles';
           marginLeft: '20px',
         }}
         onClick={() => history.push(`/reminders/${partyGuests[0].party_id}`)}
-      >
-        Next
+        style={{
+          backgroundColor:"#4330DA", 
+          textTransform:"none", 
+          marginTop:"10px",
+          marginLeft:"20px",
+          marginRight:"20px"
+        }}>Next
       </Button>
       </div>
     </>

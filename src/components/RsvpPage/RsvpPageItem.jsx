@@ -18,6 +18,8 @@ import StepLabel from '@mui/material/StepLabel';
 function RsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(true);
+    const [mealChoice, setMealChoice] = useState(partyGuest.meal_id)
+
     const mealOptions = useSelector(store => store.meals)
 
     const dispatch = useDispatch();
@@ -44,13 +46,12 @@ function RsvpPageItem({partyGuest}) {
    
 
 
-
     useEffect(() => {
         dispatch({
             type: 'SAGA/FETCH_MEALS',
             payload: partyGuest.event_id
           })
-    }, [])
+    }, [partyGuest])
 
     const updateResponse = (event) => {
         dispatch({
@@ -65,6 +66,7 @@ function RsvpPageItem({partyGuest}) {
 
     const updateMealChoice = (event) => {
         // console.log('meal choice:', event.target.value)
+        setMealChoice(event.target.value)
         dispatch({
             type: 'SAGA/UPDATE_MEAL',
             payload: {
@@ -76,6 +78,78 @@ function RsvpPageItem({partyGuest}) {
     }
   
     return (
+
+        <>
+            <h4
+            style={{ marginLeft:"20px",
+            marginRight:"20px"}}
+            
+            >{partyGuest.guest_name}</h4>
+
+        {checked ? (
+          <>
+            {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
+            <form onChange={updateResponse}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                        checked={true || ''}
+                        onChange={() => setChecked(false)}
+                    />} 
+                    label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                    style={{textTransform:"none", 
+                    marginTop:"-20px",
+                    marginLeft:"20px",
+                    marginRight:"20px"}}
+                />
+              </FormGroup>
+            </form>
+
+            <form>
+                <FormControl sx={{ m: 1, minWidth: 95 }}>
+                    <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-standard-label"
+                    style={{textTransform:"none", 
+                    marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"}}
+                    id="demo-simple-select-standard"
+                    required
+                    value={mealChoice}
+                    onChange={updateMealChoice}
+                    >
+                    {mealOptions.map(mealOption => {
+                        return (
+                            <MenuItem key={mealOption.id} value={mealOption.id}>{mealOption.meal_name}</MenuItem>
+                        )
+                    })}
+                    </Select>
+                </FormControl>
+            </form>
+        </>
+
+       ) : (
+
+        // only show toggle(switch) if they are currently declining the invitation
+         <form onChange={updateResponse}>
+                <FormGroup>
+                <FormControlLabel 
+                    control={
+                    <Switch
+                        checked={false}
+                        onChange={() => setChecked(true)}
+                    />} 
+                    label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                />
+                </FormGroup>
+            </form>
+        
+            )}
+        </>
+    )
+
       <>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
         <h4>{partyGuest.guest_name}</h4>
@@ -142,7 +216,6 @@ function RsvpPageItem({partyGuest}) {
         </Grid>
       </>
     );
-    
 }
 
 

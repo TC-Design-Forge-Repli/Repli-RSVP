@@ -73,10 +73,18 @@ function EditRsvpPageItem({partyGuest}) {
 
     return (
         <>
+
+        <h4
+         style={{ marginLeft:"20px",
+         marginRight:"20px"}}
+        >{partyGuest.guest_name}</h4>
+        {/* <h4>{partyGuest.guest_name}</h4> */}
+
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
         <h4 style={{marginRight: '5px' }}>{partyGuest.guest_name}</h4>
         {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2 }} style={{marginLeft: '15px'}}> */}
         
+
         {checked ?
         <>
             {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
@@ -91,6 +99,10 @@ function EditRsvpPageItem({partyGuest}) {
                         onChange={() => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
+                    style={{textTransform:"none", 
+                    marginTop:"-20px",
+                    marginLeft:"20px",
+                    marginRight:"20px"}}
                 />
                 </FormGroup>
             </form>
@@ -100,6 +112,10 @@ function EditRsvpPageItem({partyGuest}) {
                     <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
                     <Select
                     labelId="demo-simple-select-standard-label"
+                    style={{textTransform:"none", 
+                    marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"}}
                     id="demo-simple-select-standard"
                     required
                     value={partyGuest.meal_id}

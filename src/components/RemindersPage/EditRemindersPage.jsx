@@ -78,7 +78,7 @@ function EditRemindersPage() {
                 
             })   
             history.push(`/success/${storePartyId.party_id}`)
-    }  
+
 
     return (
         <>
