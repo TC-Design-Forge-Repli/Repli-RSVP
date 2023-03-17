@@ -18,6 +18,7 @@ function ManageGuestsPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
+  const event_id = params.id;
   const partyNames = useSelector((store) => store.partyNames);
   const eventPressed = useSelector((store) => store.eventPressed);
   const partyGuests = useSelector((store) => store.partyGuests);
@@ -30,13 +31,14 @@ function ManageGuestsPage() {
       payload: eventPressed[0] && eventPressed[0].event_code
     })
     dispatch({
-      type: 'SAGA/FETCH_ALL_GUESTS'
+      type: 'SAGA/FETCH_GUESTS_PER_PARTY',
+      payload: event_id
     })
     dispatch({
       type: 'DELETED',
       payload: 'reset'
     })
-  }, [deleted]);
+  }, [deleted, event_id]);
 
   const deleteGuest = (guestId) => {
     dispatch({
@@ -76,9 +78,9 @@ function ManageGuestsPage() {
     let no = 0;
     let noResponse = 0;
     partyGuests.forEach((guest) => {
-      if (guest.response === true) {
+      if (guest.guest_response === true) {
         yes++;
-      } else if (guest.response === false) {
+      } else if (guest.guest_response === false) {
         no++;
       } else {
         noResponse++;
@@ -105,28 +107,43 @@ function ManageGuestsPage() {
 
   const goToManageEvent = () => {
     const event_id = params.id;
-    history.push(`/manageEvent/:${event_id}`);
+    history.push(`/manageEvent/${event_id}`);
   }
 
   console.log('partyNames:', partyNames);
   console.log('eventPressed:', eventPressed);
   console.log('these are partyGuests', partyGuests);
 
-  // const guestResponseCount = () => {
-  //   for (let party of partyNames) {
-  //     console.log('party:', party);
+  const responseCount = (party) => {
+    let responseCount = 0;
 
-  //     for (let )
-  //   }
-  // }
-  // guestResponseCount();
-  // if (guest.party_id === party.id && guest.response === true || false) {
-  //   responseCount ++;
-  // }
+    for (let guest of party.guests) {
+      if (guest.guest_response !== null) {
+        responseCount++;
+      }
+    }
+    return responseCount;
+  }
+
+  const guestOfPartyCount = (party) => {
+    let guestOfPartyCount = party.guests.length;
+    return guestOfPartyCount;
+  }
 
   return (
     <section>
       <h3>Manage Guest List</h3>
+      {partyGuests.map((guest) => guest.guest_response !== null) && (
+        <div style={{ width: "400px", height: "300px" }}>
+          <PieChart
+            data={getResponseCount()}
+            label={({ dataEntry }) => `${dataEntry.title}: ${dataEntry.value}`}
+            labelStyle={{ fontSize: '4px', fontFamily: 'sans-serif' }}
+            labelPosition={65}
+            radius={40}
+          />
+        </div>
+      )}
       {partyNames.map((party) => {
         return (
           <div className="partyAccordian">
@@ -141,7 +158,11 @@ function ManageGuestsPage() {
                 id="panel1a-header"
               >
                 <Typography sx={{ margin: '10px' }}>{party.name}</Typography>
-                <Typography sx={{ margin: '10px' }}>{'X/X Responses'}</Typography>
+                <Typography 
+                  sx={{ margin: '10px' }}
+                >
+                  {`${responseCount(party)}/${guestOfPartyCount(party)} Responses`}
+                </Typography>
 
               </AccordionSummary>
               {partyGuests.map((guest) => {
@@ -151,8 +172,14 @@ function ManageGuestsPage() {
                       <IconButton color="error" onClick={() => deleteGuest(guest.id)}>
                         <DeleteForeverIcon />
                       </IconButton>
-                      <Typography>
-                        {guest.name}
+                      <Typography sx={{margin: "5px"}}>
+                        {guest.guest_name}
+                      </Typography>
+                      <Typography sx={{margin: "5px"}}>
+                      {guest.guest_response === true ? ' Attending' : ' Not Attending'}
+                      </Typography>
+                      <Typography sx={{margin: "5px"}}>
+                      {guest.meal_name}
                       </Typography>
                     </AccordionDetails>
                   );
@@ -175,18 +202,6 @@ function ManageGuestsPage() {
       >
         Back
       </Button>
-
-      {partyGuests.map((guest) => guest.response !== null) && (
-        <div style={{ width: "400px", height: "300px" }}>
-          <PieChart
-            data={getResponseCount()}
-            label={({ dataEntry }) => `${dataEntry.title}: ${dataEntry.value}`}
-            labelStyle={{ fontSize: '4px', fontFamily: 'sans-serif' }}
-            labelPosition={65}
-            radius={40}
-          />
-        </div>
-      )}
     </section>
   );
 }

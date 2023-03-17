@@ -9,8 +9,9 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material'
-
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 function SuccessPage() {
 
@@ -19,6 +20,16 @@ function SuccessPage() {
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+  const [activeStep, setActiveStep] = useState(4);
+
+  const steps = [
+    { label: '' },
+    { label: '' },
+    { label: '' },
+    { label: '' },
+    { label: '' },
+
+  ];
 
   useEffect(() => {
     const party_id=params.id
@@ -37,6 +48,13 @@ function SuccessPage() {
 
   return(
     <>
+      <Stepper activeStep={activeStep}>
+        {steps.map((step, index) => (
+          <Step key={index}>
+            <StepLabel>{step.label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
       <h2>All set - see you on the BIG day!</h2>
       <h3>You can review your responses below:</h3>
       <Table sx={{ 

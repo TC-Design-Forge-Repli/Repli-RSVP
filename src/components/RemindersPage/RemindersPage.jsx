@@ -10,6 +10,10 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { makeStyles, Switch } from '@material-ui/core';
+import { Grid } from "@mui/material";
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 
 function RemindersPage() {
@@ -38,6 +42,16 @@ function RemindersPage() {
   
   const storePartyId = useSelector(store => store.storeNavigation.storePartyId);
   const partyNames = useSelector((store) => store.partyNames);
+  const [activeStep, setActiveStep] = useState(3);
+
+  const steps = [
+    { label: '' },
+    { label: '' },
+    { label: '' },
+    { label: '' },
+    { label: '' },
+
+  ];
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -78,6 +92,14 @@ function RemindersPage() {
 
   return (
     <>
+      <Stepper activeStep={activeStep}>
+        {steps.map((step, index) => (
+          <Step key={index}>
+            <StepLabel>{step.label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+
 
       <h4
         style={{ marginLeft:"20px",

@@ -8,6 +8,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import { Grid, Typogrpahy, Box, Stack, Mask } from '@mui/material';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 import connor from './images/connor.jpg';
 import HappyGirl from './images/HappyGirl.jpeg';
@@ -23,7 +26,16 @@ function EventCodePage() {
 
   const [eventCode, setEventCode] = useState('');
   const doesEventCodeMatch = useSelector((store) => store.matchEventCode);
+  const [activeStep, setActiveStep] = useState(0);
 
+  const steps = [
+    { label: '' },
+    { label: '' },
+    { label: '' },
+    { label: '' },
+    { label: '' },
+
+  ];
 
   useEffect(() => {
     matchEventCode();
@@ -31,6 +43,7 @@ function EventCodePage() {
 
   const matchEventCode = () => {
     if (doesEventCodeMatch === true) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
       history.push(`/selectParty/${eventCode}`);
       // console.log('event code matches to an event');
       dispatch({
@@ -64,70 +77,82 @@ function EventCodePage() {
 
   return (
     <>
+      <Stepper activeStep={activeStep}>
+        {steps.map((step, index) => (
+          <Step key={index}>
+            <StepLabel>{step.label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
 
-<Box
-      sx={{
-        // backgroundImage: `url(${ManyHearts})`,
-        // backgroundImage: `url(${HappyGirl})`,
-        // backgroundImage: `url(${Hearts})`,
-        backgroundImage: `url(${FlowersHearts})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        marginTop:"-30px",
-        minHeight: '100vh', // set the minimum height of the element to 100% of the viewport height
-        // filter: 'grayscale(100%)' ,
-        // mask:"rgba(0,0,0.6)"
-      }}>
-      
-     <Box
-     sx={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height:'60vh',
-     }}
-     
-     >
-      <Stack>
-      <TextField 
-      id="filled-basic"
-      variant="filled"
-      label="Event Code"
-            sx={{
-              backgroundColor: "#4330DA",
-              textAlign:"center",
-            
-              '& .MuiInput-underline:after': {
-                borderBottomColor: 'white',
-              },
-              '& .MuiInputLabel-root': {
-                color: 'white',
-              },
-              '& .MuiFilledInput-input': {
-                color: 'white',
-              },
-              "& .MuiFilledInput-root": {
-              "& > fieldset": { borderColor: "white" },
-              },
-              "& .MuiFilledInput-root.Mui-focused": {
-              "& > fieldset":{borderColor:"white"}
-              },
-              "& label.Mui-focused":{color:"white"},
-              margin:"5px"
-            }}
-            // variant="standard"
-            onChange={(event) => setEventCode(event.target.value)}
-          />
+      <Box
+        sx={{
+          // backgroundImage: `url(${ManyHearts})`,
+          // backgroundImage: `url(${HappyGirl})`,
+          // backgroundImage: `url(${Hearts})`,
+          backgroundImage: `url(${FlowersHearts})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          marginTop: "-30px",
+          minHeight: "100vh", // set the minimum height of the element to 100% of the viewport height
+          // filter: 'grayscale(100%)' ,
+          // mask:"rgba(0,0,0.6)"
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "60vh",
+          }}
+        >
+          <Stack>
+            <TextField
+              id="filled-basic"
+              variant="filled"
+              label="Event Code"
+              sx={{
+                backgroundColor: "#4330DA",
+                textAlign: "center",
 
-          <Button
-            className="eventCodeSubmitButton"
-            style={{backgroundColor:"#4330DA", marginLeft:"50px", marginRight:"50px"}}
-            variant="contained"
-            onClick={enterEventCode}>Enter
-          </Button>
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "white",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                },
+                "& .MuiFilledInput-input": {
+                  color: "white",
+                },
+                "& .MuiFilledInput-root": {
+                  "& > fieldset": { borderColor: "white" },
+                },
+                "& .MuiFilledInput-root.Mui-focused": {
+                  "& > fieldset": { borderColor: "white" },
+                },
+                "& label.Mui-focused": { color: "white" },
+                margin: "5px",
+              }}
+              // variant="standard"
+              onChange={(event) => setEventCode(event.target.value)}
+            />
+
+            <Button
+              className="eventCodeSubmitButton"
+              style={{
+                backgroundColor: "#4330DA",
+                marginLeft: "50px",
+                marginRight: "50px",
+              }}
+              variant="contained"
+              onClick={enterEventCode}
+            >
+              Enter
+            </Button>
           </Stack>
-          </Box>
-      </Box>   
+        </Box>
+      </Box>
     </>
   );
 }

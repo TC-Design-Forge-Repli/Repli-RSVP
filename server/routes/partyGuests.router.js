@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
         SELECT * FROM "guests"
         ORDER BY "id" ASC;
     `;
-
+    
     pool.query(sqlQuery)
         .then((dbRes) => {
             res.send(dbRes.rows);
@@ -54,6 +54,7 @@ router.get('/:id', (req, res) => {
         res.sendStatus(500);
      })
 });
+
 router.delete('/:id', (req, res) =>{
     const guestId = req.params.id
     const sqlQuery = `
@@ -71,6 +72,36 @@ router.delete('/:id', (req, res) =>{
         })
 })
 
+router.get('/guests/:id', (req, res) => {
+    console.log('req.params:', req.params);
+
+    const sqlQuery = `
+    SELECT 
+        "guests"."id" AS "guest_id",
+        "party_id",
+        "guests"."name" AS "guest_name",
+        "meal_id",
+        "meal_name",
+        "guests"."response" AS "guest_response",
+        "meal_options"."event_id"
+        FROM "guests"
+        JOIN "meal_options" ON "guests"."meal_id" = "meal_options"."id"
+        JOIN "events" ON "meal_options"."event_id" = "events"."id"
+        WHERE "event_id" = $1
+        ORDER BY "guest_id" ASC;
+    `;
+
+    const sqlValue = [req.params.id];
+    
+    pool.query(sqlQuery, sqlValue)
+        .then((dbRes) => {
+            res.send(dbRes.rows);
+        })
+        .catch((dbErr) => {
+            console.error('Error /api/partyGuests GET all:', dbErr);
+            res.sendStatus(500);
+        })
+})
 
 
 module.exports = router;

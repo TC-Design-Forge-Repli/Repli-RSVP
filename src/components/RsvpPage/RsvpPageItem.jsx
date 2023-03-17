@@ -9,12 +9,14 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+
 function RsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(true);
     const [mealChoice, setMealChoice] = useState(partyGuest.meal_id)
 
     const mealOptions = useSelector(store => store.meals)
+
     const dispatch = useDispatch();
 
 
@@ -48,7 +50,7 @@ function RsvpPageItem({partyGuest}) {
             }
         })
     }
-
+  
     return (
         <>
             <h4
@@ -57,13 +59,13 @@ function RsvpPageItem({partyGuest}) {
             
             >{partyGuest.guest_name}</h4>
 
-        {checked ?
-        <>
+        {checked ? (
+          <>
             {/* show toggle(switch) and meal drop down if guest is accepting the invitation*/}
             <form onChange={updateResponse}>
-                <FormGroup>
-                <FormControlLabel 
-                    control={
+              <FormGroup>
+                <FormControlLabel
+                  control={
                     <Switch
                         checked={true || ''}
                         onChange={() => setChecked(false)}
@@ -74,7 +76,7 @@ function RsvpPageItem({partyGuest}) {
                     marginLeft:"20px",
                     marginRight:"20px"}}
                 />
-                </FormGroup>
+              </FormGroup>
             </form>
 
             <form>
@@ -101,7 +103,7 @@ function RsvpPageItem({partyGuest}) {
             </form>
         </>
 
-        :
+       ) : (
 
         // only show toggle(switch) if they are currently declining the invitation
          <form onChange={updateResponse}>
@@ -113,14 +115,14 @@ function RsvpPageItem({partyGuest}) {
                         onChange={() => setChecked(true)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
-                    
                 />
                 </FormGroup>
             </form>
         
-            }
+            )}
         </>
     )
 }
+
 
 export default RsvpPageItem;
