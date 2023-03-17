@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //mui imports
+import Grid from '@mui/material/Grid';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
@@ -76,7 +77,7 @@ function RsvpPageItem({partyGuest}) {
   
     return (
       <>
-  
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
         <h4>{partyGuest.guest_name}</h4>
 
             {checked ? (
@@ -85,6 +86,7 @@ function RsvpPageItem({partyGuest}) {
                 <form onChange={updateResponse}>
                   <FormGroup>
                     <FormControlLabel
+                      style={{marginTop: '13px', marginLeft: '10px'}}
                       control={
                         <Switch
                             className={classes.switch}
@@ -101,7 +103,7 @@ function RsvpPageItem({partyGuest}) {
                 </form>
 
             <form>
-              <FormControl sx={{ m: 1, minWidth: 95 }}>
+              <FormControl sx={{ m: 1, minWidth: 75 }}>
                 <InputLabel id="demo-simple-select-helper-label">
                   Meals
                 </InputLabel>
@@ -128,6 +130,7 @@ function RsvpPageItem({partyGuest}) {
           <form onChange={updateResponse}>
             <FormGroup>
               <FormControlLabel
+                style={{marginTop: '13px', marginLeft: '10px'}}
                 control={
                   <Switch checked={false} onChange={() => setChecked(true)} />
                 }
@@ -136,6 +139,7 @@ function RsvpPageItem({partyGuest}) {
             </FormGroup>
           </form>
         )}
+        </Grid>
       </>
     );
     
