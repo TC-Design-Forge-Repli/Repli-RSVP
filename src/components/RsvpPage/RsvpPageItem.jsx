@@ -78,7 +78,7 @@ function RsvpPageItem({partyGuest}) {
     }
   
     return (
-
+<>
         <>
             <h4
             style={{ marginLeft:"20px",
@@ -148,7 +148,7 @@ function RsvpPageItem({partyGuest}) {
         
             )}
         </>
-    )
+    
 
       <>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
@@ -214,6 +214,7 @@ function RsvpPageItem({partyGuest}) {
           </form>
         )}
         </Grid>
+      </>
       </>
     );
 }

@@ -91,7 +91,7 @@ function EditRsvpPageItem({partyGuest}) {
             <form onChange={updateResponse}>
                 <FormGroup>
                 <FormControlLabel 
-                    style={{marginTop: '13px', marginLeft: '10px'}}
+                    // style={{marginTop: '13px', marginLeft: '10px'}}
                     control={
                     <Switch
                         className={classes.switch}

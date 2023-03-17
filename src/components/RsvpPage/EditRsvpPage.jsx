@@ -61,7 +61,7 @@ function EditRsvpPage() {
         })}
 
             <div>
-            <Button
+            {/* <Button
 
                 className="backToSelectPartyButton"
                 variant="outlined"
@@ -74,7 +74,7 @@ function EditRsvpPage() {
                   }}>Back
             </Button>
 
-            <Button
+             <Button
                 className="rsvpSubmitButton"
                 variant="contained"
                 type="submit"
@@ -84,24 +84,15 @@ function EditRsvpPage() {
                   marginTop:"10px",
                   marginLeft:"20px",
                   marginRight:"20px"
-                }}
+                }} 
 
-                // onClick={() => history.push(`/editReminders/${partyGuests[0].party_id}`)}
-                // server terminal message: GET route for partyGuests failed error: invalid input syntax for type integer: "undefined"
-                // sends me here: http://localhost:3000/#/rsvp/undefined
-                // console warnings: partyGuests.saga.js:21 fetchPartyGuests SAGA function failed Error: Request failed with status code 500
-                // GET http://localhost:3000/api/partyGuests/undefined 500 (Internal Server Error)
-               
-               
-                // onClick={() => {console.log('is editRsvpPage Next button working?', storePartyId.party_id)}}
-                // console response: is editRsvpPage Next button working? {party_id: '1'}
+             >Next
+               </Button> */}
 
 
-                // onClick={() => history.push(`editReminders/${storePartyId.party_id}`)}
-                // sends me here: http://localhost:3000/#/editRsvp/editReminders/[object%20Object]
 
-            >Next
 
+<Button
                 className="backToSuccessPage"
                 variant="outlined"
                 style={{
@@ -115,7 +106,7 @@ function EditRsvpPage() {
                 onClick={() => history.push(`/success/${storePartyId.party_id}`)}
             >
                 Back
-            </Button>
+            </Button> 
             <Button
                 className="sendToEditReminders"
                 variant="contained"
@@ -128,9 +119,6 @@ function EditRsvpPage() {
                     marginLeft: '20px',
                   }}
                 onClick={() => history.push(`/editReminders/${storePartyId.party_id}`)}
-                // onClick={() => history.push(`/editReminders/1`)}
-                // onClick={() => console.log('storePartyId.party_id:', storePartyId.party_id) }
-                // onClick={() => history.push(`/reminders/${storePartyId.party_id}`)}
             >
                 Next
 

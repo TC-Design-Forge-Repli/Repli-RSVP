@@ -164,5 +164,6 @@ function EditRemindersPage() {
         </>
     )
 }
+}
 
 export default EditRemindersPage;
