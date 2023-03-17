@@ -13,11 +13,12 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 
+
 function RsvpPageItem({partyGuest}) {
     
     const [checked, setChecked] = useState(true);
     const mealOptions = useSelector(store => store.meals)
-    const [activeStep, setActiveStep] = useState(2);
+
     const dispatch = useDispatch();
     
     
@@ -41,14 +42,7 @@ function RsvpPageItem({partyGuest}) {
     const classes= useStyles();
    
 
-    const steps = [
-      { label: '' },
-      { label: '' },
-      { label: '' },
-      { label: '' },
-      { label: '' },
-  
-    ];
+
 
     useEffect(() => {
         dispatch({
@@ -79,16 +73,10 @@ function RsvpPageItem({partyGuest}) {
             }
         })
     }
-
+  
     return (
       <>
-        <Stepper activeStep={activeStep}>
-          {steps.map((step, index) => (
-            <Step key={index}>
-              <StepLabel>{step.label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+  
         <h4>{partyGuest.guest_name}</h4>
 
             {checked ? (
@@ -150,6 +138,8 @@ function RsvpPageItem({partyGuest}) {
         )}
       </>
     );
+    
 }
+
 
 export default RsvpPageItem;
