@@ -130,6 +130,20 @@ function ManageGuestsPage() {
     return guestOfPartyCount;
   }
 
+  const guestResponse = (guest) => {
+    console.log('guest:', guest);
+
+    if (guest.guest_response === true) {
+      return 'Attending';
+    }
+    if (guest.guest_response === false) {
+      return 'Not Attending';
+    }
+    if (guest.guest_response === null) {
+      return 'No Response';
+    }
+  }
+
   return (
     <section>
       <h3>Manage Guest List</h3>
@@ -176,7 +190,8 @@ function ManageGuestsPage() {
                         {guest.guest_name}
                       </Typography>
                       <Typography sx={{margin: "5px"}}>
-                      {guest.guest_response === true ? ' Attending' : ' Not Attending'}
+                        {guestResponse(guest)}
+                      {/* {guest.guest_response === true ? ' Attending' : ' Not Attending'} */}
                       </Typography>
                       <Typography sx={{margin: "5px"}}>
                       {guest.meal_name}
