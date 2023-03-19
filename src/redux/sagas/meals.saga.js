@@ -20,6 +20,7 @@ function* fetchMeals(action) {
   }
 }
 
+
 // POST
 function* createMeals(action) {
   const newMeals = action.payload;
@@ -98,6 +99,7 @@ function* updateMealDescription(action) {
     console.error('Error updateMealDescription saga:', error);
   }
 }
+
 
 function* mealsSaga() {
   yield takeLatest('SAGA/CREATE_MEALS', createMeals);

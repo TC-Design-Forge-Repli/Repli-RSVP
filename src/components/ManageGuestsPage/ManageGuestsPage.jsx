@@ -19,6 +19,7 @@ function ManageGuestsPage() {
   const dispatch = useDispatch();
   const params = useParams();
   const event_id = params.id;
+  const meals = useSelector((store) => store.meals)
   const partyNames = useSelector((store) => store.partyNames);
   const eventPressed = useSelector((store) => store.eventPressed);
   const partyGuests = useSelector((store) => store.partyGuests);
@@ -37,6 +38,10 @@ function ManageGuestsPage() {
     dispatch({
       type: 'DELETED',
       payload: 'reset'
+    })
+    dispatch({
+      type: 'SAGA/FETCH_MEALS',
+      payload: event_id
     })
   }, [deleted, event_id]);
 
@@ -80,31 +85,71 @@ function ManageGuestsPage() {
     partyGuests.forEach((guest) => {
       if (guest.guest_response === true) {
         yes++;
-      } else if (guest.guest_response === false) {
+      } if (guest.guest_response === false) {
         no++;
       } else {
         noResponse++;
       }
     });
-    return [
-      {
-        title: 'Accepted',
-        value: yes,
-        color: '#4caf50',
-      },
-      {
-        title: 'Declined',
-        value: no,
-        color: '#f44336',
-      },
-      {
-        title: 'No response',
-        value: noResponse,
-        color: 'gray',
-      },
-    ];
-  };
+    let pieArray = [];
+    if(yes != 0){
+      pieArray.push(
+        {
+          title: 'Accepted',
+          value: yes,
+          color: '#4caf50',
+        }
+      )
+    }
+    if(no != 0){
+      pieArray.push(
+        {
+          title: 'Declined',
+          value: no,
+          color: '#f44336',
+        }
+      )
 
+    }
+    if(noResponse != 0){
+      pieArray.push(
+        {
+          title: 'No response',
+          value: noResponse,
+          color: 'gray',
+        }
+      )
+
+    }
+    return pieArray
+    // if(yes != 0 && no != 0 && noResponse != 0){
+    //   return [
+    //     {
+    //       title: 'Accepted',
+    //       value: yes,
+    //       color: '#4caf50',
+    //     },
+    //     {
+    //       title: 'Declined',
+    //       value: no,
+    //       color: '#f44336',
+    //     },
+    //     {
+    //       title: 'No response',
+    //       value: noResponse,
+    //       color: 'gray',
+    //     },
+    //   ];
+    // }
+    
+  };
+  const replaceMealIdWithMealName = (mealId) =>{
+    for(let i = 0; i < meals.length; i++){
+      if(meals[i].id === mealId){
+        return meals[i].meal_name
+      }
+    }
+  }
   const goToManageEvent = () => {
     const event_id = params.id;
     history.push(`/manageEvent/${event_id}`);
@@ -194,7 +239,7 @@ function ManageGuestsPage() {
                       {/* {guest.guest_response === true ? ' Attending' : ' Not Attending'} */}
                       </Typography>
                       <Typography sx={{margin: "5px"}}>
-                      {guest.meal_name}
+                      {replaceMealIdWithMealName(guest.meal_id)}
                       </Typography>
                     </AccordionDetails>
                   );
