@@ -81,12 +81,10 @@ router.get('/guests/:id', (req, res) => {
         "party_id",
         "guests"."name" AS "guest_name",
         "meal_id",
-        "meal_name",
-        "guests"."response" AS "guest_response",
-        "meal_options"."event_id"
+        "guests"."response" AS "guest_response"
         FROM "guests"
-        JOIN "meal_options" ON "guests"."meal_id" = "meal_options"."id"
-        JOIN "events" ON "meal_options"."event_id" = "events"."id"
+        JOIN "party" ON "party".id = guests.party_id
+        JOIN "events" ON "party"."event_id" = "events"."id"
         WHERE "event_id" = $1
         ORDER BY "guest_id" ASC;
     `;
