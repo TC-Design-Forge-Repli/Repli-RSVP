@@ -31,19 +31,22 @@ function Dashboard() {
           return <DashboardItems key={event.id} event={event} />
         })
       }
-      <Button
-        variant="contained"
-        style={{
-          color: "white",
-          backgroundColor: "#4330DA",
-          fontFamily: "Montserrat",
-          margin: "10px",
-          left: "250px",
-        }}
-        onClick={createEvent}
-      >
-        +
-      </Button>
+      <div>
+        {/* <p id="createEventParagraph">Create Event</p> */}
+        <Button
+          variant="contained"
+          style={{
+            color: "white",
+            backgroundColor: "#4330DA",
+            fontFamily: "Montserrat",
+            margin: "10px",
+            left: "180px",
+          }}
+          onClick={createEvent}
+        >
+          Create Event +
+        </Button>
+      </div>
     </div>
   );
 }
