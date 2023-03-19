@@ -59,14 +59,16 @@ function EditRsvpPageItem({partyGuest}) {
     }
 
     const updateMealChoice = (event) => {
-        console.log('meal choice:',)
+        // console.log('meal choice:',)
+        setMealChoice(event.target.value)
         dispatch({
             type: 'SAGA/UPDATE_MEAL',
             payload: {
                 guest_id: partyGuest.guest_id,
                 event_id: partyGuest.event_id,
                 response: true, 
-                meal_id: mealChoice
+                // meal_id: mealChoice
+                meal_id: event.target.value
             }
         })
     }
@@ -81,7 +83,8 @@ function EditRsvpPageItem({partyGuest}) {
         {/* <h4>{partyGuest.guest_name}</h4> */}
 
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 3 }} style={{ marginTop: '30px', marginLeft: '10px', marginBottom: '30px'}}>
-        <h4 style={{marginRight: '5px' }}>{partyGuest.guest_name}</h4>
+        <h4>{partyGuest.guest_name}</h4>
+        {/* <h4 style={{marginRight: '5px' }}>{partyGuest.guest_name}</h4> */}
         {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2 }} style={{marginLeft: '15px'}}> */}
         
 
@@ -91,7 +94,7 @@ function EditRsvpPageItem({partyGuest}) {
             <form onChange={updateResponse}>
                 <FormGroup>
                 <FormControlLabel 
-                    // style={{marginTop: '13px', marginLeft: '10px'}}
+                    style={{marginTop: '13px', marginLeft: '10px'}}
                     control={
                     <Switch
                         className={classes.switch}
@@ -99,10 +102,10 @@ function EditRsvpPageItem({partyGuest}) {
                         onChange={() => setChecked(false)}
                     />} 
                     label={`${checked ? 'Politely Accept' : 'Regretfully Decline' }`}
-                    style={{textTransform:"none", 
-                    marginTop:"-20px",
-                    marginLeft:"20px",
-                    marginRight:"20px"}}
+                    // style={{textTransform:"none", 
+                    // marginTop:"-20px",
+                    // marginLeft:"20px",
+                    // marginRight:"20px"}}
                 />
                 </FormGroup>
             </form>
@@ -112,13 +115,13 @@ function EditRsvpPageItem({partyGuest}) {
                     <InputLabel id="demo-simple-select-helper-label">Meals</InputLabel>
                     <Select
                     labelId="demo-simple-select-standard-label"
-                    style={{textTransform:"none", 
-                    marginTop:"10px",
-                    marginLeft:"20px",
-                    marginRight:"20px"}}
+                    // style={{textTransform:"none", 
+                    // marginTop:"10px",
+                    // marginLeft:"20px",
+                    // marginRight:"20px"}}
                     id="demo-simple-select-standard"
                     required
-                    value={partyGuest.meal_id}
+                    value={mealChoice}
                     onChange={() => {updateMealChoice(setMealChoice(event.target.value))}}
                     >
                     {mealOptions.map(mealOption => {

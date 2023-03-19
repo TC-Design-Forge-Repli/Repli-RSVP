@@ -22,6 +22,13 @@ function RemindersPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [receiveReminders, setReceiveReminders] = useState(false)
 
+  // Fill the From onClick (placed on the <div> tag for "What is the event's name")
+const fillTheForm = () => {
+  setEmail('aman@gmail.com');
+  setPhoneNumber('612-588-0257');
+  setReceiveReminders(true)
+}
+
   const useStyles = makeStyles({
     switch: {
       // '& .MuiSwitch-thumb': {
@@ -102,6 +109,7 @@ function RemindersPage() {
 
 
       <h4
+        onClick={fillTheForm}
         style={{ marginLeft:"20px",
         marginRight:"20px"}}
       >What is the best way for us to communicate with you?</h4>
