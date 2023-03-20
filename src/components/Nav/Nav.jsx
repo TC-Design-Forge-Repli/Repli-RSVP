@@ -32,7 +32,7 @@ function Nav() {
               Info Page
             </Link> */}
 
-            <Link className="navLink" to="/dashboard">
+            {/* <Link className="navLink" to="/dashboard">
               Dashboard
             </Link>
 
@@ -42,7 +42,7 @@ function Nav() {
 
             <Link className="navLink" to="/eventCode">
               Event Code
-            </Link>
+            </Link> */}
 
             {/* <Link className="navLink" to="/manageEvent">
               Manage Event
