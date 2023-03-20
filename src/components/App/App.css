@@ -63,17 +63,17 @@ Button
 .btn_asLink {
   padding: 0;
   border-width: 0;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #4330DA;
   border-radius: 0;
   background: none;
-  font: inherit;
-  color: #444;
+  font: Montserrat;
+  color: #4330DA;
 }
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
-  color: #008183;
+  border-color: #4330DA;
+  color: #4330DA;
 }
 
 /* --------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
+  background-color: white;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
