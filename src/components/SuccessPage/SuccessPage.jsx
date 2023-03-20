@@ -17,6 +17,7 @@ function SuccessPage() {
 
   const storedPartyId = useSelector(store => store.storeNavigation.storePartyId);
   const partyGuests = useSelector(store => store.partyGuests);
+  const remindersToEdit = useSelector(store => store.remindersToEdit);
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -37,13 +38,15 @@ function SuccessPage() {
       type: 'STORE_PARTY_ID',
       payload: params.id
     })
-
     dispatch({
       type: 'SAGA/FETCH_PARTY_GUESTS',
       payload: params.id
     })
+    dispatch({
+      type: 'SAGA/FETCH_REMINDERS_PAGE_TO_EDIT',
+      payload: params.id
+    })
     console.log(params.id)
-
   }, [params.id])
 
   return(
@@ -56,7 +59,7 @@ function SuccessPage() {
         ))}
       </Stepper>
       <h2>All set - see you on the BIG day!</h2>
-      <h3>You can review your responses below:</h3>
+      <h3>Review your responses:</h3>
       <Table sx={{ 
                 minWidth: 200, 
                 // display:"flex", 
@@ -70,16 +73,12 @@ function SuccessPage() {
             <TableRow key={partyGuest.guest_id}>
                <TableCell>{partyGuest.guest_name}</TableCell>
               {partyGuest.guest_response ?
-              
               <>
-                {/* <TableCell>{partyGuest.guest_name}</TableCell> */}
                 <TableCell>Attending</TableCell>
                 <TableCell>{partyGuest.meal_name}</TableCell>
               </>
-
               :
               <>
-                {/* <TableCell>{partyGuest.guest_name}</TableCell> */}
                 <TableCell>Not Attending</TableCell>
                 <TableCell></TableCell>
               </>
@@ -89,7 +88,23 @@ function SuccessPage() {
         })}
         </TableBody>
       </Table>
-
+      <h3>Contact Information:</h3>
+      <Table sx={{ 
+                minWidth: 200, 
+                // display:"flex", 
+                // alignItems:"center",
+                // justifyContent:"center"
+              }} 
+                aria-label="simple table">
+        <TableBody>
+          <TableRow>
+            <TableCell>{remindersToEdit.email_address}</TableCell>
+            <TableCell>{remindersToEdit.phone_number}</TableCell>
+            <TableCell>{remindersToEdit.receive_reminders === true ? 'Receiving Reminders' : 'Not Receiving Reminders' } </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+        
       <Button
           className="backEditResponsesPage"
           variant="outlined" 
