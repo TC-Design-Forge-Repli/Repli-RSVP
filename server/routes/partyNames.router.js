@@ -50,6 +50,7 @@ FROM "guests"
             }
             newArray.push(partyObject);
          }
+         console.log(newArray)
          // Declare a new array
          let uniqueArray = [];
 
@@ -59,17 +60,18 @@ FROM "guests"
          // Loop for the array elements
          for (let i in newArray) {
 
-            // Extract the title
-            objTitle = newArray[i]['name'];
+            // Extract the id
+            objid = newArray[i]['id'];
 
-            // Use the title as the index
-            uniqueObject[objTitle] = newArray[i];
+            // Use the id as the index
+            uniqueObject[objid] = newArray[i];
          }
 
          // Loop to push unique object into array
          for (i in uniqueObject) {
             uniqueArray.push(uniqueObject[i]);
          }
+         console.log(uniqueArray)
          res.send(uniqueArray)
       })
       .catch(dbErr => {

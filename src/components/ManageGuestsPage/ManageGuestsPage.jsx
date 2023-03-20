@@ -85,9 +85,11 @@ function ManageGuestsPage() {
     partyGuests.forEach((guest) => {
       if (guest.guest_response === true) {
         yes++;
-      } if (guest.guest_response === false) {
+      } 
+      if (guest.guest_response === false) {
         no++;
-      } else {
+      }
+      if(guest.guest_response === null) {
         noResponse++;
       }
     });
