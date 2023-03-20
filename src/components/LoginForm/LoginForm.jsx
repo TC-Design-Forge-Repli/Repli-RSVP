@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+//mui imports
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -36,31 +39,66 @@ function LoginForm() {
         </h3>
       )}
       <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="username"
+          required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": { borderColor: "#4330DA" },
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset":{borderColor:"#4330DA"}
+            },
+            "& label.Mui-focused":{color:"#4330DA"},
+            margin:"5px",
+            marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"
+          }}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
+        
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
+        <TextField
+          label="password"
+          type="password"
+          required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& > fieldset": { borderColor: "#4330DA" },
+            },
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset":{borderColor:"#4330DA"}
+            },
+            "& label.Mui-focused":{color:"#4330DA"},
+            margin:"5px",
+            marginTop:"10px",
+                    marginLeft:"20px",
+                    marginRight:"20px"
+          }}
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+        <Button
+          className="loginButton"
+          variant="contained"
+          type="submit"
+          value="Log In"
+          style={{
+            textTransform: 'none',
+            backgroundColor: '#4330DA',
+            fontFamily: 'Montserrat',
+            color: 'white',
+            marginTop: '35px',
+            marginLeft: '20px',
+          }}
+        >
+          Login
+        </Button>
       </div>
     </form>
   );
