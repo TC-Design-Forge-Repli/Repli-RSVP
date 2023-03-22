@@ -230,7 +230,7 @@ function ManageGuestsPage() {
                 if (guest.party_id === party.id) {
                   return (
                     <AccordionDetails sx={{ display: 'flex' }} key={guest.id}>
-                      <IconButton color="error" onClick={() => deleteGuest(guest.id)}>
+                      <IconButton color="error" onClick={() => deleteGuest(guest.guest_id)}>
                         <DeleteForeverIcon />
                       </IconButton>
                       <Typography sx={{margin: "5px"}}>
