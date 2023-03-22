@@ -122,7 +122,8 @@ function EditRsvpPageItem({partyGuest}) {
                     id="demo-simple-select-standard"
                     required
                     value={mealChoice}
-                    onChange={() => {updateMealChoice(setMealChoice(event.target.value))}}
+                    //onChange={() => {updateMealChoice(setMealChoice(event.target.value))}}
+                    onChange={updateMealChoice}
                     >
                     {mealOptions.map(mealOption => {
                         return (
