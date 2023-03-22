@@ -17,9 +17,9 @@
 ## Description
 
 Introducing Repli, the ultimate event planning app for hosts and guests! With Repli, hosts can easily create and manage events, including important details like time, date, and meal options. 
-<br>
+
 Guests can quickly RSVP and select their preferred meal choices with just a few taps on their mobile device. With the option to edit their responses, guests can easily manage their attendance and meal preferences. 
-<br>
+
 Whether you're planning a wedding or any other event, Repli is the must-have app for seamless event planning and coordination. Try Repli today and experience stress-free event planning today!
 
 
@@ -40,10 +40,12 @@ Whether you're planning a wedding or any other event, Repli is the must-have app
 ## Getting Started
 
 This project should be able to run in your favorite IDE. We used VS code while building it. 
+
 <a href="https://code.visualstudio.com/"><img src="https://github.com/devicons/devicon/blob/master/icons/vscode/vscode-original-wordmark.svg" height="40px" width="40px" /></a>
 
 
 ## Prerequisites
+
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
