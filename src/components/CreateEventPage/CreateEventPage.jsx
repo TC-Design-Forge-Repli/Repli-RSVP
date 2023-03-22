@@ -25,14 +25,6 @@ function CreateEventPage() {
   const [rsvpCloseDate, setRsvpCloseDate] = useState('');
   const [activeStep, setActiveStep] = useState(0);
 
-// Fill the From onClick (placed on the <div> tag for "What is the event's name")
-const fillTheForm = () => {
-  setEventTitle('Our Big Day!!');
-  setEventCode('Love');
-  setDate("2023-07-08");
-  setLocation('Sinclair on Grand');
-  setRsvpCloseDate("2023-06-08")
-}
 
   const steps = [
     { label: '' },
@@ -92,7 +84,7 @@ const fillTheForm = () => {
         ))}
       </Stepper>
       <br/>
-      <div onClick={fillTheForm}>What is the event's name?</div>
+      <div>What is the event's name?</div>
       <TextField 
       required
       id="outlined-required"
