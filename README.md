@@ -17,9 +17,9 @@
 ## Description
 
 Introducing Repli, the ultimate event planning app for hosts and guests! With Repli, hosts can easily create and manage events, including important details like time, date, and meal options. 
-<br>
+
 Guests can quickly RSVP and select their preferred meal choices with just a few taps on their mobile device. With the option to edit their responses, guests can easily manage their attendance and meal preferences. 
-<br>
+
 Whether you're planning a wedding or any other event, Repli is the must-have app for seamless event planning and coordination. Try Repli today and experience stress-free event planning today!
 
 
@@ -27,7 +27,7 @@ Whether you're planning a wedding or any other event, Repli is the must-have app
 
 <a href="https://reactjs.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" height="40px" width="40px" /></a>
 <a href="https://www.w3schools.com/js/default.asp"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" height="40px" width="40px" /></a>
-<a href="https://interactive.twilio.com/email-brand-signup-sales?utm_source=google&utm_medium=cpc&utm_term=sendgrid%20api&utm_campaign=SendGrid_G_S_NAMER_Brand_Tier1&cq_plac=&cq_net=g&cq_pos=&cq_med=&cq_plt=gp&gclid=CjwKCAjwzuqgBhAcEiwAdj5dRktp_EboiSvLP1i00EvGuteMYcPif46CLchL80n5KhnmpOZ8TeQ2ehoCShgQAvD_BwE" <img src="https://sendgrid.com/wp-content/themes/sgdotcom/pages/resource/brand/2016/SendGrid-Logomark.png" height="40px" width="40px" /></a>
+<a href="https://interactive.twilio.com/email-brand-signup-sales?utm_source=google&utm_medium=cpc&utm_term=sendgrid%20api&utm_campaign=SendGrid_G_S_NAMER_Brand_Tier1&cq_plac=&cq_net=g&cq_pos=&cq_med=&cq_plt=gp&gclid=CjwKCAjwzuqgBhAcEiwAdj5dRktp_EboiSvLP1i00EvGuteMYcPif46CLchL80n5KhnmpOZ8TeQ2ehoCShgQAvD_BwE"><img src="https://sendgrid.com/wp-content/themes/sgdotcom/pages/resource/brand/2016/SendGrid-Logomark.png" height="40px" width="40px" /></a>
 <a href="https://redux.js.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" height="40px" width="40px" /></a>
 <a href="https://www.postgresql.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" height="40px" width="40px" /></a>
 <a href="https://nodejs.org/en/"><img src="https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-plain.svg" height="40px" width="40px" /></a>
@@ -37,7 +37,15 @@ Whether you're planning a wedding or any other event, Repli is the must-have app
 <a href="https://www.w3schools.com/w3css/defaulT.asp"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" height="40px" width="40px" /></a>
 
 
+## Getting Started
+
+This project should be able to run in your favorite IDE. We used VS code while building it. 
+
+<a href="https://code.visualstudio.com/"><img src="https://github.com/devicons/devicon/blob/master/icons/vscode/vscode-original-wordmark.svg" height="40px" width="40px" /></a>
+
+
 ## Prerequisites
+
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
@@ -57,3 +65,10 @@ If you would like to name your database something else, you will need to change 
 9. The queries in the database.sql file are set up to create all the necessary tables that you need, as well as a dummy data table to test the app. Copy and paste those queries in the SQL query of the database. If this is going to production, leave out the dummy data.
 10. Run `npm run server` in your VS Code terminal
 11. Open a second terminal and run `npm run client`
+
+
+## Usage
+
+Once everything is installed and running it should open in your default browser - if not, navigate to http://localhost:3000/#/.
+
+Video walkthrough of application usage: [Walkthrough]
