@@ -9,6 +9,7 @@ function* deleteOneGuestSaga() {
 // Will get Party Names to be listed on the Party Names page
 function* deleteOneGuest(action) {
     try {
+        console.log('$$$$$$$$$$',action.payload)
         const response = yield axios({
             method: 'DELETE',
             url:`/api/partyGuests/${action.payload}`
