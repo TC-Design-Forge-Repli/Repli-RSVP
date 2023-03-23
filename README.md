@@ -72,4 +72,4 @@ If you would like to name your database something else, you will need to change 
 
 Once everything is installed and running it should open in your default browser - if not, navigate to http://localhost:3000/#/.
 
-Video walkthrough of application usage: [Walkthrough](https://www.youtube.com/watch?v=xvQpqAJ-aj0&feature=youtu.be)
+Video walkthrough of application usage: [Walkthrough](https://youtu.be/xvQpqAJ-aj0)
